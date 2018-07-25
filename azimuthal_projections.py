@@ -28,6 +28,7 @@ sys.path.insert(0, '/home/andyr/src/frb')
 from yt.utilities.math_utils import ortho_find
 from radial_profile1 import *
 
+'''
 def find_angular_momentum(sp, c):
     """
     Finds the average angular momentum of a sphere of particles around a 
@@ -46,16 +47,13 @@ def find_angular_momentum(sp, c):
     v_z = sp[(pt, 'velocity_z')] - halo_vel[2]
 
     # something ain't right here
-    x_ang_mom = np.sum(sp[(pt, 'mass')] * r_y * v_z)
-    x_ang_mom -= np.sum(sp[(pt, 'mass')] * r_z * v_y)
-    y_ang_mom = np.sum(sp[(pt, 'mass')] * r_z * v_x)
-    y_ang_mom -= np.sum(sp[(pt, 'mass')] * r_x * v_z)
-    z_ang_mom = np.sum(sp[(pt, 'mass')] * r_x * v_y)
-    z_ang_mom -= np.sum(sp[(pt, 'mass')] * r_y * v_x)
+    x_ang_mom = np.sum(sp[(pt, 'mass')]*(r_y*v_z - r_z*v_y))
+    y_ang_mom = np.sum(sp[(pt, 'mass')]*(r_z*v_x - r_x*v_z))
+    z_ang_mom = np.sum(sp[(pt, 'mass')]*(r_x*v_y - r_y*v_x))
     ang_mom = yt.YTArray([x_ang_mom, y_ang_mom, z_ang_mom])
     ang_mom, b1, b2 = ortho_find(ang_mom)
-    log(ang_mom)
     return ang_mom, b1, b2
+'''
 
 if __name__ == '__main__':
 	"""
@@ -189,6 +187,20 @@ if __name__ == '__main__':
 				if dset not in cdens_file.keys():
 					cdens_file.create_dataset(dset, data=frb[full_other_fields[i]].ravel())
 					cdens_file.flush()
-
+		log('Generating Face on Projections')
+		frb = make_off_axis_projection(ds, ang_mom, b1, full_ion_fields, \
+		                           c, width, box, rvir, dir='face/')
+		for i, ion_field in enumerate(ion_fields):
+			dset = "%s/%s" % (ion_field, 'face')
+			if dset not in cdens_file.keys():
+			    cdens_file.create_dataset(dset, data=frb[full_ion_fields[i]].ravel())
+			    cdens_file.flush()
+			frb = make_off_axis_projection(ds, ang_mom, b1, full_other_fields, \
+			                           c, width, box, rvir, weight_field=('gas', 'density'), dir='face/')
+			for i, other_field in enumerate(other_fields):
+				dset = "%s/%s" % (other_field, 'face')
+				if dset not in cdens_file.keys():
+					cdens_file.create_dataset(dset, data=frb[full_other_fields[i]].ravel())
+					cdens_file.flush()
 		cdens_file.close()
 
