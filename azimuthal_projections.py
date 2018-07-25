@@ -24,7 +24,7 @@ from scipy.signal import filtfilt, gaussian
 from scipy.ndimage import filters
 import ytree
 from yt.utilities.math_utils import ortho_find
-from /home/andyr/src/frb/radial_profile1 import log, get_amiga_data,\
+from src/frb/radial_profile1 import log, get_amiga_data,\
 read_amiga_center, read_amiga_rvir, smooth_amiga, make_off_axis_projection
 
 def find_angular_momentum(sp, c):
