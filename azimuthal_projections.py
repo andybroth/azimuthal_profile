@@ -182,8 +182,8 @@ if __name__ == '__main__':
 			for i, other_field in enumerate(other_fields):
 				dset = "%s/%s" % (other_field, 'edge')
 				if dset not in cdens_file.keys():
-			    	cdens_file.create_dataset(dset, data=frb[full_other_fields[i]].ravel())
-			    	cdens_file.flush()
+					cdens_file.create_dataset(dset, data=frb[full_other_fields[i]].ravel())
+					cdens_file.flush()
 
 		cdens_file.close()
 
