@@ -68,10 +68,8 @@ if __name__ == '__main__':
         f = h5.File(v[j], 'r')
         a_arr = np.concatenate((a_arr, f['phi'].value))
         cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
-      for i in range(len(a_arr)):
-        if (a_arr[i] < 1):
-            print(a_arr[i])
-      profile_data = make_profiles(a_arr, cdens_arr, n_bins, field)
+
+      profile_data = make_profiles(a_arr, cdens_arr, a_bins, field, n_bins)
       # plot_hist2d(r_arr, cdens_arr, field, fn_head)
       plot_profile(a_bins, profile_data, k, colors[c])
     finish_plot(field, COS_data, fn_head)
