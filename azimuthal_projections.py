@@ -185,20 +185,5 @@ if __name__ == '__main__':
 				if dset not in cdens_file.keys():
 					cdens_file.create_dataset(dset, data=frb[full_other_fields[i]].ravel())
 					cdens_file.flush()
-		log('Generating Face on Projections')
-		frb = make_off_axis_projection(ds, ang_mom, b1, full_ion_fields, \
-		                           c, width, box, rvir, dir='face/')
-		for i, ion_field in enumerate(ion_fields):
-			dset = "%s/%s" % (ion_field, 'face')
-			if dset not in cdens_file.keys():
-			    cdens_file.create_dataset(dset, data=frb[full_ion_fields[i]].ravel())
-			    cdens_file.flush()
-			frb = make_off_axis_projection(ds, ang_mom, b1, full_other_fields, \
-			                           c, width, box, rvir, weight_field=('gas', 'density'), dir='face/')
-			for i, other_field in enumerate(other_fields):
-				dset = "%s/%s" % (other_field, 'face')
-				if dset not in cdens_file.keys():
-					cdens_file.create_dataset(dset, data=frb[full_other_fields[i]].ravel())
-					cdens_file.flush()
 		cdens_file.close()
 
