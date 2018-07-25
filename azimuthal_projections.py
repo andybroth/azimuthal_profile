@@ -45,6 +45,7 @@ def find_angular_momentum(sp, c):
     v_y = sp[(pt, 'velocity_y')] - halo_vel[1]
     v_z = sp[(pt, 'velocity_z')] - halo_vel[2]
 
+    # something ain't right here
     x_ang_mom = np.sum(sp[(pt, 'mass')]*(r_y*v_z - r_z*v_y))
     y_ang_mom = np.sum(sp[(pt, 'mass')]*(r_z*v_x - r_x*v_z))
     z_ang_mom = np.sum(sp[(pt, 'mass')]*(r_x*v_y - r_y*v_x))
