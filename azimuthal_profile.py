@@ -24,7 +24,9 @@ import h5py as h5
 import sys
 from matplotlib.colors import LogNorm
 from get_COS_data import get_COS_data, plot_COS_data
-from /home/andyr/src/frb/radial_profile2 import *
+import sys
+sys.path.insert(0, '/home/andyr/src/frb')
+from radial_profile2 import *
 
 if __name__ == '__main__':
   """

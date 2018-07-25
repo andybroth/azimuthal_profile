@@ -28,7 +28,6 @@ sys.path.insert(0, '/home/andyr/src/frb')
 from yt.utilities.math_utils import ortho_find
 from radial_profile1 import *
 
-
 def find_angular_momentum(sp, c):
     """
     Finds the average angular momentum of a sphere of particles around a 
@@ -46,14 +45,13 @@ def find_angular_momentum(sp, c):
     v_y = sp[(pt, 'velocity_y')] - halo_vel[1]
     v_z = sp[(pt, 'velocity_z')] - halo_vel[2]
 
-    # something ain't right here
+    # cross product to find angular momentum
     x_ang_mom = np.sum(sp[(pt, 'mass')]*(r_y*v_z - r_z*v_y))
     y_ang_mom = np.sum(sp[(pt, 'mass')]*(r_z*v_x - r_x*v_z))
     z_ang_mom = np.sum(sp[(pt, 'mass')]*(r_x*v_y - r_y*v_x))
     ang_mom = yt.YTArray([x_ang_mom, y_ang_mom, z_ang_mom])
     ang_mom, b1, b2 = ortho_find(ang_mom)
     return ang_mom, b1, b2
-
 
 if __name__ == '__main__':
 	"""
