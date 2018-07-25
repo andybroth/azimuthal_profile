@@ -69,6 +69,7 @@ if __name__ == '__main__':
         a_arr = np.concatenate((a_arr, f['phi'].value))
         cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
       print(a_arr)
+      print(len(a_arr))
       print(n_bins)
       profile_data = make_profiles(a_arr, cdens_arr, n_bins, field)
       # plot_hist2d(r_arr, cdens_arr, field, fn_head)
