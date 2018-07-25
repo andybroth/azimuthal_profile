@@ -26,7 +26,7 @@ import ytree
 import sys
 sys.path.insert(0, '/home/andyr/src/frb')
 from yt.utilities.math_utils import ortho_find
-from src/frb/radial_profile1 import *
+from radial_profile1 import *
 
 def find_angular_momentum(sp, c):
     """
