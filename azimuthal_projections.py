@@ -37,17 +37,17 @@ def find_angular_momentum(sp, c):
     pt = 'PartType0'
     halo_vel = sp.quantities.bulk_velocity()
 
-    x_r = sp[(pt, 'x')] - c[0]
-    y_r = sp[(pt, 'y')] - c[1]
-    z_r = sp[(pt, 'z')] - c[2]
+    r_x = sp[(pt, 'x')] - c[0]
+    r_y = sp[(pt, 'y')] - c[1]
+    r_z = sp[(pt, 'z')] - c[2]
 
-    x_v = sp[(pt, 'velocity_x')] - halo_vel[0]
-    y_v = sp[(pt, 'velocity_y')] - halo_vel[1]
-    z_v = sp[(pt, 'velocity_z')] - halo_vel[2]
+    v_x = sp[(pt, 'velocity_x')] - halo_vel[0]
+    v_y = sp[(pt, 'velocity_y')] - halo_vel[1]
+    v_z = sp[(pt, 'velocity_z')] - halo_vel[2]
 
-    x_ang_mom = np.sum(sp[(pt, 'mass')]*(y_r*z_v - z_r*y_v))
-    y_ang_mom = np.sum(sp[(pt, 'mass')]*(z_r*x_v - x_r*z_v))
-    z_ang_mom = np.sum(sp[(pt, 'mass')]*(x_r*y_v - y_r*x_v))
+    x_ang_mom = np.sum(sp[(pt, 'mass')]*(r_y*v_z - r_z*v_y))
+    y_ang_mom = np.sum(sp[(pt, 'mass')]*(r_z*v_x - r_x*v_z))
+    z_ang_mom = np.sum(sp[(pt, 'mass')]*(r_x*v_y - r_y*v_x))
     ang_mom = yt.YTArray([x_ang_mom, y_ang_mom, z_ang_mom])
     ang_mom, b1, b2 = ortho_find(ang_mom)
     return ang_mom, b1, b2
