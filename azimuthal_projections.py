@@ -23,6 +23,8 @@ import cmocean
 from scipy.signal import filtfilt, gaussian
 from scipy.ndimage import filters
 import ytree
+import sys
+sys.path.insert(0, '/home/andyr/src/frb')
 from yt.utilities.math_utils import ortho_find
 from src/frb/radial_profile1 import *
 
