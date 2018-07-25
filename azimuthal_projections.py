@@ -61,7 +61,7 @@ if __name__ == '__main__':
 	# Variables to set for each run
 	radial_extent = YTQuantity(250, 'kpc')
 	width = 2*radial_extent
-    res = 800 # default resolution of PlotWindow images
+    res = 800
 
     # Loading datasets
     fn_list = open(sys.argv[1], 'r')
