@@ -32,7 +32,7 @@ def find_angular_momentum(sp, c):
     Finds the average angular momentum of a sphere of particles around a 
     center point c
     """
-    
+
     pt = 'PartType0'
     halo_vel = sp.quantities.bulk_velocity()
 
@@ -168,7 +168,7 @@ if __name__ == '__main__':
         log('Finding Angular Momentum of Galaxy')
         sph = ds.sphere(c, (15, 'kpc'))
         ang_mom, b1, b2 = find_angular_momentum(sph, c)
-        log('Generating Edge on Projection')
+        log('Generating Edge on Projections')
         frb = make_off_axis_projection(ds, b1, ang_mom, full_ion_fields, \
                                        c, width, box, rvir, dir='edge/')
         for i, ion_field in enumerate(ion_fields):
