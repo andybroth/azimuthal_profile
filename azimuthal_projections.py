@@ -45,9 +45,9 @@ def find_angular_momentum(sp, c):
     y_v = sp[(pt, 'velocity_y')] - halo_vel[1]
     z_v = sp[(pt, 'velocity_z')] - halo_vel[2]
 
-    x_ang_mom = np.sum(sp[(pt, 'mass')]*(z_r*y_v + y_r*z_v))
-    y_ang_mom = np.sum(sp[(pt, 'mass')]*(x_r*z_v + z_r*x_v))
-    z_ang_mom = np.sum(sp[(pt, 'mass')]*(x_r*y_v + y_r*x_v))
+    x_ang_mom = np.sum(sp[(pt, 'mass')]*(y_r*z_v - z_r*y_v))
+    y_ang_mom = np.sum(sp[(pt, 'mass')]*(x_r*z_v - z_r*x_v))
+    z_ang_mom = np.sum(sp[(pt, 'mass')]*(x_r*y_v - y_r*x_v))
     ang_mom = yt.YTArray([x_ang_mom, y_ang_mom, z_ang_mom])
     ang_mom, b1, b2 = ortho_find(ang_mom)
     return ang_mom, b1, b2
