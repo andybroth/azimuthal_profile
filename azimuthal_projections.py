@@ -164,6 +164,7 @@ if __name__ == '__main__':
 
 		# Finds azimuthal angle for each pixel
 		phi = np.abs((np.pi / 2) - np.arctan(np.abs(py / px)))
+		phi *= 180 / np.pi
 		if "phi" not in cdens_file.keys():
 			cdens_file.create_dataset("phi", data=phi.ravel())
 

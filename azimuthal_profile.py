@@ -46,7 +46,7 @@ if __name__ == '__main__':
 
   n_bins = 45
   # r_bins = np.linspace(1, 200, n_bins)
-  a_bins = np.linspace(0, np.pi / 2, n_bins)
+  a_bins = np.linspace(0, 90, n_bins)
 
 
 # Get the list of ion_fields from the first file available
