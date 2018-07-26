@@ -48,8 +48,6 @@ if __name__ == '__main__':
   # r_bins = np.linspace(1, 200, n_bins)
   a_bins = np.linspace(90, 0, n_bins, endpoint=False)
   a_bins = np.flip(a_bins, 0)
-  print(a_bins)
-
 
 # Get the list of ion_fields from the first file available
   fn = list(profiles_dict.values())[0][0]
@@ -75,7 +73,7 @@ if __name__ == '__main__':
       # a_arr[np.isnan(a_arr)] = 0
 
       profile_data = make_profiles(a_arr, cdens_arr, a_bins, field, n_bins)
-      # plot_hist2d(r_arr, cdens_arr, field, fn_head)
+      plot_hist2d(r_arr, cdens_arr, field, fn_head)
       plot_profile(a_bins, profile_data, k, colors[c])
     finish_plot(field, COS_data, fn_head)
 
