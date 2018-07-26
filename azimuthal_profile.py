@@ -45,7 +45,7 @@ if __name__ == '__main__':
   profiles_dict = read_parameter_file(sys.argv[1])
 
   n_bins = 45
-  # r_bins = np.linspace(1, 200, n_bins)
+  r_bins = np.linspace(0, 150, 31)
   a_bins = np.linspace(90, 0, n_bins, endpoint=False)
   a_bins = np.flip(a_bins, 0)
 
@@ -69,11 +69,9 @@ if __name__ == '__main__':
         a_arr = np.concatenate((a_arr, f['phi'].value))
         cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
 
-      # masks all NaN's with 0, might skew data a bit so could fix in future
-      # a_arr[np.isnan(a_arr)] = 0
-
       profile_data = make_profiles(a_arr, cdens_arr, a_bins, field, n_bins)
       # plot_hist2d(a_arr, cdens_arr, field, fn_head)
+      print(profile_data)
       plot_profile(a_bins, profile_data, k, colors[c])
     finish_plot(field, COS_data, fn_head)
 
