@@ -70,7 +70,7 @@ if __name__ == '__main__':
         cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
 
       # masks all NaN's with 0, might skew data a bit so could fix in future
-      a_arr[np.isnan(a_arr)] = 0
+      # a_arr[np.isnan(a_arr)] = 0
 
       profile_data = make_profiles(a_arr, cdens_arr, a_bins, field, n_bins)
       # plot_hist2d(r_arr, cdens_arr, field, fn_head)
