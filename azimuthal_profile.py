@@ -40,7 +40,7 @@ def make_profiles2(a_arr, r_arr, cdens_arr, field, a_bins, r_bins):
                             ),np.zeros([3, len(a_bins) / 3])]
   for i, a_bin_id in enumerate(np.arange(len(a_bins))):
     for j in range(len(radii)):
-      sample = cdens_arr[a_bin_ids == a_bin_id && r_bin_ids > radii[j] && \
+      sample = cdens_arr[a_bin_ids == a_bin_id and r_bin_ids > radii[j] and \
                         r_bin_ids <= radii[j+1]]
       profile_data[j,0,i] = np.median(sample)
       profile_data[j,1,i] = np.percentile(sample, 25)
