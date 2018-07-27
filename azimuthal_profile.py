@@ -56,7 +56,7 @@ def normalize_by_radius(cdens_arr, r_bin_ids, r, a_bin_ids, a_bin_id):
   while a <= r+10:
     ids = np.logical_and(a_bin_ids == a_bin_id, r_bin_ids == a)
     bin_data = cdens_arr[ids]
-    sample = np.concatenate(sample, np.sum(bin_data) / len(bin_data))
+    sample = np.concatenate(sample, [np.sum(bin_data) / len(bin_data)])
     a+=1
   return sample
 
