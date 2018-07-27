@@ -43,9 +43,9 @@ def make_profiles2(a_arr, r_arr, cdens_arr, field, a_bins, r_bins):
       ids = np.logical_and(a_bin_ids == a_bin_id, r_bin_ids > radii[j])
       ids = np.logical_and(ids, r_bin_ids <= radii[j+1])
       sample = cdens_arr[ids]
-      profile_data[j,0,i] = np.median(sample)
-      profile_data[j,1,i] = np.percentile(sample, 25)
-      profile_data[j,2,i] = np.percentile(sample, 75)
+      profile_data[j][0,i] = np.median(sample)
+      profile_data[j][1,i] = np.percentile(sample, 25)
+      profile_data[j][2,i] = np.percentile(sample, 75)
   
   return profile_data
 
