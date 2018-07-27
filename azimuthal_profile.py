@@ -114,7 +114,7 @@ if __name__ == '__main__':
       # profile_data = make_profiles(a_arr, cdens_arr, a_bins, field, n_bins)
       # plot_hist2d(a_arr, cdens_arr, field, fn_head)
       for i in range(3):
-        plot_profile(a_bins, profile_data[i], k, colors[c])
+        plot_profile((a_bins+np.linspace(0, 90, a_n_bins)) / 2, profile_data[i], k, colors[c])
         finish_plot(field, COS_data, fn_head, i*50)
 
 
