@@ -43,6 +43,7 @@ def make_profiles2(a_arr, r_arr, cdens_arr, field, a_bins, r_bins):
       ids = np.logical_and(a_bin_ids == a_bin_id, r_bin_ids > radii[j])
       ids = np.logical_and(ids, r_bin_ids <= radii[j+1])
       sample = cdens_arr[ids]
+      print(sample)
       profile_data[j][0,i] = np.median(sample)
       profile_data[j][1,i] = np.percentile(sample, 25)
       profile_data[j][2,i] = np.percentile(sample, 75)
@@ -97,7 +98,6 @@ if __name__ == '__main__':
       # profile_data = make_profiles(a_arr, cdens_arr, a_bins, field, n_bins)
       # plot_hist2d(a_arr, cdens_arr, field, fn_head)
       for i in range(3):
-        print(profile_data[i])
         plot_profile(a_bins, profile_data[i], k, colors[c])
         finish_plot(field, COS_data, fn_head, i*50)
 
