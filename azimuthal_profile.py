@@ -94,6 +94,8 @@ if __name__ == '__main__':
         f = h5.File(v[j], 'r')
         a_arr = np.concatenate((a_arr, f['phi'].value))
         r_arr = np.concatenate((r_arr, f['radius'].value))
+        if (j%1000) == 0:
+          print(f["%s/%s" % (field, 'edge')].value)
         cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
       profile_data = make_profiles2(a_arr, r_arr, cdens_arr, field, a_bins, r_bins)
       
