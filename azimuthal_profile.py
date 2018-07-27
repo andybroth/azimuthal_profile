@@ -53,7 +53,7 @@ def normalize_by_radius(cdens_arr, r_bin_ids, r, a_bin_ids, a_bin_id):
   sample = np.array([])
   r += 1
   i = r
-  while i <= r+10:
+  while i < r+10 or i == 31:
     ids = np.logical_and(a_bin_ids == a_bin_id, r_bin_ids == i)
     if not (True in ids):
       print(i)
