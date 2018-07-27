@@ -42,24 +42,26 @@ def make_profiles2(a_arr, r_arr, cdens_arr, a_bins, r_bins):
     for j in range(len(radii)):
       # ids = np.logical_and(a_bin_ids == a_bin_id, r_bin_ids > radii[j])
       # ids = np.logical_and(ids, r_bin_ids <= radii[j+1])
-      sample = normalize_by_radius(cdens_arr, r_bin_ids, radii[j], a_bin_ids, a_bin_id)
+      sample = normalize_by_radius(cdens_arr, r_arr, r_bin_ids, radii[j], a_bin_ids, a_bin_id)
       profile_data[j][0,i] = np.median(sample)
       profile_data[j][1,i] = np.percentile(sample, 25)
       profile_data[j][2,i] = np.percentile(sample, 75)
   
   return profile_data
 
-def normalize_by_radius(cdens_arr, r_bin_ids, r, a_bin_ids, a_bin_id):
+def normalize_by_radius(cdens_arr, r_arr, r_bin_ids, r, a_bin_ids, a_bin_id):
   sample = np.array([])
   r += 1
   i = r
   while i < r+10:
     ids = np.logical_and(a_bin_ids == a_bin_id, r_bin_ids == i)
     bin_data = cdens_arr[ids]
-    if not (True in ids):
-      print(i)
-      print(len(bin_data))
-    sample = np.append(sample, np.sum(bin_data) / len(bin_data))
+    radii = r_arr[ids]
+    new_r_bins = np.linspace(5*i, 5*i + 5, 5)
+    new_data = np.array([])
+    for k in range():
+
+    sample = np.append(sample, np.sum(new_data) / len(new_data))
     i+=1
   return sample
 
@@ -79,7 +81,7 @@ if __name__ == '__main__':
   fn_head = sys.argv[1].split('.')[0]
   profiles_dict = read_parameter_file(sys.argv[1])
 
-  a_n_bins = 45
+  a_n_bins = 10
   r_n_bins = 31
   r_bins = np.linspace(0, 150, r_n_bins)
   a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
