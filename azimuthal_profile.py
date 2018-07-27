@@ -58,6 +58,7 @@ def normalize_by_radius(cdens_arr, r_bin_ids, r, a_bin_ids, a_bin_id):
     bin_data = cdens_arr[ids]
     sample = np.append(sample, np.sum(bin_data) / len(bin_data))
     a+=1
+  print(sample)
   return sample
 
 if __name__ == '__main__':
