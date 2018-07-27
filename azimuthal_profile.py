@@ -40,6 +40,8 @@ def make_profiles2(a_arr, r_arr, cdens_arr, field, a_bins, r_bins):
                     int(len(a_bins) / 3)]),np.zeros([3, int(len(a_bins) / 3)])]
   for i, a_bin_id in enumerate(np.arange(len(a_bins))):
     for j in range(len(radii)):
+      print(a_bin_ids == a_bin_id and r_bin_ids > radii[j] and \
+                        r_bin_ids <= radii[j+1])
       sample = cdens_arr[a_bin_ids == a_bin_id and r_bin_ids > radii[j] and \
                         r_bin_ids <= radii[j+1]]
       profile_data[j,0,i] = np.median(sample)
