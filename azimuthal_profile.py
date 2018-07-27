@@ -62,7 +62,7 @@ def normalize_by_radius(cdens_arr, r_arr, r_bin_ids, r, a_bin_ids, a_bin_id):
     new_data = np.array([])
     for k in range():
     '''
-    sample = np.append(sample, np.sum(new_data) / len(new_data))
+    sample = np.append(sample, np.sum(bin_data) / len(bin_data))
     i+=1
   return sample
 
