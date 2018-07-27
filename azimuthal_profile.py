@@ -54,7 +54,7 @@ def make_profiles2(a_arr, r_arr, cdens_arr, a_bins, r_bins):
 def normalize_by_radius(cdens_arr, r_arr, r_bins, r):
   sample = np.array([])
   while r < r+10:
-    r++
+    r+=1
   return sample
 
 if __name__ == '__main__':
