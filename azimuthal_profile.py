@@ -82,7 +82,7 @@ if __name__ == '__main__':
   fn_head = sys.argv[1].split('.')[0]
   profiles_dict = read_parameter_file(sys.argv[1])
 
-  a_n_bins = 10
+  a_n_bins = 20
   r_n_bins = 31
   r_bins = np.linspace(0, 150, r_n_bins)
   a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
