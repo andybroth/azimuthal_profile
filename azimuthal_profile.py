@@ -98,7 +98,7 @@ if __name__ == '__main__':
       # plot_hist2d(a_arr, cdens_arr, field, fn_head)
       for i in range(3):
         plot_profile(a_bins, profile_data[i], k, colors[c])
-    finish_plot(field, COS_data, fn_head)
+        finish_plot(field, COS_data, fn_head, i*50)
 
 
 
