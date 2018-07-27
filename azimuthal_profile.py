@@ -42,7 +42,7 @@ def make_profiles2(a_arr, r_arr, cdens_arr, a_bins, r_bins):
     for j in range(len(radii)-1):
       # ids = np.logical_and(a_bin_ids == a_bin_id, r_bin_ids > radii[j])
       # ids = np.logical_and(ids, r_bin_ids <= radii[j+1])
-      sample = normalize_by_radius(cdens_arr, r_bins, r_bin_ids, radii[j])
+      sample = normalize_by_radius(cdens_arr, r_bins, r_bin_ids, radii[j], a_bin_ids, a_bin_id)
       profile_data[j][0,i] = np.median(sample)
       profile_data[j][1,i] = np.percentile(sample, 25)
       profile_data[j][2,i] = np.percentile(sample, 75)
