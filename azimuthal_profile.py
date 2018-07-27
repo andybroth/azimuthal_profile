@@ -38,7 +38,7 @@ def make_profiles2(a_arr, r_arr, cdens_arr, field, a_bins, r_bins):
   radii = [0, 11, 21, 31]
   profile_data = [np.zeros([3, int(len(a_bins) / 3)]), np.zeros([3, \
                     int(len(a_bins) / 3)]),np.zeros([3, int(len(a_bins) / 3)])]
-  for i, a_bin_id in enumerate(np.arange(len(a_bins))):
+  for i, a_bin_id in enumerate(np.arange(int(len(a_bins)/3))):
     for j in range(len(radii)-1):
       ids = np.logical_and(a_bin_ids == a_bin_id, r_bin_ids > radii[j])
       ids = np.logical_and(ids, r_bin_ids <= radii[j+1])
