@@ -35,11 +35,11 @@ def make_profiles2(a_arr, r_arr, cdens_arr, a_bins, r_bins):
   """
   r_bin_ids = np.digitize(r_arr, r_bins)
   a_bin_ids = np.digitize(a_arr, a_bins)
-  radii = [0, 11, 21, 31]
+  radii = [1, 11, 21]
   profile_data = [np.zeros([3, len(a_bins)]), np.zeros([3, len(a_bins)]), \
                   np.zeros([3, len(a_bins)])]
   for i, a_bin_id in enumerate(np.arange(len(a_bins))):
-    for j in range(len(radii)-1):
+    for j in range(len(radii)):
       # ids = np.logical_and(a_bin_ids == a_bin_id, r_bin_ids > radii[j])
       # ids = np.logical_and(ids, r_bin_ids <= radii[j+1])
       sample = normalize_by_radius(cdens_arr, r_bin_ids, radii[j], a_bin_ids, a_bin_id)
@@ -53,7 +53,7 @@ def normalize_by_radius(cdens_arr, r_bin_ids, r, a_bin_ids, a_bin_id):
   sample = np.array([])
   r += 1
   i = r
-  while i < r+10 or i == 31:
+  while i < r+10:
     ids = np.logical_and(a_bin_ids == a_bin_id, r_bin_ids == i)
     bin_data = cdens_arr[ids]
     if not (True in ids):
