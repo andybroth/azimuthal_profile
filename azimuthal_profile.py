@@ -52,13 +52,14 @@ def make_profiles2(a_arr, r_arr, cdens_arr, a_bins, r_bins):
 def normalize_by_radius(cdens_arr, r_bin_ids, r, a_bin_ids, a_bin_id):
   sample = np.array([])
   r += 1
-  a = r
-  while a <= r+10:
-    ids = np.logical_and(a_bin_ids == a_bin_id, r_bin_ids == a)
-    print(True in ids)
+  i = r
+  while i <= r+10:
+    ids = np.logical_and(a_bin_ids == a_bin_id, r_bin_ids == i)
+    if not (True in ids):
+      print(i)
     bin_data = cdens_arr[ids]
     sample = np.append(sample, np.sum(bin_data) / len(bin_data))
-    a+=1
+    i+=1
   return sample
 
 if __name__ == '__main__':
