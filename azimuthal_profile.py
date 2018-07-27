@@ -28,13 +28,15 @@ sys.path.insert(0, '/home/andyr/src/frb')
 from get_COS_data import get_COS_data, plot_COS_data
 from radial_profile2 import *
 
-def make_profiles2(a_arr, r_arr, cdens_arr, field, a_bins, r_bins):
+def make_profiles2(a_arr, r_arr, cdens_arr, a_bins, r_bins):
   """
   Splits data into three radial groups (50 kpc, 100 kpc, 150 kpc) and bins data
   with respect to azimuthal angle to find the percentiles of each raidal group.
   """
   r_bin_ids = np.digitize(r_arr, r_bins)
   a_bin_ids = np.digitize(a_arr, a_bins)
+  if 0 in r_bin_ids:
+    print('0 is in r_bin_ids')
   radii = [0, 11, 21, 31]
   profile_data = [np.zeros([3, len(a_bins)]), np.zeros([3, len(a_bins)]), \
                   np.zeros([3, len(a_bins)])]
@@ -42,12 +44,18 @@ def make_profiles2(a_arr, r_arr, cdens_arr, field, a_bins, r_bins):
     for j in range(len(radii)-1):
       ids = np.logical_and(a_bin_ids == a_bin_id, r_bin_ids > radii[j])
       ids = np.logical_and(ids, r_bin_ids <= radii[j+1])
-      sample = cdens_arr[ids]
+      sample = normalize_by_radius(cdens_arr[ids], r_arr, r_bins, radii[j])
       profile_data[j][0,i] = np.median(sample)
       profile_data[j][1,i] = np.percentile(sample, 25)
       profile_data[j][2,i] = np.percentile(sample, 75)
   
   return profile_data
+
+def normalize_by_radius(cdens_arr, r_arr, r_bins, r):
+  sample = np.array([])
+  while r < r+10:
+    r++
+  return sample
 
 if __name__ == '__main__':
   """
@@ -92,10 +100,7 @@ if __name__ == '__main__':
         a_arr = np.concatenate((a_arr, f['phi'].value))
         r_arr = np.concatenate((r_arr, f['radius'].value))
         cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
-        for i in range(len(a_arr)):
-          if cdens_arr[i] > 1e-4:
-            print(cdens_arr[i])
-      profile_data = make_profiles2(a_arr, r_arr, cdens_arr, field, a_bins, r_bins)
+      profile_data = make_profiles2(a_arr, r_arr, cdens_arr, a_bins, r_bins)
       
       # profile_data = make_profiles(a_arr, cdens_arr, a_bins, field, n_bins)
       # plot_hist2d(a_arr, cdens_arr, field, fn_head)
