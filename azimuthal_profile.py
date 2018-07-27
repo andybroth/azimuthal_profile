@@ -35,8 +35,6 @@ def make_profiles2(a_arr, r_arr, cdens_arr, a_bins, r_bins):
   """
   r_bin_ids = np.digitize(r_arr, r_bins)
   a_bin_ids = np.digitize(a_arr, a_bins)
-  if 0 in r_bin_ids:
-    print('0 is in r_bin_ids')
   radii = [0, 11, 21, 31]
   profile_data = [np.zeros([3, len(a_bins)]), np.zeros([3, len(a_bins)]), \
                   np.zeros([3, len(a_bins)])]
@@ -44,17 +42,21 @@ def make_profiles2(a_arr, r_arr, cdens_arr, a_bins, r_bins):
     for j in range(len(radii)-1):
       ids = np.logical_and(a_bin_ids == a_bin_id, r_bin_ids > radii[j])
       ids = np.logical_and(ids, r_bin_ids <= radii[j+1])
-      sample = normalize_by_radius(cdens_arr[ids], r_arr, r_bins, radii[j])
+      sample = normalize_by_radius(cdens_arr[ids], r_arr, r_bins, r_bin_ids, radii[j])
       profile_data[j][0,i] = np.median(sample)
       profile_data[j][1,i] = np.percentile(sample, 25)
       profile_data[j][2,i] = np.percentile(sample, 75)
   
   return profile_data
 
-def normalize_by_radius(cdens_arr, r_arr, r_bins, r):
+def normalize_by_radius(cdens_arr, r_arr, r_bins, r_bin_ids, r):
   sample = np.array([])
-  a=r
-  while a < r+10:
+  r += 1
+  a = r
+  while a <= r+10:
+    ids = r_bin_ids == a
+    bin_data = cdens_arr[ids]
+    sample = np.concatenate(sample, np.sum(bin_data[ids] / len(ids)))
     a+=1
   return sample
 
