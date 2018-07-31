@@ -173,7 +173,7 @@ if __name__ == '__main__':
       radial_data = make_radial_profile(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins, r_n_bins)
       ion = finish_plot(field, COS_data, fn_head)
       for i in range(3):
-        plot_profile(r_bins, radial_data[i], str('_%s-%s degrees' % \
+        plot_profile(r_bins, radial_data[i], field+str('_%s-%s degrees' % \
                     (30*i, 30*i + 30)), colors[3*i])
       fplot_radius(ion)
 
