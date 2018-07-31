@@ -117,7 +117,7 @@ if __name__ == '__main__':
   fn_head = sys.argv[1].split('.')[0]
   profiles_dict = read_parameter_file(sys.argv[1])
 
-  a_n_bins = 30
+  a_n_bins = 10
   r_n_bins = 30
   r_bins = np.linspace(150, 0, r_n_bins, endpoint=False)
   r_bins = np.flip(r_bins, 0)
@@ -146,7 +146,7 @@ if __name__ == '__main__':
         cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
       profile_data = make_profiles2(a_arr, r_arr, cdens_arr, a_bins, r_bins)
       for i in range(3):
-        plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], k, colors[c])
+        plot_profile(a_bins, profile_data[i], k, colors[c])
         ion = finish_plot(field, COS_data, fn_head)
         fplot_angle(i*50, ion)
 
