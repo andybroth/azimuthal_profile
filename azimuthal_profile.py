@@ -82,13 +82,13 @@ def make_radial_profile(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins, r_n_b
       profile_data[j][2,i] = np.percentile(sample, 75)
   return profile_data
 
-def fplot_angle(r, ion):
-  plt.title('%s from %s kpc to %s kpc' % (ion, r, r+50))
+def fplot_angle(ion):
+  plt.title('%s' % ion)
   plt.xlabel('Azimuthal Angle [degrees]')
   plt.xlim((0,90))
   # plt.legend()
-  print('%s_%s_%s.png' % (fn_head, ion, r+50))
-  plt.savefig('plots/%s_%s_%s.png' % (fn_head, ion, r+50))
+  print('%s_%s_radial.png' % (fn_head, ion))
+  plt.savefig('plots/%s_%s_radial.png' % (fn_head, ion))
   plt.clf()
 
 def fplot_radius(ion):
