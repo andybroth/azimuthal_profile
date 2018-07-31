@@ -149,7 +149,7 @@ if __name__ == '__main__':
         plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], field+str('_%s-%s [kpc]' % \
                     (50*i, 50*i + 50)), colors[3*c])
       ion = finish_plot(field, COS_data, fn_head)
-      fplot_angle(i*50, ion)
+      fplot_angle(ion)
 
   # redefine bins for next plots
   a_n_bins = 3
