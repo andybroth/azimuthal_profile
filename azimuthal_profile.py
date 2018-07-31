@@ -86,7 +86,7 @@ def fplot_angle(ion):
   plt.title('%s' % ion)
   plt.xlabel('Azimuthal Angle [degrees]')
   plt.xlim((0,90))
-  # plt.legend()
+  plt.legend(title='Radius')
   print('%s_%a_angle.png' % (fn_head, ion))
   plt.savefig('plots/%s_%s_angle.png' % (fn_head, ion))
   plt.clf()
@@ -147,7 +147,7 @@ if __name__ == '__main__':
       profile_data = make_profiles2(a_arr, r_arr, cdens_arr, a_bins, r_bins)
       for i in range(3):
         plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], field+str('_%s-%s [kpc]' % \
-                    (50*i, 50*i + 50)), colors[3*c])
+                    (50*i, 50*i + 50)), colors[3*i])
       ion = finish_plot(field, COS_data, fn_head)
       fplot_angle(ion)
 
