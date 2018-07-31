@@ -83,7 +83,7 @@ def make_radial_profile(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins, r_n_b
   return profile_data
 
 def fplot_angle(r, ion):
-  plt.title('%ss from %s kpc to %s kpc' % (ion, r, r+50))
+  plt.title('%s from %s kpc to %s kpc' % (ion, r, r+50))
   plt.xlabel('Azimuthal Angle [degrees]')
   plt.xlim((0,90))
   # plt.legend()
@@ -92,7 +92,7 @@ def fplot_angle(r, ion):
   plt.clf()
 
 def fplot_radius(ion):
-  plt.title('%ss' % ion)
+  plt.title('%s' % ion)
   plt.xlabel('Impact Parameter [kpc]')
   plt.xlim((0,150))
   plt.legend(title='Azimuthal Angle')
