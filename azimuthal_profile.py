@@ -35,7 +35,7 @@ def make_profiles2(a_arr, r_arr, cdens_arr, a_bins, r_bins):
   """
   r_bin_ids = np.digitize(r_arr, r_bins)
   a_bin_ids = np.digitize(a_arr, a_bins)
-  radii = [1, 11, 21]
+  radii = [0, 10, 20]
   profile_data = [np.zeros([3, len(a_bins)]), np.zeros([3, len(a_bins)]), \
                   np.zeros([3, len(a_bins)])]
   for i, a_bin_id in enumerate(np.arange(len(a_bins))):
@@ -54,7 +54,6 @@ def normalize_by_radius(cdens_arr, r_bin_ids, r, a_bin_ids, a_bin_id):
   give the percentiles. 
   '''
   sample = np.array([])
-  r += 1
   radial_bin_id = r
   while radial_bin_id < r+10:
     ids = np.logical_and(a_bin_ids == a_bin_id, r_bin_ids == radial_bin_id)
@@ -74,7 +73,7 @@ def make_radial_bins(a_arr, r_arr, cdens_arr, a_bins, r_bins):
   profile_data = [np.zeros([3, len(a_bins)]), np.zeros([3, len(a_bins)]), \
                   np.zeros([3, len(a_bins)])]
   for i, r_bin_id in enumerate(np.arange(len(r_bins))):
-    for j in range(len(angle_bins)):
+    for j in range(len(angle_bins)-1):
       ids = np.logical_and(r_bin_ids == r_bin_id, a_bin_ids >= angle_bins[j])
       sample = cdens_arr[np.logical_and(ids, a_bin_ids < angle_bins[j+1])]
       if len(sample) < 5:
