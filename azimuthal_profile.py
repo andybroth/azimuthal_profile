@@ -63,7 +63,7 @@ def normalize_by_radius(cdens_arr, r_bin_ids, r, a_bin_ids, a_bin_id):
     radial_bin_id += 1
   return sample
 
-def make_radial_profile(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins):
+def make_radial_profile(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins, r_n_bins):
   '''
   Makes a profile based on radius with 3 bins of azimuthal angles: 0-30, 30-60, 
   60-90. 
@@ -71,8 +71,8 @@ def make_radial_profile(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins):
   r_bin_ids = np.digitize(r_arr, r_bins)
   a_bin_ids = np.digitize(a_arr, a_bins)
   angle_bins = range(a_n_bins)
-  profile_data = [np.zeros([3, a_n_bins]), np.zeros([3, a_n_bins]), \
-                  np.zeros([3, a_n_bins])]
+  profile_data = [np.zeros([3, r_n_bins]), np.zeros([3, r_n_bins]), \
+                  np.zeros([3, r_n_bins])]
   for i, r_bin_id in enumerate(np.arange(len(r_bins))):
     for j in range(a_n_bins):
       ids = np.logical_and(r_bin_ids == r_bin_id, a_bin_ids == angle_bins[j])
@@ -170,7 +170,7 @@ if __name__ == '__main__':
         a_arr = np.concatenate((a_arr, f['phi'].value))
         r_arr = np.concatenate((r_arr, f['radius'].value))
         cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
-      radial_data = make_radial_profile(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins)
+      radial_data = make_radial_profile(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins, r_n_bins)
       ion = finish_plot(field, COS_data, fn_head)
       for i in range(3):
         plot_profile(r_bins, radial_data[i], str('_%s-%s degrees' % \
