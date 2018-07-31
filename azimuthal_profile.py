@@ -58,7 +58,8 @@ def normalize_by_radius(cdens_arr, r_bin_ids, r, a_bin_ids, a_bin_id):
   while radial_bin_id < r+10:
     ids = np.logical_and(a_bin_ids == a_bin_id, r_bin_ids == radial_bin_id)
     bin_data = cdens_arr[ids]
-    sample = np.append(sample, np.sum(bin_data) / len(bin_data))
+    avg = np.sum(bin_data) / len(bin_data)
+    sample = np.append(sample, avg)
     radial_bin_id += 1
   return sample
 
@@ -76,9 +77,6 @@ def make_radial_bins(a_arr, r_arr, cdens_arr, a_bins, r_bins):
     for j in range(len(angle_bins)-1):
       ids = np.logical_and(r_bin_ids == r_bin_id, a_bin_ids >= angle_bins[j])
       sample = cdens_arr[np.logical_and(ids, a_bin_ids < angle_bins[j+1])]
-      if len(sample) < 5:
-        print('Radial bin: %s' % r_bin_id)
-        print('Angle bin: %s - %s' % (angle_bins[j], angle_bins[j+1]))
       profile_data[j][0,i] = np.median(sample)
       profile_data[j][1,i] = np.percentile(sample, 25)
       profile_data[j][2,i] = np.percentile(sample, 75)
