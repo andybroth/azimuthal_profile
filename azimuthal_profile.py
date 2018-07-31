@@ -87,8 +87,8 @@ def fplot_angle(ion):
   plt.xlabel('Azimuthal Angle [degrees]')
   plt.xlim((0,90))
   # plt.legend()
-  print('%s_%s_radial.png' % (fn_head, ion))
-  plt.savefig('plots/%s_%s_radial.png' % (fn_head, ion))
+  print('%s_%a_angle.png' % (fn_head, ion))
+  plt.savefig('plots/%s_%s_angle.png' % (fn_head, ion))
   plt.clf()
 
 def fplot_radius(ion):
