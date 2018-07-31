@@ -146,9 +146,10 @@ if __name__ == '__main__':
         cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
       profile_data = make_profiles2(a_arr, r_arr, cdens_arr, a_bins, r_bins)
       for i in range(3):
-        plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], k, colors[c])
-        ion = finish_plot(field, COS_data, fn_head)
-        fplot_angle(i*50, ion)
+        plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], field+str('_%s-%s [kpc]' % \
+                    (50*i, 50*i + 50)), colors[3*c])
+      ion = finish_plot(field, COS_data, fn_head)
+      fplot_angle(i*50, ion)
 
   # redefine bins for next plots
   a_n_bins = 3
