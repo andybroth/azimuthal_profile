@@ -46,7 +46,6 @@ def make_profiles2(a_arr, r_arr, cdens_arr, a_bins, r_bins):
       profile_data[j][0,i] = np.median(sample)
       profile_data[j][1,i] = np.percentile(sample, 25)
       profile_data[j][2,i] = np.percentile(sample, 75)
-  
   return profile_data
 
 def normalize_by_radius(cdens_arr, r_bin_ids, r, a_bin_ids, a_bin_id):
@@ -65,6 +64,41 @@ def normalize_by_radius(cdens_arr, r_bin_ids, r, a_bin_ids, a_bin_id):
     sample = np.append(sample, np.sum(bin_data) / len(bin_data))
     radial_bin_id += 1
   return sample
+
+def make_radial_bins(a_arr, r_arr, cdens_arr, a_bins, r_bins):
+  '''
+  Makes a profile based on radius with 3 bins of azimuthal angles: 0-30, 30-60, 
+  60-90. 
+  '''
+  r_bin_ids = np.digitize(r_arr, r_bins)
+  a_bin_ids = np.digitize(a_arr, a_bins)
+  angle_bins = [0, 10, 20, 30]
+  profile_data = [np.zeros([3, len(a_bins)]), np.zeros([3, len(a_bins)]), \
+                  np.zeros([3, len(a_bins)])]
+  for i, r_bin_id in enumerate(np.arange(len(r_bins))):
+    for j in range(len(angle_bins)):
+      ids = np.logical_and(r_bin_ids == r_bin_id, a_bin_ids >= angle_bins[j])
+      sample = cdens_arr[np.logical_and(ids, a_bin_ids < angle_bins[j+1])]
+      profile_data[j][0,i] = np.median(sample)
+      profile_data[j][1,i] = np.percentile(sample, 25)
+      profile_data[j][2,i] = np.percentile(sample, 75)
+  return profile_data
+
+def fplot_angle(r):
+  plt.xlabel('Azimuthal Angle [degrees]')
+  plt.xlim((0,90))
+  plt.legend()
+  print('%s_%s_%s.png' % (fn_head, ion, r+50))
+  plt.savefig('plots/%s_%s_%s.png' % (fn_head, ion, r+50))
+  plt.clf()
+
+def fplot_radius():
+  plt.xlabel('Impact Parameter [kpc]')
+  plt.xlim((0,150))
+  plt.legend()
+  print('%s_%s_radial.png' % (fn_head, ion))
+  plt.savefig('plots/%s_%s_radial.png' % (fn_head, ion))
+  plt.clf()
 
 if __name__ == '__main__':
   """
@@ -99,7 +133,7 @@ if __name__ == '__main__':
 
   # Step through each ion
   for field in ion_fields:
-  # setup plot?
+    # Makes plots of azimuthal angle vs N
     for c, (k,v) in enumerate(profiles_dict.items()):
       n_files = len(v)
       cdens_arr = np.array([])
@@ -111,12 +145,18 @@ if __name__ == '__main__':
         r_arr = np.concatenate((r_arr, f['radius'].value))
         cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
       profile_data = make_profiles2(a_arr, r_arr, cdens_arr, a_bins, r_bins)
-      
-      # profile_data = make_profiles(a_arr, cdens_arr, a_bins, field, n_bins)
-      # plot_hist2d(a_arr, cdens_arr, field, fn_head)
       for i in range(3):
         plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], k, colors[c])
-        finish_plot(field, COS_data, fn_head, i*50)
+        finish_plot(field, COS_data, fn_head)
+        fplot_angle(i*50)
+
+      # Makes radius vs N for 3 bins
+      radial_data = make_radial_bins(a_arr, r_arr, cdens_arr, a_bins, r_bins)
+      for i in range(3):
+        plot_profile(r_bins, radial_data[i], k+str('%s\degrees-%s\degrees' % \
+                    (30*i, 30*i + 30)), colors[3*i])
+      finish_plot(field, COS_data, fn_head)
+      fplot_radius()
 
 
 
