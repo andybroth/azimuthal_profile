@@ -92,7 +92,7 @@ def fplot_angle(r, ion):
   plt.clf()
 
 def fplot_radius(ion):
-  plt.title('%ss')
+  plt.title('%ss' % ion)
   plt.xlabel('Impact Parameter [kpc]')
   plt.xlim((0,150))
   plt.legend(title='Azimuthal Angle')
@@ -153,10 +153,10 @@ if __name__ == '__main__':
 
       # Makes radius vs N for 3 bins
       radial_data = make_radial_bins(a_arr, r_arr, cdens_arr, a_bins, r_bins)
-      for i in range(3):
-        plot_profile(r_bins, radial_data[i], k+str('%s\degrees-%s\degrees' % \
-                    (30*i, 30*i + 30)), colors[3*i])
       ion = finish_plot(field, COS_data, fn_head)
+      for i in range(3):
+        plot_profile(r_bins, radial_data[i], ion+str('_%s-%s degrees' % \
+                    (30*i, 30*i + 30)), colors[3*i])
       fplot_radius(ion)
 
 
