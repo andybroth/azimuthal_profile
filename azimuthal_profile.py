@@ -85,17 +85,19 @@ def make_radial_bins(a_arr, r_arr, cdens_arr, a_bins, r_bins):
   return profile_data
 
 def fplot_angle(r):
+  plt.title('%ss from %s kpc to %s kpc' % (ion, r, r+50))
   plt.xlabel('Azimuthal Angle [degrees]')
   plt.xlim((0,90))
-  plt.legend()
+  # plt.legend()
   print('%s_%s_%s.png' % (fn_head, ion, r+50))
   plt.savefig('plots/%s_%s_%s.png' % (fn_head, ion, r+50))
   plt.clf()
 
 def fplot_radius():
+  plt.title('%ss')
   plt.xlabel('Impact Parameter [kpc]')
   plt.xlim((0,150))
-  plt.legend()
+  plt.legend(title='Azimuthal Angle')
   print('%s_%s_radial.png' % (fn_head, ion))
   plt.savefig('plots/%s_%s_radial.png' % (fn_head, ion))
   plt.clf()
