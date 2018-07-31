@@ -84,7 +84,7 @@ def make_radial_bins(a_arr, r_arr, cdens_arr, a_bins, r_bins):
       profile_data[j][2,i] = np.percentile(sample, 75)
   return profile_data
 
-def fplot_angle(r):
+def fplot_angle(r, ion):
   plt.title('%ss from %s kpc to %s kpc' % (ion, r, r+50))
   plt.xlabel('Azimuthal Angle [degrees]')
   plt.xlim((0,90))
@@ -93,7 +93,7 @@ def fplot_angle(r):
   plt.savefig('plots/%s_%s_%s.png' % (fn_head, ion, r+50))
   plt.clf()
 
-def fplot_radius():
+def fplot_radius(ion):
   plt.title('%ss')
   plt.xlabel('Impact Parameter [kpc]')
   plt.xlim((0,150))
@@ -149,16 +149,16 @@ if __name__ == '__main__':
       profile_data = make_profiles2(a_arr, r_arr, cdens_arr, a_bins, r_bins)
       for i in range(3):
         plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], k, colors[c])
-        finish_plot(field, COS_data, fn_head)
-        fplot_angle(i*50)
+        ion = finish_plot(field, COS_data, fn_head)
+        fplot_angle(i*50, ion)
 
       # Makes radius vs N for 3 bins
       radial_data = make_radial_bins(a_arr, r_arr, cdens_arr, a_bins, r_bins)
       for i in range(3):
         plot_profile(r_bins, radial_data[i], k+str('%s\degrees-%s\degrees' % \
                     (30*i, 30*i + 30)), colors[3*i])
-      finish_plot(field, COS_data, fn_head)
-      fplot_radius()
+      ion = finish_plot(field, COS_data, fn_head)
+      fplot_radius(ion)
 
 
 
