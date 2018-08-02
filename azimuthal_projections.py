@@ -170,7 +170,8 @@ if __name__ == '__main__':
 
 		log('Finding Angular Momentum of Galaxy')
 		sph = ds.sphere(c, (15, 'kpc'))
-		ang_mom, b1, b2 = find_angular_momentum(sph, c)
+		ang_mom = sp.quantities.angular_momentum_vector(use_gas=False, use_particles=True, particle_type='PartType0')
+		ang_mom, b1, b2 = ortho_find(ang_mom)
 		log('Generating Edge on Projections')
 		frb = make_off_axis_projection(ds, b1, ang_mom, full_ion_fields, \
 		                           c, width, box, rvir, dir='edge/')
