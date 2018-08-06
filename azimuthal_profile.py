@@ -89,16 +89,19 @@ def radial_profile_unadjusted(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins,
   '''
   r_bin_ids = np.digitize(r_arr, r_bins)
   a_bin_ids = np.digitize(a_arr, a_bins)
-  profile_data = [np.zeros([3, a_n_bins]), np.zeros([3, a_n_bins]), \
-                  np.zeros([3, a_n_bins])]
+  cden_data = [np.zeros([2, a_n_bins]), np.zeros([2, a_n_bins]), \
+                  np.zeros([2, a_n_bins])]
+  angle_data = [np.zeros([2, a_n_bins]), np.zeros([2, a_n_bins]), \
+                np.zeros([2, a_n_bins])]
   for r_bin_id in range(r_n_bins):
     for a_bin_id in range(a_n_bins):
       ids = np.logical_and(r_bin_ids == r_bin_id, a_bin_ids == a_bin_id)
       sample = cdens_arr[ids]
-      profile_data[r_bin_id][0,a_bin_id] = np.median(sample)
-      profile_data[r_bin_id][1,a_bin_id] = np.std(a_arr[ids])
-      profile_data[r_bin_id][2,a_bin_id] = np.std(sample)
-  return profile_data
+      cden_data[r_bin_id][0,a_bin_id] = np.median(sample)
+      cden_data[r_bin_id][1,a_bin_id] = np.std(sample)
+      angle_data[r_bin_id][0,a_bin_id] = np.median(a_arr[ids])
+      angle_data[r_bin_id][1,a_bin_id] = np.std(a_arr[ids])
+  return cden_data, angle_data
 
 def fplot_angle(ion):
   plt.title('%s' % ion)
@@ -127,12 +130,16 @@ def fplot_new(ion):
   plt.savefig('plots/%s_new.png' % ion)
   plt.clf()
 
-def plot_radial(r_bins, profile_data, label, color, marker):
-  plt.errorbar(r_bins, profile_data[0,:], xerr=profile_data[1,:], yerr=profile_data[2,:], marker=marker)
+def plot_radial(angle_data, cden_data, label, color, marker):
   '''
-  plt.semilogy(r_bins, profile_data[0,:], marker='', ls='dashed', label=label, color=color)    
-  plt.fill_between(r_bins, profile_data[1,:], profile_data[2,:], facecolor=color, alpha=0.3)
+  Plots the azimuthal angle vs Cden for 3 angular and 3 radial bins along with
+  a error bar of 1 std for each axis at each point
   '''
+  plt.set_yscale('log')
+  ylower = np.maximum(1e-29, cden_data[0,:] - cden_data[1,:])
+  yerr_lower = cden_data[0,:] - ylower
+
+  plt.errorbar(angle_data[0,:], cden_data[0,:], xerr=angle_data[1,:], yerr=yerr_lower, marker=marker, label=label)
 
 if __name__ == '__main__':
   """
@@ -213,10 +220,10 @@ if __name__ == '__main__':
       r_bins = np.linspace(80, 20, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
 
-      radial_data = radial_profile_unadjusted(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins, r_n_bins)
+      cden_data, angle_data = radial_profile_unadjusted(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins, r_n_bins)
       ion = finish_plot(field, COS_data, fn_head)
-      plot_radial(r_bins, radial_data[i], 'b < %s kpc' % r_bins[0], colors[3*i], markers[0])
+      plot_radial(angle_data[0], cden_data[0], 'b < %s kpc' % r_bins[0], colors[0], markers[0])
       for i in range(1,3):
-        plot_radial(r_bins, radial_data[i], '%s < b < %s kpc' % \
+        plot_radial(angle_data[i], cden_data[i], '%s < b < %s kpc' % \
                     (r_bins[i-1], r_bins[i]), colors[3*i], markers[i])
       fplot_new(ion)
