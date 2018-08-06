@@ -135,11 +135,13 @@ def plot_radial(angle_data, cden_data, label, color, marker):
   Plots the azimuthal angle vs Cden for 3 angular and 3 radial bins along with
   a error bar of 1 std for each axis at each point
   '''
-  plt.set_yscale('log')
+  # makes sure the error bars never go below 0
   ylower = np.maximum(1e-29, cden_data[0,:] - cden_data[1,:])
   yerr_lower = cden_data[0,:] - ylower
-
+  
+  # plots points
   plt.errorbar(angle_data[0,:], cden_data[0,:], xerr=angle_data[1,:], yerr=yerr_lower, marker=marker, label=label)
+  plt.semilogy()
 
 if __name__ == '__main__':
   """
