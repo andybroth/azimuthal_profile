@@ -105,7 +105,7 @@ def fplot_angle(ion):
   plt.xlabel('Azimuthal Angle [degrees]')
   plt.xlim((0,90))
   plt.legend(title='Radius')
-  print('%s_%a_angle.png' % (fn_head, ion))
+  print('%s_angle.png' % ion)
   plt.savefig('plots/%s_angle.png' % ion)
   plt.clf()
 
@@ -114,8 +114,17 @@ def fplot_radius(ion):
   plt.xlabel('Impact Parameter [kpc]')
   plt.xlim((0,150))
   plt.legend(title='Azimuthal Angle')
-  print('%s_%s_radial.png' % (fn_head, ion))
+  print('%s_radial.png' % ion)
   plt.savefig('plots/%s_radial.png' % ion)
+  plt.clf()
+
+def fplot_new(ion):
+  plt.title('%s' % ion)
+  plt.xlabel('Impact Parameter [kpc]')
+  plt.xlim((0,150))
+  plt.legend(title='Azimuthal Angle')
+  print('%s_radial.png' % ion)
+  plt.savefig('plots/%s_new.png' % ion)
   plt.clf()
 
 def plot_radial(r_bins, profile_data, label, color, marker):
@@ -210,4 +219,4 @@ if __name__ == '__main__':
       for i in range(1,3):
         plot_radial(r_bins, radial_data[i], '%s < b < %s kpc' % \
                     (r_bins[i-1], r_bins[i]), colors[3*i], markers[i])
-      fplot_radius(ion)
+      fplot_new(ion)
