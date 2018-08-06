@@ -123,10 +123,10 @@ def fplot_radius(ion):
 
 def fplot_new(ion):
   plt.title('%s' % ion)
-  plt.xlabel('Impact Parameter [kpc]')
-  plt.xlim((0,150))
-  plt.legend(title='Azimuthal Angle')
-  print('%s_radial.png' % ion)
+  plt.xlabel('Azimuthal Angle [Degrees}')
+  plt.xlim((0,90))
+  plt.legend(title='Impact Parameter')
+  print('%s_new.png' % ion)
   plt.savefig('plots/%s_new.png' % ion)
   plt.clf()
 
@@ -224,8 +224,8 @@ if __name__ == '__main__':
 
       cden_data, angle_data = radial_profile_unadjusted(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins, r_n_bins)
       ion = finish_plot(field, COS_data, fn_head)
-      plot_radial(angle_data[0], cden_data[0], 'b < %s kpc' % r_bins[0], colors[0], markers[0])
+      plot_radial(angle_data[0], cden_data[0], 'b < 40 kpc', colors[0], markers[0])
       for i in range(1,3):
         plot_radial(angle_data[i], cden_data[i], '%s < b < %s kpc' % \
-                    (r_bins[i-1], r_bins[i]), colors[3*i], markers[i])
+                    (i*20 + 20, i*20 + 40), colors[3*i], markers[i])
       fplot_new(ion)
