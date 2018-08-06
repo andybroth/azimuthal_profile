@@ -144,38 +144,33 @@ if __name__ == '__main__':
         a_arr = np.concatenate((a_arr, f['phi'].value))
         r_arr = np.concatenate((r_arr, f['radius'].value))
         cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
+      
+      # create bins for data
+      a_n_bins = 9
+      r_n_bins = 30
+      r_bins = np.linspace(150, 0, r_n_bins, endpoint=False)
+      r_bins = np.flip(r_bins, 0)
+      a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
+      a_bins = np.flip(a_bins, 0)
+
       profile_data = make_profiles2(a_arr, r_arr, cdens_arr, a_bins, r_bins)
       for i in range(3):
-        plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], field+str('_%s-%s [kpc]' % \
-                    (50*i, 50*i + 50)), colors[3*i])
+        plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], '%s - %s kpc' % \
+                    (50*i, 50*i + 50), colors[3*i])
       ion = finish_plot(field, COS_data, fn_head)
       fplot_angle(ion)
 
-  # redefine bins for next plots
-  a_n_bins = 3
-  r_n_bins = 30
-  r_bins = np.linspace(150, 0, r_n_bins, endpoint=False)
-  r_bins = np.flip(r_bins, 0)
-  a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
-  a_bins = np.flip(a_bins, 0)
+      # redefine bins
+      a_n_bins = 3
+      a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
+      a_bins = np.flip(a_bins, 0)
 
-  # Step through each ion and make plots of radius vs N for 3 radial bins
-  for field in ion_fields:
-    for c, (k,v) in enumerate(profiles_dict.items()):
-      n_files = len(v)
-      cdens_arr = np.array([])
-      a_arr = np.array([])
-      r_arr = np.array([])
-      for j in range(n_files):
-        f = h5.File(v[j], 'r')
-        a_arr = np.concatenate((a_arr, f['phi'].value))
-        r_arr = np.concatenate((r_arr, f['radius'].value))
-        cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
+      # Step through each ion and make plots of radius vs N for 3 radial bins
       radial_data = make_radial_profile(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins, r_n_bins)
       ion = finish_plot(field, COS_data, fn_head)
       for i in range(3):
-        plot_profile(r_bins, radial_data[i], field+str('_%s-%s degrees' % \
-                    (30*i, 30*i + 30)), colors[3*i])
+        plot_profile(r_bins, radial_data[i], '%s - %s degrees' % \
+                    (30*i, 30*i + 30), colors[3*i])
       fplot_radius(ion)
 
 
