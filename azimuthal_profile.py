@@ -82,13 +82,31 @@ def make_radial_profile(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins, r_n_b
       profile_data[j][2,i] = np.percentile(sample, 75)
   return profile_data
 
+def radial_profile_unadjusted(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins, r_n_bins):
+  '''
+  Makes 3 bins for angle and radius and plots median point for each with
+  error bars of 1 standard deviation.
+  '''
+  r_bin_ids = np.digitize(r_arr, r_bins)
+  a_bin_ids = np.digitize(a_arr, a_bins)
+  profile_data = [np.zeros([3, a_n_bins]), np.zeros([3, a_n_bins]), \
+                  np.zeros([3, a_n_bins])]
+  for r_bin_id in range(r_n_bins):
+    for a_bin_id in range(a_n_bins):
+      ids = np.logical_and(r_bin_ids == r_bin_id, a_bin_ids == a_bin_id)
+      sample = cdens_arr[ids]
+      profile_data[r_bin_id][0,a_bin_id] = np.median(sample)
+      profile_data[r_bin_id][1,a_bin_id] = np.std(a_arr[ids])
+      profile_data[r_bin_id][2,a_bin_id] = np.std(sample)
+  return profile_data
+
 def fplot_angle(ion):
   plt.title('%s' % ion)
   plt.xlabel('Azimuthal Angle [degrees]')
   plt.xlim((0,90))
   plt.legend(title='Radius')
   print('%s_%a_angle.png' % (fn_head, ion))
-  plt.savefig('plots/%s_%s_angle.png' % (fn_head, ion))
+  plt.savefig('plots/%s_angle.png' % ion)
   plt.clf()
 
 def fplot_radius(ion):
@@ -97,8 +115,15 @@ def fplot_radius(ion):
   plt.xlim((0,150))
   plt.legend(title='Azimuthal Angle')
   print('%s_%s_radial.png' % (fn_head, ion))
-  plt.savefig('plots/%s_%s_radial.png' % (fn_head, ion))
+  plt.savefig('plots/%s_radial.png' % ion)
   plt.clf()
+
+def plot_radial(r_bins, profile_data, label, color, marker):
+  plt.errorbar(r_bins, profile_data[0,:], xerr=profile_data[1,:], yerr=profile_data[2,:], marker=marker)
+  '''
+  plt.semilogy(r_bins, profile_data[0,:], marker='', ls='dashed', label=label, color=color)    
+  plt.fill_between(r_bins, profile_data[1,:], profile_data[2,:], facecolor=color, alpha=0.3)
+  '''
 
 if __name__ == '__main__':
   """
@@ -113,6 +138,7 @@ if __name__ == '__main__':
 
   # Color cycling
   colors = 3*['black', 'cyan', 'green', 'magenta', 'yellow', 'blue', 'red']
+  markers = ['o', '^', 's']
 
   fn_head = sys.argv[1].split('.')[0]
   profiles_dict = read_parameter_file(sys.argv[1])
@@ -173,5 +199,15 @@ if __name__ == '__main__':
                     (30*i, 30*i + 30), colors[3*i])
       fplot_radius(ion)
 
+      # Make plot similar to paper
+      r_n_bins = 3
+      r_bins = np.linspace(80, 20, r_n_bins, endpoint=False)
+      r_bins = np.flip(r_bins, 0)
 
-
+      radial_data = radial_profile_unadjusted(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins, r_n_bins)
+      ion = finish_plot(field, COS_data, fn_head)
+      plot_radial(r_bins, radial_data[i], 'b < %s kpc' % r_bins[0], colors[3*i], markers[0])
+      for i in range(1,3):
+        plot_radial(r_bins, radial_data[i], '%s < b < %s kpc' % \
+                    (r_bins[i-1], r_bins[i]), colors[3*i], markers[i])
+      fplot_radius(ion)
