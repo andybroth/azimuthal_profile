@@ -150,18 +150,16 @@ def radial_profile_big(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins, r_n_bi
   '''
   r_bin_ids = np.digitize(r_arr, r_bins)
   a_bin_ids = np.digitize(a_arr, a_bins)
-  cden_data = [np.zeros([2, a_n_bins]), np.zeros([2, a_n_bins]), \
-                  np.zeros([2, a_n_bins])]
-  radius_data = [np.zeros([2, a_n_bins]), np.zeros([2, a_n_bins]), \
-                np.zeros([2, a_n_bins])]
+  cden_data = [np.zeros([2, r_n_bins]), np.zeros([2, r_n_bins])]
+  radius_data = [np.zeros([2, r_n_bins]), np.zeros([2, r_n_bins])]
   for r_bin_id in range(r_n_bins):
     for a_bin_id in range(a_n_bins):
       ids = np.logical_and(r_bin_ids == r_bin_id, a_bin_ids == a_bin_id)
       sample = cdens_arr[ids]
-      cden_data[r_bin_id][0,a_bin_id] = np.median(sample)
-      cden_data[r_bin_id][1,a_bin_id] = np.std(sample)
-      radius_data[r_bin_id][0,a_bin_id] = np.median(r_arr[ids])
-      radius_data[r_bin_id][1,a_bin_id] = np.std(r_arr[ids])
+      cden_data[a_bin_id][0,r_bin_id] = np.median(sample)
+      cden_data[a_bin_id][1,r_bin_id] = np.std(sample)
+      radius_data[a_bin_id][0,r_bin_id] = np.median(r_arr[ids])
+      radius_data[a_bin_id][1,r_bin_id] = np.std(r_arr[ids])
   return cden_data, radius_data
 
 def plot_big_radius(radius_data, cden_data, label, color, marker):
