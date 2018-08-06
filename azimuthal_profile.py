@@ -155,7 +155,7 @@ if __name__ == '__main__':
 
       profile_data = make_profiles2(a_arr, r_arr, cdens_arr, a_bins, r_bins)
       for i in range(3):
-        plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], '%s - %s kpc' % \
+        plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], '%s < b < %s kpc' % \
                     (50*i, 50*i + 50), colors[3*i])
       ion = finish_plot(field, COS_data, fn_head)
       fplot_angle(ion)
@@ -169,7 +169,7 @@ if __name__ == '__main__':
       radial_data = make_radial_profile(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins, r_n_bins)
       ion = finish_plot(field, COS_data, fn_head)
       for i in range(3):
-        plot_profile(r_bins, radial_data[i], '%s - %s degrees' % \
+        plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % \
                     (30*i, 30*i + 30), colors[3*i])
       fplot_radius(ion)
 
