@@ -182,7 +182,7 @@ if __name__ == '__main__':
 			if dset not in cdens_file.keys():
 			    cdens_file.create_dataset(dset, data=frb[full_ion_fields[i]].ravel())
 			    cdens_file.flush()
-			frb = make_off_axis_projection(ds, b1, ang_mom, full_other_fields, \
+			frb = make_off_axis_projection(ds, b2, ang_mom, full_other_fields, \
 			                           c, width, box, rvir, weight_field=('gas', 'density'), dir='edge/')
 			for i, other_field in enumerate(other_fields):
 				dset = "%s/%s" % (other_field, 'edge')
