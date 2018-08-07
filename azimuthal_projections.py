@@ -172,9 +172,11 @@ if __name__ == '__main__':
 		sph = ds.sphere(c, (15, 'kpc'))
 		ang_mom = sp.quantities.angular_momentum_vector(use_gas=False, use_particles=True, particle_type='PartType0')
 		ang_mom, b1, b2 = ortho_find(ang_mom)
+
 		log('Generating Edge on Projections')
 		frb = make_off_axis_projection(ds, b1, ang_mom, full_ion_fields, \
 		                           c, width, box, rvir, dir='edge/')
+		
 		for i, ion_field in enumerate(ion_fields):
 			dset = "%s/%s" % (ion_field, 'edge')
 			if dset not in cdens_file.keys():
