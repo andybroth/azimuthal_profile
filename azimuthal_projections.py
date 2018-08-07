@@ -148,8 +148,6 @@ if __name__ == '__main__':
 		c = read_amiga_center(amiga_data, fn, ds)
 		rvir = read_amiga_rvir(amiga_data, fn, ds)
 
-		sp = ds.sphere(c, 3*radial_extent)
-
 		cdens_file = h5.File(cdens_fn, 'a')
 
 		# Create box around galaxy so we're only sampling galaxy out to 1 Mpc
@@ -169,14 +167,10 @@ if __name__ == '__main__':
 			cdens_file.create_dataset("phi", data=phi.ravel())
 
 		log('Finding Angular Momentum of Galaxy')
-		sph = ds.sphere(c, (15, 'kpc'))
-		L1 = sph.quantities.angular_momentum_vector(use_gas=False, use_particles=True, particle_type='PartType0')
-		L, E1, E2 = ortho_find(L1)
-		log(L1)
-		log(L)
-		log(str(np.cross(L1,L)))
-		log(str(np.inner(L, E1)))
-		log(str(np.inner(L, E2)))
+		_, c = ds.find_max('density')
+		sp = ds.sphere(c, (15, 'kpc'))
+		L = sp.quantities.angular_momentum_vector(use_gas=False, use_particles=True, particle_type='PartType0')
+		L, E1, E2 = ortho_find(L)
 
 		log('Making basic projection')
 		p = yt.OffAxisProjectionPlot(ds, E1, 'density', center=c, width=(100, 'kpc'), north_vector=L)
