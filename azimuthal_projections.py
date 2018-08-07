@@ -174,9 +174,9 @@ if __name__ == '__main__':
 		L, E1, E2 = ortho_find(L1)
 		log(L1)
 		log(L)
-		log(str(np.inner(L1,L)))
-		log(str(np.cross(L, E1)))
-		log(str(np.cross(L, E2)))
+		log(str(np.cross(L1,L)))
+		log(str(np.inner(L, E1)))
+		log(str(np.inner(L, E2)))
 
 		log('Making basic projection')
 		p = yt.OffAxisProjectionPlot(ds, E1, 'density', center=c, width=(100, 'kpc'), north_vector=L)
