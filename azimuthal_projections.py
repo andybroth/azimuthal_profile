@@ -173,7 +173,11 @@ if __name__ == '__main__':
 
 		log('Generating Edge on Projections')
 		frb = make_off_axis_projection(ds, E1, L, full_ion_fields, \
-		                           c, width, box, rvir, dir='edge/')
+		                           c,\
+		                            width,\
+		                             box,\
+		                              rvir,\
+		                               dir='edge/')
 		
 		for i, ion_field in enumerate(ion_fields):
 			dset = "%s/%s" % (ion_field, 'edge')
