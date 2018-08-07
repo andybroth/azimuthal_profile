@@ -83,12 +83,12 @@ if __name__ == '__main__':
 		ions = []
 		ion_fields = []
 		full_ion_fields = []
-		ions.append('H I')
-		ion_fields.append('H_number_density')
-		full_ion_fields.append(('gas', 'H_number_density'))
-		ions.append('Mg II')
-		ion_fields.append('Mg_p1_number_density')
-		full_ion_fields.append(('gas', 'Mg_p1_number_density'))
+		# ions.append('H I')
+		# ion_fields.append('H_number_density')
+		# full_ion_fields.append(('gas', 'H_number_density'))
+		# ions.append('Mg II')
+		# ion_fields.append('Mg_p1_number_density')
+		# full_ion_fields.append(('gas', 'Mg_p1_number_density'))
 		# ions.append('Si II')
 		# ion_fields.append('Si_p1_number_density')
 		# full_ion_fields.append(('gas', 'Si_p1_number_density'))
