@@ -174,9 +174,9 @@ if __name__ == '__main__':
 		L, b1, b2 = ortho_find(ang_mom)
 		log(ang_mom)
 		log(L)
-		log(np.dot(L, ang_mom))
-		log(np.cross(L, b1))
-		log(np.cross(L, b2))
+		log(str(np.dot(L, ang_mom)))
+		log(str(np.cross(L, b1)))
+		log(str(np.cross(L, b2)))
 		log('Generating Edge on Projections')
 		frb = make_off_axis_projection(ds, b1, L, full_ion_fields, \
 		                           c, width, box, rvir, dir='edge/')
