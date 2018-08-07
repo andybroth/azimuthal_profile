@@ -171,6 +171,8 @@ if __name__ == '__main__':
 		L = sp.quantities.angular_momentum_vector(use_gas=False, use_particles=True, particle_type='PartType0')
 		L, E1, E2 = ortho_find(L)
 
+		log(c)
+
 		log('Generating Edge on Projections')
 		frb = make_off_axis_projection(ds, E1, L, full_ion_fields, \
 		                           c, width, box, rvir, dir='edge/')
