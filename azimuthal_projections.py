@@ -170,11 +170,11 @@ if __name__ == '__main__':
 
 		log('Finding Angular Momentum of Galaxy')
 		sph = ds.sphere(c, (15, 'kpc'))
-		ang_mom = sp.quantities.angular_momentum_vector(use_gas=False, use_particles=True, particle_type='PartType0')
-		ang_mom, b1, b2 = ortho_find(ang_mom)
+		L = sp.quantities.angular_momentum_vector(use_gas=False, use_particles=True, particle_type='PartType0')
+		L, b1, b2 = ortho_find(ang_mom)
 
 		log('Generating Edge on Projections')
-		frb = make_off_axis_projection(ds, b1, ang_mom, full_ion_fields, \
+		frb = make_off_axis_projection(ds, b1, L, full_ion_fields, \
 		                           c, width, box, rvir, dir='edge/')
 		
 		for i, ion_field in enumerate(ion_fields):
@@ -182,7 +182,7 @@ if __name__ == '__main__':
 			if dset not in cdens_file.keys():
 			    cdens_file.create_dataset(dset, data=frb[full_ion_fields[i]].ravel())
 			    cdens_file.flush()
-			frb = make_off_axis_projection(ds, b2, ang_mom, full_other_fields, \
+			frb = make_off_axis_projection(ds, b1, L, full_other_fields, \
 			                           c, width, box, rvir, weight_field=('gas', 'density'), dir='edge/')
 			for i, other_field in enumerate(other_fields):
 				dset = "%s/%s" % (other_field, 'edge')
