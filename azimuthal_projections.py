@@ -83,9 +83,9 @@ if __name__ == '__main__':
 		ions = []
 		ion_fields = []
 		full_ion_fields = []
-		ions.append('H I')
-		ion_fields.append('H_number_density')
-		full_ion_fields.append(('gas', 'H_number_density'))
+		# ions.append('H I')
+		# ion_fields.append('H_number_density')
+		# full_ion_fields.append(('gas', 'H_number_density'))
 		# ions.append('Mg II')
 		# ion_fields.append('Mg_p1_number_density')
 		# full_ion_fields.append(('gas', 'Mg_p1_number_density'))
@@ -146,6 +146,7 @@ if __name__ == '__main__':
 		# Figure out centroid and r_vir info
 		log("Reading amiga center for halo in %s" % fn)
 		c = read_amiga_center(amiga_data, fn, ds)
+		log(c)
 		rvir = read_amiga_rvir(amiga_data, fn, ds)
 
 		cdens_file = h5.File(cdens_fn, 'a')
@@ -170,8 +171,6 @@ if __name__ == '__main__':
 		sp = ds.sphere(c, (15, 'kpc'))
 		L = sp.quantities.angular_momentum_vector(use_gas=False, use_particles=True, particle_type='PartType0')
 		L, E1, E2 = ortho_find(L)
-
-		_, c = ds.find_max('density')
 
 		log('Generating Edge on Projections')
 		frb = make_off_axis_projection(ds, E1, L, full_ion_fields, \
