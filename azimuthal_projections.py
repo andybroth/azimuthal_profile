@@ -85,9 +85,9 @@ if __name__ == '__main__':
 		# ions.append('H I')
 		# ion_fields.append('H_number_density')
 		# full_ion_fields.append(('gas', 'H_number_density'))
-		# ions.append('Mg II')
-		# ion_fields.append('Mg_p1_number_density')
-		# full_ion_fields.append(('gas', 'Mg_p1_number_density'))
+		ions.append('Mg II')
+		ion_fields.append('Mg_p1_number_density')
+		full_ion_fields.append(('gas', 'Mg_p1_number_density'))
 		# ions.append('Si II')
 		# ion_fields.append('Si_p1_number_density')
 		# full_ion_fields.append(('gas', 'Si_p1_number_density'))
@@ -171,11 +171,9 @@ if __name__ == '__main__':
 
 		log('Finding Angular Momentum of Galaxy')
 		sp = ds.sphere(c, (15, 'kpc'))
-		# L = sp.quantities.angular_momentum_vector(use_gas=False, use_particles=True, particle_type='PartType0')
-		# L, E1, E2 = ortho_find(L)
+		L = sp.quantities.angular_momentum_vector(use_gas=False, use_particles=True, particle_type='PartType0')
+		L, E1, E2 = ortho_find(L)
 
-		L = [1,0,0]
-		E1 = [0,1,0]
 		log('Generating Edge on Projections')
 		import pdb;pdb.set_trace()
 		frb = make_off_axis_projection(ds, E1, L, full_ion_fields, \
