@@ -146,6 +146,8 @@ if __name__ == '__main__':
 		# Figure out centroid and r_vir info
 		log("Reading amiga center for halo in %s" % fn)
 		c = read_amiga_center(amiga_data, fn, ds)
+		import pdb:pdb.set_trace()
+
 		rvir = read_amiga_rvir(amiga_data, fn, ds)
 
 		cdens_file = h5.File(cdens_fn, 'a')
@@ -173,11 +175,7 @@ if __name__ == '__main__':
 
 		log('Generating Edge on Projections')
 		frb = make_off_axis_projection(ds, E1, L, full_ion_fields, \
-		                           c,\
-		                            width,\
-		                             box,\
-		                              rvir,\
-		                               dir='edge/')
+		                           c, width, box, rvir, dir='edge/')
 		
 		for i, ion_field in enumerate(ion_fields):
 			dset = "%s/%s" % (ion_field, 'edge')
