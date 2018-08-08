@@ -169,8 +169,8 @@ if __name__ == '__main__':
 
 		log('Finding Angular Momentum of Galaxy')
 		sp = ds.sphere(c, (15, 'kpc'))
-		L = sp.quantities.angular_momentum_vector(use_gas=False, use_particles=True, particle_type='PartType0')
-		L, E1, E2 = ortho_find(L)
+		# L = sp.quantities.angular_momentum_vector(use_gas=False, use_particles=True, particle_type='PartType0')
+		# L, E1, E2 = ortho_find(L)
 
 		L = [1,0,0]
 		E1 = [0,1,0]
