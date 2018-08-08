@@ -60,8 +60,7 @@ if __name__ == '__main__':
 	"""
 
 	# Variables to set for each run
-	radial_extent = YTQuantity(250, 'kpc')
-	width = 2*radial_extent
+	
 	res = 800
 
 	# Loading datasets
@@ -132,6 +131,9 @@ if __name__ == '__main__':
 		ds = GizmoDataset(fn)
 
 		trident.add_ion_fields(ds, ions=ions, ftype='gas')
+
+		radial_extent = ds.quan(250, 'kpc')
+		width = 2*radial_extent
 
 		# ions.append('O_nuclei_density')
 		# ion_fields.append('O_nuclei_density')
