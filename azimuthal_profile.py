@@ -28,7 +28,7 @@ sys.path.insert(0, '/home/andyr/src/frb')
 from get_COS_data import get_COS_data, plot_COS_data
 from radial_profile2 import *
 
-def make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins, normalize)
+def make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins, normalize):
   '''
   Default is angle vs N plot w/ 3 radial bins in legend. normalize should be set
   to true for this to work. To make radius vs N plots, flip all angular and radius
