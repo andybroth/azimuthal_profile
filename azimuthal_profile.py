@@ -252,7 +252,7 @@ if __name__ == '__main__':
       ion = finish_plot(field, COS_data, fn_head)
       for i in range(9):
         color = 3*i
-        while 3*i >= len(colors):
+        while color >= len(colors):
           print(color)
           color -= len(colors)
         plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % \
