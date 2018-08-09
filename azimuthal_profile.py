@@ -78,6 +78,7 @@ def make_radial_profile(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins, r_n_b
     for j in range(len(profile_data)):
       ids = np.logical_and(r_bin_ids == r_bin_id, a_bin_ids == angle_bins[j])
       sample = cdens_arr[ids]
+      import pdb; pdb.set_trace()
       profile_data[j][0,r_bin_id] = np.median(sample)
       profile_data[j][1,r_bin_id] = np.percentile(sample, 25)
       profile_data[j][2,r_bin_id] = np.percentile(sample, 75)
