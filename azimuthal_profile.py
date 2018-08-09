@@ -225,7 +225,7 @@ if __name__ == '__main__':
       
       # create bins for data
       a_n_bins = 9
-      r_n_bins = 150
+      r_n_bins = 30
       r_bins = np.linspace(150, 0, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
@@ -239,7 +239,7 @@ if __name__ == '__main__':
       fplot_angle(ion)
 
       # redefine bins
-      a_n_bins = 3
+      a_n_bins = 9
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
       a_bins = np.flip(a_bins, 0)
 
