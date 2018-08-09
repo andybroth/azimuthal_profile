@@ -225,7 +225,7 @@ if __name__ == '__main__':
       
       # create bins for data
       a_n_bins = 9
-      r_n_bins = 50
+      r_n_bins = 150
       r_bins = np.linspace(150, 0, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
