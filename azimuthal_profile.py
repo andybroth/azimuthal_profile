@@ -253,6 +253,7 @@ if __name__ == '__main__':
       for i in range(9):
         color = 3*i
         while 3*i >= len(colors):
+          print(color)
           color -= len(colors)
         plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % \
                     (10*i, 1*i + 10), colors[color])
