@@ -250,10 +250,9 @@ if __name__ == '__main__':
       # Step through each ion and make plots of radius vs N for 3 radial bins
       radial_data = make_radial_profile(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins, r_n_bins)
       ion = finish_plot(field, COS_data, fn_head)
-      print(len(radial_data))
-      for i in range(len(radial_data)):
+      for i in range(9):
         plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % \
-                    (10*i, 1*i + 10), colors[3*i])
+                    (10*i, 1*i + 10), colors[np.abs(3*i-len(colors))])
       fplot_radius(ion)
 
       # Make plot similar to paper of phi vs N
