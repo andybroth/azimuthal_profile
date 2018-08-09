@@ -71,8 +71,9 @@ def make_radial_profile(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins, r_n_b
   r_bin_ids = np.digitize(r_arr, r_bins)
   a_bin_ids = np.digitize(a_arr, a_bins)
   angle_bins = range(a_n_bins)
-  profile_data = [np.zeros([3, r_n_bins]), np.zeros([3, r_n_bins]), \
-                  np.zeros([3, r_n_bins])]
+  profile_data = np.array([])
+  for j in range(a_bins):
+    profile_data.append(np.zeros([3, r_n_bins]))
   for i, r_bin_id in enumerate(np.arange(len(r_bins))):
     for j in range(a_n_bins):
       ids = np.logical_and(r_bin_ids == r_bin_id, a_bin_ids == angle_bins[j])
