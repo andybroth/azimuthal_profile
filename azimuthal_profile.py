@@ -229,11 +229,11 @@ if __name__ == '__main__':
       
       # create bins for data
       a_n_bins = 9
+      a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
+      a_bins = np.flip(a_bins, 0)
       r_n_bins = 30
       r_bins = np.linspace(150, 0, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
-      a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
-      a_bins = np.flip(a_bins, 0)
 
       profile_data = make_profiles2(a_arr, r_arr, cdens_arr, a_bins, r_bins)
       for i in range(3):
@@ -243,9 +243,9 @@ if __name__ == '__main__':
       fplot_angle(ion)
 
       # redefine bins
-      # a_n_bins = 3
-      # a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
-      # a_bins = np.flip(a_bins, 0)
+      a_n_bins = 18
+      a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
+      a_bins = np.flip(a_bins, 0)
 
       r_n_bins = 50
       r_bins = np.linspace(150, 0, r_n_bins, endpoint=False)
@@ -261,9 +261,9 @@ if __name__ == '__main__':
       #   plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % \
       #               (10*i, 10*i + 10), colors[color])
       plot_profile(r_bins, radial_data[0], '%s < Φ < %s degrees' % \
-                     (10*0, 10*0 + 10), colors[0])
-      plot_profile(r_bins, radial_data[8], '%s < Φ < %s degrees' % \
-                     (10*8, 10*8 + 10), colors[3])
+                     (10*0, 10*0 + 5), colors[0])
+      plot_profile(r_bins, radial_data[17], '%s < Φ < %s degrees' % \
+                     (5*17, 5*17 + 5), colors[3])
       fplot_radius(ion)
 
       # Make plot similar to paper of phi vs N
