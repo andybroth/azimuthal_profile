@@ -74,13 +74,13 @@ def make_radial_profile(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins, r_n_b
   profile_data = np.zeros([3, r_n_bins])
   for j in range(a_n_bins-1):
     profile_data = np.concatenate((profile_data, np.zeros([3, r_n_bins])), axis=0)
-  for i, r_bin_id in enumerate(np.arange(len(r_bins))):
-    for j in range(a_n_bins):
+  for r_bin_id in range(r_n_bins):
+    for j in range(len(profile_data)):
       ids = np.logical_and(r_bin_ids == r_bin_id, a_bin_ids == angle_bins[j])
       sample = cdens_arr[ids]
-      profile_data[j][0,i] = np.median(sample)
-      profile_data[j][1,i] = np.percentile(sample, 25)
-      profile_data[j][2,i] = np.percentile(sample, 75)
+      profile_data[j][0,r_bin_id] = np.median(sample)
+      profile_data[j][1,r_bin_id] = np.percentile(sample, 25)
+      profile_data[j][2,r_bin_id] = np.percentile(sample, 75)
   return profile_data
 
 def angle_profile_big(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins, r_n_bins):
