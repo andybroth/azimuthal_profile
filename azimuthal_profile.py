@@ -243,16 +243,16 @@ if __name__ == '__main__':
       fplot_angle(ion)
 
       # redefine bins
-      a_n_bins = 9
-      a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
-      a_bins = np.flip(a_bins, 0)
+      # a_n_bins = 3
+      # a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
+      # a_bins = np.flip(a_bins, 0)
 
       # Step through each ion and make plots of radius vs N for 3 radial bins
       radial_data = make_radial_profile(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins, r_n_bins)
       ion = finish_plot(field, COS_data, fn_head)
-      for i in range(3):
+      for i in range(9):
         plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % \
-                    (30*i, 30*i + 30), colors[3*i])
+                    (10*i, 1*i + 10), colors[3*i])
       fplot_radius(ion)
 
       # Make plot similar to paper of phi vs N
