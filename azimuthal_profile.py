@@ -247,7 +247,7 @@ if __name__ == '__main__':
       # a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
       # a_bins = np.flip(a_bins, 0)
 
-      r_n_bins = 75
+      r_n_bins = 50
       r_bins = np.linspace(150, 0, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
 
