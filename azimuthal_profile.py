@@ -97,7 +97,7 @@ def fplot_angle(ion, description):
   plt.xlim((0,90))
   plt.legend(title='Radius')
   if len(description) > 0:
-      print('%s_big_angle.png' % ion)
+    print('%s_big_angle.png' % ion)
     plt.savefig('plots/%s_%s_angle.png' % (ion, description))
   else:
     print('%s_angle.png' % ion)
