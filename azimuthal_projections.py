@@ -175,7 +175,6 @@ if __name__ == '__main__':
 		L, E1, E2 = ortho_find(L)
 
 		log('Generating Edge on Projections')
-		import pdb;pdb.set_trace()
 		frb = make_off_axis_projection(ds, E1, L, full_ion_fields, \
 		                           c, width, box, rvir, dir='edge/')
 		
