@@ -115,7 +115,7 @@ def fplot_angle(ion):
 def fplot_radius(ion):
   plt.title('%s' % ion)
   plt.xlabel('Impact Parameter [kpc]')
-  plt.xlim((0,150))
+  plt.xlim((0,50))
   plt.legend(title='Azimuthal Angle')
   print('%s_radial.png' % ion)
   plt.savefig('plots/%s_radial.png' % ion)
@@ -201,13 +201,6 @@ if __name__ == '__main__':
 
   fn_head = sys.argv[1].split('.')[0]
   profiles_dict = read_parameter_file(sys.argv[1])
-
-  a_n_bins = 9
-  r_n_bins = 30
-  r_bins = np.linspace(150, 0, r_n_bins, endpoint=False)
-  r_bins = np.flip(r_bins, 0)
-  a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
-  a_bins = np.flip(a_bins, 0)
 
   # Get the list of ion_fields from the first file available
   fn = list(profiles_dict.values())[0][0]
