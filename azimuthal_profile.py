@@ -229,7 +229,7 @@ if __name__ == '__main__':
       
       # create bins for data
       a_n_bins = 9
-      r_n_bins = 75
+      r_n_bins = 30
       r_bins = np.linspace(150, 0, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
@@ -246,6 +246,10 @@ if __name__ == '__main__':
       # a_n_bins = 3
       # a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
       # a_bins = np.flip(a_bins, 0)
+
+      r_n_bins = 75
+      r_bins = np.linspace(150, 0, r_n_bins, endpoint=False)
+      r_bins = np.flip(r_bins, 0)
 
       # Step through each ion and make plots of radius vs N for 3 radial bins
       radial_data = make_radial_profile(a_arr, r_arr, cdens_arr, a_bins, r_bins, a_n_bins, r_n_bins)
