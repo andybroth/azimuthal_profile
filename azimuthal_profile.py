@@ -201,7 +201,7 @@ if __name__ == '__main__':
       fplot_angle(ion, '')
 
       # redefine bins
-      a_n_bins = 9
+      a_n_bins = 3
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
       a_bins = np.flip(a_bins, 0)
 
@@ -213,19 +213,34 @@ if __name__ == '__main__':
       radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins, False)
       ion = finish_plot(field, COS_data, fn_head)
       angle = 90/a_n_bins
-      # for i in range(a_n_bins):
-      #   color = 3*i
-      #   while color >= len(colors):
-      #     color -= len(colors)
-      #   plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % \
-      #               (angle*i, angle*i + angle), colors[color])
+      for i in range(a_n_bins):
+        color = 3*i
+        while color >= len(colors):
+          color -= len(colors)
+        plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % \
+                    (angle*i, angle*i + angle), colors[color])
+      fplot_radius(ion, '')
+      
+      # Test plot, should show much higher density in 80-90 degree bins over
+      # 0-10 degree bin
+      a_n_bins = 9
+      a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
+      a_bins = np.flip(a_bins, 0)
+
+      r_n_bins = 30
+      r_bins = np.linspace(150, 0, r_n_bins, endpoint=False)
+      r_bins = np.flip(r_bins, 0)
+
+      radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins, False)
+      ion = finish_plot(field, COS_data, fn_head)
+      angle = 90/a_n_bins
       i=0
       plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % \
                     (angle*i, angle*i + angle), colors[0])
       i=8
       plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % \
                     (angle*i, angle*i + angle), colors[3])
-      fplot_radius(ion, '')
+      fplot_radius(ion, 'test')
 
       # Make plot similar to paper of phi vs N
       a_n_bins = 3
