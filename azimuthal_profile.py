@@ -218,7 +218,7 @@ if __name__ == '__main__':
         while color > len(colors):
           color -= len(colors)
         plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % \
-                    (angle*i, angle*i + angle), colors[color])
+                    (angle*i, angle*i + angle), colors[0])
       fplot_radius(ion, '')
 
       # Make plot similar to paper of phi vs N
