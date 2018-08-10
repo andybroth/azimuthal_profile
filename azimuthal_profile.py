@@ -108,7 +108,10 @@ def fplot_angle(ion, description):
 def fplot_radius(ion, description):
   plt.title('%s' % ion)
   plt.xlabel('Impact Parameter [kpc]')
-  plt.xlim((0,50))
+  max = 150
+  if description == 'test':
+    max = 50
+  plt.xlim((0,max))
   plt.legend(title='Azimuthal Angle')
   if len(description) > 0:
     print('%s_%s_radius.png' % (ion, description))
