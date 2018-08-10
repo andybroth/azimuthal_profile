@@ -227,7 +227,7 @@ if __name__ == '__main__':
       for i in range(1,3):
         plot_big_angle(angle_data[i], cden_data[i], '%s < b < %s kpc' % \
                     (i*20 + 20, i*20 + 40), colors[3*i], markers[i])
-      fplot_big_angle(ion, 'big')
+      fplot_angle(ion, 'big')
 
       # Makes plot similar to paper of b vs N
       r_n_bins = 4
@@ -241,6 +241,6 @@ if __name__ == '__main__':
       ion = finish_plot(field, COS_data, fn_head)
       plot_big_radius(radius_data[0], cden_data[0], 'Φ < 45 degrees', colors[0], markers[0])
       plot_big_radius(radius_data[1], cden_data[1], 'Φ > 45 degrees', colors[3], markers[1])
-      fplot_big_radius(ion, 'big')
+      fplot_radius(ion, 'big')
 
 
