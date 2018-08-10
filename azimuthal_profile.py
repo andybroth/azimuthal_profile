@@ -153,7 +153,7 @@ if __name__ == '__main__':
 
   # # Get observational data from file
   # COS_data = get_COS_data()
-  COS_data = null
+  COS_data = ""
 
   # Color cycling
   colors = 3*['black', 'cyan', 'green', 'magenta', 'yellow', 'blue', 'red']
