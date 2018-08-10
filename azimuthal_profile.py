@@ -221,10 +221,10 @@ if __name__ == '__main__':
       #               (angle*i, angle*i + angle), colors[color])
       i=0
       plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % \
-                    (angle*i, angle*i + angle), colors[color])
+                    (angle*i, angle*i + angle), colors[0])
       i=8
       plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % \
-                    (angle*i, angle*i + angle), colors[color])
+                    (angle*i, angle*i + angle), colors[3])
       fplot_radius(ion, '')
 
       # Make plot similar to paper of phi vs N
