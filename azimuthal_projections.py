@@ -147,7 +147,6 @@ if __name__ == '__main__':
 
 		# Figure out centroid and r_vir info
 		log("Reading amiga center for halo in %s" % fn)
-		import pdb;pdb.set_trace()
 		c = read_amiga_center(amiga_data, fn, ds)
 		rvir = read_amiga_rvir(amiga_data, fn, ds)
 
