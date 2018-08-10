@@ -208,7 +208,7 @@ if __name__ == '__main__':
       r_bins = np.flip(r_bins, 0)
 
       # Step through each ion and make plots of radius vs N for 3 radial bins
-      radial_data = make_radial_profile(r_arr, r_bins, r_n_bins, cdens_arr, r_arr, r_bins, r_n_bins, False)
+      radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, r_arr, r_bins, r_n_bins, False)
       ion = finish_plot(field, COS_data, fn_head)
       # for i in range(9):
       #   color = 3*i
@@ -227,7 +227,7 @@ if __name__ == '__main__':
       r_bins = np.linspace(80, 20, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
 
-      cden_data, angle_data = angle_profile_big(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins)
+      cden_data, angle_data = big_profile(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins)
       ion = finish_plot(field, COS_data, fn_head)
       plot_big_angle(angle_data[0], cden_data[0], 'b < 40 kpc', colors[0], markers[0])
       for i in range(1,3):
