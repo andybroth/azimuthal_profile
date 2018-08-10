@@ -39,7 +39,7 @@ def make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins, 
   if normalize:
     radii = [0, 10, 20]
   else:
-    radii = range(a_n_bins)
+    radii = range(r_n_bins)
 
   profile_data = [np.zeros([3, a_n_bins]) for _ in range(r_n_bins)]
 
