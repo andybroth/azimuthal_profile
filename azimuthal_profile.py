@@ -79,16 +79,18 @@ def big_profile(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins):
   '''
   r_bin_ids = np.digitize(r_arr, r_bins)
   a_bin_ids = np.digitize(a_arr, a_bins)
-  profile_data = [np.zeros([3, r_n_bins]) for _ in range(a_n_bins)]
-
+  cden_data = [np.zeros([2, a_n_bins]) for _ in range(r_n_bins)]
+  angle_data = [np.zeros([2, a_n_bins]) for _ in range(r_n_bins)]
+  
   for r_bin_id in range(r_n_bins):
     for a_bin_id in range(a_n_bins):
       ids = np.logical_and(r_bin_ids == r_bin_id, a_bin_ids == a_bin_id)
       sample = cdens_arr[ids]
-      profile_data[a_bin_id][0,r_bin_id] = np.median(sample)
-      profile_data[a_bin_id][1,r_bin_id] = np.percentile(sample, 25)
-      profile_data[a_bin_id][2,r_bin_id] = np.percentile(sample, 75)
-  return profile_data
+      cden_data[r_bin_id][0,a_bin_id] = np.median(sample)
+      cden_data[r_bin_id][1,a_bin_id] = np.std(sample)
+      angle_data[r_bin_id][0,a_bin_id] = np.median(a_arr[ids])
+      angle_data[r_bin_id][1,a_bin_id] = np.std(a_arr[ids])
+  return cden_data, angle_data
 
 def fplot_angle(ion, description):
   plt.title('%s' % ion)
