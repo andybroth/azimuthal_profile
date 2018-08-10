@@ -188,6 +188,7 @@ if __name__ == '__main__':
       a_n_bins = 9
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
       a_bins = np.flip(a_bins, 0)
+
       r_n_bins = 30
       r_bins = np.linspace(150, 0, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
@@ -200,7 +201,7 @@ if __name__ == '__main__':
       fplot_angle(ion, '')
 
       # redefine bins
-      a_n_bins = 3
+      a_n_bins = 9
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
       a_bins = np.flip(a_bins, 0)
 
@@ -211,12 +212,17 @@ if __name__ == '__main__':
       # Step through each ion and make plots of radius vs N for 3 radial bins
       radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins, False)
       ion = finish_plot(field, COS_data, fn_head)
+      angle = 90/a_n_bins
       for i in range(a_n_bins):
         plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % \
-                    (30*i, 30*i + 30), colors[3*i])
+                    (angle*i, angle*i + angle), colors[3*i])
       fplot_radius(ion, '')
 
       # Make plot similar to paper of phi vs N
+      a_n_bins = 3
+      a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
+      a_bins = np.flip(a_bins, 0)
+
       r_n_bins = 3
       r_bins = np.linspace(80, 20, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
@@ -230,13 +236,14 @@ if __name__ == '__main__':
       fplot_angle(ion, 'big')
 
       # Makes plot similar to paper of b vs N
-      r_n_bins = 4
-      r_bins = np.linspace(80, 20, r_n_bins, endpoint=False)
-      r_bins = np.flip(r_bins, 0)
       a_n_bins = 2
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
       a_bins = np.flip(a_bins, 0)
 
+      r_n_bins = 4
+      r_bins = np.linspace(80, 20, r_n_bins, endpoint=False)
+      r_bins = np.flip(r_bins, 0)
+      
       cden_data, radius_data = big_profile(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
       ion = finish_plot(field, COS_data, fn_head)
       plot_big_radius(radius_data[0], cden_data[0], 'Φ < 45 degrees', colors[0], markers[0])
