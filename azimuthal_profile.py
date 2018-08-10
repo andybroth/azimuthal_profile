@@ -98,7 +98,7 @@ def fplot_angle(ion, description):
   plt.xlim((0,90))
   plt.legend(title='Radius')
   if len(description) > 0:
-    print('%s_big_angle.png' % ion)
+    print('%s_%s_angle.png' % (ion, description))
     plt.savefig('plots/%s_%s_angle.png' % (ion, description))
   else:
     print('%s_angle.png' % ion)
@@ -112,7 +112,7 @@ def fplot_radius(ion, description):
   plt.legend(title='Azimuthal Angle')
   if len(description) > 0:
     print('%s_%s_radius.png' % (ion, description))
-    plt.savefig('plots/%s_big_radius.png' % ion)
+    plt.savefig('plots/%s_%s_radius.png' % (ion, description))
   else:
     print('%s_radial.png' % ion)
     plt.savefig('plots/%s_radial.png' % ion)
