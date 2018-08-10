@@ -26,7 +26,7 @@ from matplotlib.colors import LogNorm
 import sys
 sys.path.insert(0, '/home/andyr/src/frb')
 from get_COS_data import get_COS_data, plot_COS_data
-from radial_profile2 import read_parameter_file, plot_profile, finish_plot
+from radial_profile2 import read_parameter_file, plot_profile, finish_plot, limits_from_field
 
 def make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins, normalize):
   '''
@@ -96,6 +96,8 @@ def fplot_angle(ion, description):
   plt.title('%s' % ion)
   plt.xlabel('Azimuthal Angle [degrees]')
   plt.xlim((0,90))
+  if limits_from_field(field):
+    plt.ylim(limits_from_field(field))
   plt.legend(title='Radius')
   if len(description) > 0:
     print('%s_%s_angle.png' % (ion, description))
@@ -112,6 +114,8 @@ def fplot_radius(ion, description):
   if description == 'test':
     max = 50
   plt.xlim((0,max))
+  if limits_from_field(field):
+    plt.ylim(limits_from_field(field))
   plt.legend(title='Azimuthal Angle')
   if len(description) > 0:
     print('%s_%s_radius.png' % (ion, description))
