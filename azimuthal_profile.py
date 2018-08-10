@@ -26,7 +26,7 @@ from matplotlib.colors import LogNorm
 import sys
 sys.path.insert(0, '/home/andyr/src/frb')
 from get_COS_data import get_COS_data, plot_COS_data
-from radial_profile2 import read_parameter_file, plot_profile
+from radial_profile2 import read_parameter_file, plot_profile, finish_plot
 
 def make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins, normalize):
   '''
@@ -153,6 +153,7 @@ if __name__ == '__main__':
 
   # # Get observational data from file
   # COS_data = get_COS_data()
+  COS_data = null
 
   # Color cycling
   colors = 3*['black', 'cyan', 'green', 'magenta', 'yellow', 'blue', 'red']
