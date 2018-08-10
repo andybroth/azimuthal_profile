@@ -213,11 +213,17 @@ if __name__ == '__main__':
       radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins, False)
       ion = finish_plot(field, COS_data, fn_head)
       angle = 90/a_n_bins
-      for i in range(a_n_bins):
-        color = 3*i
-        while color >= len(colors):
-          color -= len(colors)
-        plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % \
+      # for i in range(a_n_bins):
+      #   color = 3*i
+      #   while color >= len(colors):
+      #     color -= len(colors)
+      #   plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % \
+      #               (angle*i, angle*i + angle), colors[color])
+      i=0
+      plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % \
+                    (angle*i, angle*i + angle), colors[color])
+      i=8
+      plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % \
                     (angle*i, angle*i + angle), colors[color])
       fplot_radius(ion, '')
 
