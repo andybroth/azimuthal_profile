@@ -41,7 +41,7 @@ def make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins, 
   else:
     radii = range(a_n_bins)
 
-  profile_data = [np.zeros(3, a_n_bins) for _ in range(r_n_bins)]
+  profile_data = [np.zeros([3, a_n_bins]) for _ in range(r_n_bins)]
 
   for a_bin_id in range(a_n_bins):
     for j, radius in enumerate(radii):
@@ -80,7 +80,7 @@ def big_profile(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins):
   '''
   r_bin_ids = np.digitize(r_arr, r_bins)
   a_bin_ids = np.digitize(a_arr, a_bins)
-  profile_data = [np.zeros(3, r_n_bins) for _ in range(a_n_bins)]
+  profile_data = [np.zeros([3, r_n_bins]) for _ in range(a_n_bins)]
 
   for r_bin_id in range(r_n_bins):
     for a_bin_id in range(a_n_bins):
