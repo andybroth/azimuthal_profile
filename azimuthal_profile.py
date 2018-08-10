@@ -208,7 +208,7 @@ if __name__ == '__main__':
       r_bins = np.flip(r_bins, 0)
 
       # Step through each ion and make plots of radius vs N for 3 radial bins
-      radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, r_arr, r_bins, r_n_bins, False)
+      radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins, False)
       ion = finish_plot(field, COS_data, fn_head)
       for i in range(9):
         color = 3*i
