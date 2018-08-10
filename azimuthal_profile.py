@@ -214,8 +214,11 @@ if __name__ == '__main__':
       ion = finish_plot(field, COS_data, fn_head)
       angle = 90/a_n_bins
       for i in range(a_n_bins):
+        color = 3*i
+        while color > len(colors):
+          color -= len(colors)
         plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % \
-                    (angle*i, angle*i + angle), colors[3*i])
+                    (angle*i, angle*i + angle), colors[color])
       fplot_radius(ion, '')
 
       # Make plot similar to paper of phi vs N
