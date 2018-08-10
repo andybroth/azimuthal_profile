@@ -237,7 +237,7 @@ if __name__ == '__main__':
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
       a_bins = np.flip(a_bins, 0)
 
-      cden_data, radius_data = big_profile(r_arr, r_bins, r_n_bins, cden_arr, a_arr, a_bins, a_n_bins)
+      cden_data, radius_data = big_profile(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
       ion = finish_plot(field, COS_data, fn_head)
       plot_big_radius(radius_data[0], cden_data[0], 'Φ < 45 degrees', colors[0], markers[0])
       plot_big_radius(radius_data[1], cden_data[1], 'Φ > 45 degrees', colors[3], markers[1])
