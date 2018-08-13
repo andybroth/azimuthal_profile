@@ -176,6 +176,8 @@ if __name__ == '__main__':
   ion_fields = list(f.keys())
   ion_fields.remove('radius')
   ion_fields.remove('phi')
+  ion_fields.remove('px')
+  ion_fields.remove('py')
   f.close()
 
   # Step through each ion and make plots of azimuthal angle vs N
@@ -185,6 +187,8 @@ if __name__ == '__main__':
       cdens_arr = np.array([])
       a_arr = np.array([])
       r_arr = np.array([])
+      x_arr = np.array([])
+      y_arr = np.array([])
       for j in range(n_files):
         f = h5.File(v[j], 'r')
         a_arr = np.concatenate((a_arr, f['phi'].value))
@@ -282,5 +286,4 @@ if __name__ == '__main__':
       plot_big_radius(radius_data[1], cden_data[1], '30 < Φ < 60 degrees', colors[3], markers[1])
       plot_big_radius(radius_data[2], cden_data[2], '60 < Φ < 90 degrees', colors[6], markers[2])
       fplot_radius(ion, 'big')
-
 

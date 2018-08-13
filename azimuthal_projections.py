@@ -82,12 +82,12 @@ if __name__ == '__main__':
 		ions = []
 		ion_fields = []
 		full_ion_fields = []
-		# ions.append('H I')
-		# ion_fields.append('H_number_density')
-		# full_ion_fields.append(('gas', 'H_number_density'))
-		ions.append('Mg II')
-		ion_fields.append('Mg_p1_number_density')
-		full_ion_fields.append(('gas', 'Mg_p1_number_density'))
+		ions.append('H I')
+		ion_fields.append('H_number_density')
+		full_ion_fields.append(('gas', 'H_number_density'))
+		# ions.append('Mg II')
+		# ion_fields.append('Mg_p1_number_density')
+		# full_ion_fields.append(('gas', 'Mg_p1_number_density'))
 		# ions.append('Si II')
 		# ion_fields.append('Si_p1_number_density')
 		# full_ion_fields.append(('gas', 'Si_p1_number_density'))
@@ -123,9 +123,9 @@ if __name__ == '__main__':
 		others = []
 		other_fields = []
 		full_other_fields = []
-		others.append('Temperature')
-		other_fields.append('temperature')
-		full_other_fields.append(('gas', 'temperature'))
+		# others.append('Temperature')
+		# other_fields.append('temperature')
+		# full_other_fields.append(('gas', 'temperature'))
 
 		log("Starting projections for %s" % fn)
 		ds = GizmoDataset(fn)
@@ -141,9 +141,9 @@ if __name__ == '__main__':
 		ions.append('density')
 		ion_fields.append('density')
 		full_ion_fields.append(('gas', 'density'))
-		ions.append('metal_density')
-		ion_fields.append('metal_density')
-		full_ion_fields.append(('gas', 'metal_density'))
+		# ions.append('metal_density')
+		# ion_fields.append('metal_density')
+		# full_ion_fields.append(('gas', 'metal_density'))
 
 		# Figure out centroid and r_vir info
 		log("Reading amiga center for halo in %s" % fn)
@@ -157,13 +157,14 @@ if __name__ == '__main__':
 		box = ds.box(c-one, c+one)
 
 		# Identify the radius from the center of each pixel (in sim units)
-		px, py = np.mgrid[-width/2:width/2:res*1j, -width/2:width/2:res*1j]
+		px, py = np.mgrid[-width/2:width/2:res*1j, -width/2:width/2:res*1j]	
 		radius = (px**2.0 + py**2.0)**0.5
 		if "radius" not in cdens_file.keys():
 			cdens_file.create_dataset("radius", data=radius.ravel())
 
 		# Finds azimuthal angle for each pixel
-		phi = np.abs((np.pi / 2) - np.arctan(np.abs(py / px)))
+		# phi = np.abs((np.pi / 2) - np.abs(np.arctan(py / px)))
+		phi = np.abs(np.arctan(px / py))
 		phi *= 180 / np.pi
 		if "phi" not in cdens_file.keys():
 			cdens_file.create_dataset("phi", data=phi.ravel())
