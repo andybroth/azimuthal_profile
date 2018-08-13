@@ -268,7 +268,7 @@ if __name__ == '__main__':
       fplot_angle(ion, 'big')
 
       # Makes plot similar to paper of b vs N
-      a_n_bins = 2
+      a_n_bins = 3
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
       a_bins = np.flip(a_bins, 0)
 
