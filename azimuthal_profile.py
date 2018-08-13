@@ -96,8 +96,8 @@ def fplot_angle(ion, description):
   plt.title('%s' % ion)
   plt.xlabel('Azimuthal Angle [degrees]')
   plt.xlim((0,90))
-  if limits_from_field(field):
-    plt.ylim(limits_from_field(field))
+  # if limits_from_field(field):
+  #   plt.ylim(limits_from_field(field))
   plt.legend(title='Radius')
   if len(description) > 0:
     print('%s_%s_angle.png' % (ion, description))
@@ -114,8 +114,8 @@ def fplot_radius(ion, description):
   if description == 'test':
     max = 50
   plt.xlim((0,max))
-  if limits_from_field(field):
-    plt.ylim(limits_from_field(field))
+  # if limits_from_field(field):
+  #   plt.ylim(limits_from_field(field))
   plt.legend(title='Azimuthal Angle')
   if len(description) > 0:
     print('%s_%s_radius.png' % (ion, description))
@@ -234,18 +234,19 @@ if __name__ == '__main__':
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
       a_bins = np.flip(a_bins, 0)
 
-      r_n_bins = 30
+      r_n_bins = 15
       r_bins = np.linspace(150, 0, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
+      r_bins_plot = np.linspace(0, 150, r_n_bins)
 
       radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins, False)
       ion = finish_plot(field, COS_data, fn_head)
       angle = 90/a_n_bins
       i=0
-      plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % \
+      plot_profile(r_bins_plot, radial_data[i], '%s < Φ < %s degrees' % \
                     (angle*i, angle*i + angle), colors[0])
       i=8
-      plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % \
+      plot_profile(r_bins_plot, radial_data[i], '%s < Φ < %s degrees' % \
                     (angle*i, angle*i + angle), colors[3])
       fplot_radius(ion, 'test')
 
