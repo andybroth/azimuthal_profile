@@ -241,7 +241,7 @@ if __name__ == '__main__':
         while color >= len(colors):
           color -= len(colors)
         plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % (angle*i, angle*i + angle), colors[color])
-      fplot_radius(ion, '')
+        fplot_radius(ion, '')
       
       '''
 
