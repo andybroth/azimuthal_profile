@@ -260,7 +260,7 @@ if __name__ == '__main__':
       i=0
       plot_profile(r_bins_plot, radial_data[i], '%s < Φ < %s degrees' % \
                     (angle*i, angle*i + angle), colors[0])
-      i=8
+      i=5
       plot_profile(r_bins_plot, radial_data[i], '%s < Φ < %s degrees' % \
                     (angle*i, angle*i + angle), colors[3])
       fplot_radius(ion, 'test')
