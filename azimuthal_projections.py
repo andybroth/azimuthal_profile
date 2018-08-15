@@ -167,7 +167,7 @@ if __name__ == '__main__':
 
 		# switch x and y
 		phi = np.abs(np.arctan(py / px))
-		
+
 		phi *= 180 / np.pi
 		if "phi" not in cdens_file.keys():
 			cdens_file.create_dataset("phi", data=phi.ravel())
@@ -178,6 +178,7 @@ if __name__ == '__main__':
 		L, E1, E2 = ortho_find(L)
 
 		log('Generating Edge on Projections')
+		log('Ion Fields')
 		frb = make_off_axis_projection(ds, E1, L, full_ion_fields, \
 		                           c, width, box, rvir, dir='edge/')
 		
@@ -186,6 +187,9 @@ if __name__ == '__main__':
 			if dset not in cdens_file.keys():
 			    cdens_file.create_dataset(dset, data=frb[full_ion_fields[i]].ravel())
 			    cdens_file.flush()
+		
+		log('Other fields')
+
 		frb = make_off_axis_projection(ds, E1, L, full_other_fields, \
 			                           c, width, box, rvir, weight_field=('gas', 'density'), dir='edge/')
 		for i, other_field in enumerate(other_fields):

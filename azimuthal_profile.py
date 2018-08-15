@@ -111,7 +111,7 @@ def fplot_radius(ion, description):
   plt.title('%s' % ion)
   plt.xlabel('Impact Parameter [kpc]')
   max = 150
-  if description == 'test' or description == 'test_a':
+  if description == 'test':
     max = 50
   plt.xlim((0,max))
   # if limits_from_field(field):
@@ -150,20 +150,6 @@ def plot_big_radius(radius_data, cden_data, label, color, marker):
   # plots points
   plt.errorbar(radius_data[0,:], cden_data[0,:], xerr=radius_data[1,:], yerr=yerr_lower, marker=marker, label=label)
   plt.semilogy()
-
-def make_profiles_a(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins):
-  r_bin_ids = np.digitize(r_arr, r_bins)
-  a_bin_ids = np.digitize(a_arr, a_bins)
-
-  profile_data = [np.zeros([3, r_n_bins]) for _ in range(a_n_bins)]
-  for a_bin_id in range(a_n_bins):
-    for r_bin_id in range(r_n_bins):
-      ids = np.logical_and(r_bin_ids == r_bin_id, a_bin_ids == a_bin_id)
-      sample = cdens_arr[ids]
-      profile_data[a_bin_id][0,r_bin_id] = np.median(sample)
-      profile_data[a_bin_id][1,r_bin_id] = np.percentile(sample, 25)
-      profile_data[a_bin_id][2,r_bin_id] = np.percentile(sample, 75)
-  return profile_data
 
 if __name__ == '__main__':
   """
@@ -256,18 +242,6 @@ if __name__ == '__main__':
       r_bins = np.flip(r_bins, 0)
       r_bins_plot = np.linspace(0, 150, r_n_bins)
 
-      # radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins, False)
-      radial_data = make_profiles_a(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins)
-      ion = finish_plot(field, COS_data, fn_head)
-      angle = 90/a_n_bins
-      i=0
-      plot_profile(r_bins_plot, radial_data[i], '%s < Φ < %s degrees' % \
-                    (angle*i, angle*i + angle), colors[0])
-      i=8
-      plot_profile(r_bins_plot, radial_data[i], '%s < Φ < %s degrees' % \
-                    (angle*i, angle*i + angle), colors[3])
-      fplot_radius(ion, 'test_a')
-
       radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins, False)
       ion = finish_plot(field, COS_data, fn_head)
       angle = 90/a_n_bins
@@ -277,7 +251,7 @@ if __name__ == '__main__':
       i=8
       plot_profile(r_bins_plot, radial_data[i], '%s < Φ < %s degrees' % \
                     (angle*i, angle*i + angle), colors[3])
-      fplot_radius(ion, 'test')
+      fplot_radius(ion, 'test_a')
 
       '''
 
