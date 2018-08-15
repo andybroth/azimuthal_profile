@@ -253,8 +253,8 @@ if __name__ == '__main__':
       r_bins = np.flip(r_bins, 0)
       r_bins_plot = np.linspace(0, 150, r_n_bins)
 
-      radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins, False)
-      # radial_data = make_profiles_a(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins)
+      # radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins, False)
+      radial_data = make_profiles_a(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins)
       ion = finish_plot(field, COS_data, fn_head)
       angle = 90/a_n_bins
       i=0
