@@ -190,8 +190,6 @@ if __name__ == '__main__':
         a_arr = np.concatenate((a_arr, f['phi'].value))
         r_arr = np.concatenate((r_arr, f['radius'].value))
         cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
-      
-      '''
 
       # create bins for data
       a_n_bins = 9
@@ -229,7 +227,6 @@ if __name__ == '__main__':
         plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % (angle*i, angle*i + angle), colors[color])
         fplot_radius(ion, '')
       
-      '''
 
       # Test plot, should show much higher density in 75-90 degree bins over
       # 0-15 degree bin
@@ -251,9 +248,8 @@ if __name__ == '__main__':
       i=8
       plot_profile(r_bins_plot, radial_data[i], '%s < Φ < %s degrees' % \
                     (angle*i, angle*i + angle), colors[3])
-      fplot_radius(ion, 'test_a')
+      fplot_radius(ion, 'test')
 
-      '''
 
       # Make plot similar to paper of phi vs N
       a_n_bins = 3
@@ -288,5 +284,4 @@ if __name__ == '__main__':
       plot_big_radius(radius_data[2], cden_data[2], '60 < Φ < 90 degrees', colors[6], markers[2])
       fplot_radius(ion, 'big')
 
-      '''
 
