@@ -190,8 +190,6 @@ if __name__ == '__main__':
   ion_fields = list(f.keys())
   ion_fields.remove('radius')
   ion_fields.remove('phi')
-  ion_fields.remove('px')
-  ion_fields.remove('py')
   f.close()
 
   # Step through each ion and make plots of azimuthal angle vs N
@@ -201,8 +199,6 @@ if __name__ == '__main__':
       cdens_arr = np.array([])
       a_arr = np.array([])
       r_arr = np.array([])
-      x_arr = np.array([])
-      y_arr = np.array([])
       for j in range(n_files):
         f = h5.File(v[j], 'r')
         a_arr = np.concatenate((a_arr, f['phi'].value))
