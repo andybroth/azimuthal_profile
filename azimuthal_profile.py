@@ -111,7 +111,7 @@ def fplot_radius(ion, description):
   plt.title('%s' % ion)
   plt.xlabel('Impact Parameter [kpc]')
   max = 150
-  if description == 'test':
+  if description == 'test' or description == 'test_a':
     max = 50
   plt.xlim((0,max))
   # if limits_from_field(field):
@@ -247,7 +247,7 @@ if __name__ == '__main__':
 
       # Test plot, should show much higher density in 75-90 degree bins over
       # 0-15 degree bin
-      a_n_bins = 6
+      a_n_bins = 9
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
       a_bins = np.flip(a_bins, 0)
 
@@ -263,7 +263,7 @@ if __name__ == '__main__':
       i=0
       plot_profile(r_bins_plot, radial_data[i], '%s < Φ < %s degrees' % \
                     (angle*i, angle*i + angle), colors[0])
-      i=5
+      i=8
       plot_profile(r_bins_plot, radial_data[i], '%s < Φ < %s degrees' % \
                     (angle*i, angle*i + angle), colors[3])
       fplot_radius(ion, 'test_a')
@@ -274,7 +274,7 @@ if __name__ == '__main__':
       i=0
       plot_profile(r_bins_plot, radial_data[i], '%s < Φ < %s degrees' % \
                     (angle*i, angle*i + angle), colors[0])
-      i=5
+      i=8
       plot_profile(r_bins_plot, radial_data[i], '%s < Φ < %s degrees' % \
                     (angle*i, angle*i + angle), colors[3])
       fplot_radius(ion, 'test')
