@@ -85,9 +85,9 @@ if __name__ == '__main__':
 		ions.append('H I')
 		ion_fields.append('H_number_density')
 		full_ion_fields.append(('gas', 'H_number_density'))
-		ions.append('Mg II')
-		ion_fields.append('Mg_p1_number_density')
-		full_ion_fields.append(('gas', 'Mg_p1_number_density'))
+		# ions.append('Mg II')
+		# ion_fields.append('Mg_p1_number_density')
+		# full_ion_fields.append(('gas', 'Mg_p1_number_density'))
 		# ions.append('Si II')
 		# ion_fields.append('Si_p1_number_density')
 		# full_ion_fields.append(('gas', 'Si_p1_number_density'))
@@ -164,6 +164,10 @@ if __name__ == '__main__':
 
 		# Finds azimuthal angle for each pixel
 		phi = np.abs(np.arctan(px / py))
+
+		# switch x and y
+		phi = np.abs(np.arctan(py / px))
+		
 		phi *= 180 / np.pi
 		if "phi" not in cdens_file.keys():
 			cdens_file.create_dataset("phi", data=phi.ravel())
