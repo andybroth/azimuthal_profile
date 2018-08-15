@@ -76,7 +76,8 @@ if __name__ == '__main__':
 	for fn in yt.parallel_objects(fns):
 		fn = fn.strip() # Get rid of trailing \n
 		fn_head = fn.split('/')[-1]
-		cdens_fn = "%s_cdens.h5" % fn_head
+		cdens_fn_1 = "%s_1_cdens.h5" % fn_head
+		cdens_fn_2 = "%s_2_cdens.h5" % fn_head
 
 		# Define ions we care about
 		ions = []
@@ -150,8 +151,8 @@ if __name__ == '__main__':
 		c = read_amiga_center(amiga_data, fn, ds)
 		rvir = read_amiga_rvir(amiga_data, fn, ds)
 
-		cdens_file_1 = h5.File(cdens_fn+'_1', 'a')
-		cdens_file_2 = h5.File(cdens_fn+'_2', 'a')
+		cdens_file_1 = h5.File(cdens_fn_1, 'a')
+		cdens_file_2 = h5.File(cdens_fn_2, 'a')
 
 		# Create box around galaxy so we're only sampling galaxy out to 1 Mpc
 		one = ds.arr([.5, .5, .5], 'Mpc')
