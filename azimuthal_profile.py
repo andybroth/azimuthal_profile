@@ -212,7 +212,7 @@ if __name__ == '__main__':
       fplot_angle(ion, '')
 
       # redefine bins
-      a_n_bins = 3
+      a_n_bins = 2
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
       a_bins = np.flip(a_bins, 0)
 
@@ -223,12 +223,8 @@ if __name__ == '__main__':
       # Step through each ion and make plots of radius vs N for 3 radial bins
       radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins, False)
       ion = finish_plot(field, COS_data, fn_head)
-      angle = 90/a_n_bins
-      for i in range(a_n_bins):
-        color = 3*i
-        while color >= len(colors):
-          color -= len(colors)
-        plot_profile(r_bins, radial_data[i], '%s < Φ < %s degrees' % (angle*i, angle*i + angle), colors[color])
+      plot_profile(r_bins, radial_data[0], 'Φ < 45 degrees', colors[0])
+      plot_profile(r_bins, radial_data[1], 'Φ > 45 degrees', colors[1])
       fplot_radius(ion, '')
       
 
