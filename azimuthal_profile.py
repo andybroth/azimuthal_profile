@@ -137,7 +137,8 @@ def plot_big_angle(angle_data, cden_data, label, color, marker):
   yerr_lower = cden_data[0,:] - ylower
   
   # plots points
-  plt.errorbar(angle_data[0,:], cden_data[0,:], xerr=angle_data[1,:], yerr=[yerr_lower, cden_data[1,:]], marker=marker, label=label)
+  # plt.errorbar(angle_data[0,:], cden_data[0,:], xerr=angle_data[1,:], yerr=[yerr_lower, cden_data[1,:]], marker=marker, label=label)
+  plt.errorbar(angle_data[0,:], cden_data[0,:], xerr=0, yerr=0, marker=marker, label=label)
   plt.semilogy()
 
 def plot_big_radius(radius_data, cden_data, label, color, marker):
@@ -150,7 +151,8 @@ def plot_big_radius(radius_data, cden_data, label, color, marker):
   yerr_lower = cden_data[0,:] - ylower
   
   # plots points
-  plt.errorbar(radius_data[0,:], cden_data[0,:], xerr=radius_data[1,:], yerr=[yerr_lower, cden_data[1,:]], marker=marker, label=label)
+  # plt.errorbar(radius_data[0,:], cden_data[0,:], xerr=radius_data[1,:], yerr=[yerr_lower, cden_data[1,:]], marker=marker, label=label)
+  plt.errorbar(radius_data[0,:], cden_data[0,:], xerr=0, yerr=0, marker=marker, label=label)
   plt.semilogy()
 
 if __name__ == '__main__':
