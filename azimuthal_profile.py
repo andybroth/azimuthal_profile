@@ -225,7 +225,7 @@ if __name__ == '__main__':
       radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins, False)
       ion = finish_plot(field, COS_data, fn_head)
       plot_profile(r_bins_plot, radial_data[0], 'Φ < 45 degrees', colors[0])
-      plot_profile(r_bins_plot, radial_data[1], 'Φ > 45 degrees', colors[1])
+      plot_profile(r_bins_plot, radial_data[1], 'Φ > 45 degrees', colors[6])
       fplot_radius(ion, 'short')
       
 
