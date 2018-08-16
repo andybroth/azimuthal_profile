@@ -179,7 +179,7 @@ if __name__ == '__main__':
 		log('Generating Edge on Projections with 1st vec')
 		log('Ion Fields')
 		frb = make_off_axis_projection(ds, E1, L, full_ion_fields, \
-		                           c, width, box, rvir, dir='edge/')
+		                           c, width, box, rvir, dir='1/')
 		
 		for i, ion_field in enumerate(ion_fields):
 			dset = "%s/%s" % (ion_field, 'edge')
@@ -190,7 +190,7 @@ if __name__ == '__main__':
 		log('Other fields')
 
 		frb = make_off_axis_projection(ds, E1, L, full_other_fields, \
-			                           c, width, box, rvir, weight_field=('gas', 'density'), dir='edge/')
+			                           c, width, box, rvir, weight_field=('gas', 'density'), dir='1/')
 		for i, other_field in enumerate(other_fields):
 			dset = "%s/%s" % (other_field, 'edge')
 			if dset not in cdens_file_1.keys():
@@ -209,7 +209,7 @@ if __name__ == '__main__':
 		log('Generating Edge on Projections with 2nd vec')
 		log('Ion Fields')
 		frb = make_off_axis_projection(ds, E2, L, full_ion_fields, \
-		                           c, width, box, rvir, dir='edge/')
+		                           c, width, box, rvir, dir='2/')
 		
 		for i, ion_field in enumerate(ion_fields):
 			dset = "%s/%s" % (ion_field, 'edge')
@@ -220,7 +220,7 @@ if __name__ == '__main__':
 		log('Other fields')
 
 		frb = make_off_axis_projection(ds, E2, L, full_other_fields, \
-			                           c, width, box, rvir, weight_field=('gas', 'density'), dir='edge/')
+			                           c, width, box, rvir, weight_field=('gas', 'density'), dir='2/')
 		for i, other_field in enumerate(other_fields):
 			dset = "%s/%s" % (other_field, 'edge')
 			if dset not in cdens_file_2.keys():
