@@ -190,6 +190,8 @@ if __name__ == '__main__':
         a_arr = np.concatenate((a_arr, f['phi'].value))
         r_arr = np.concatenate((r_arr, f['radius'].value))
         cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
+      if field == 'Mg_p1_number_density' or field == 'O_p5_number_density':
+        cdens_arr *= 6.02 * 10**23
 
       # create bins for data
       a_n_bins = 9
