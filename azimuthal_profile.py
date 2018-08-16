@@ -113,13 +113,13 @@ def fplot_radius(ion, description):
   max = 150
   if description == 'test':
     max = 50
-  elif description == 'big':
+  elif description == 'big' or  description == 'short':
     max = 80
   plt.xlim((0,max))
   # if limits_from_field(field):
   #   plt.ylim(limits_from_field(field))
   plt.legend(title='Azimuthal Angle')
-  if len(description) > 0:
+  if len(description) > 0 and not description == 'short':
     print('%s_%s_radius.png' % (ion, description))
     plt.savefig('plots/%s_%s_radius.png' % (ion, description))
   else:
@@ -225,7 +225,7 @@ if __name__ == '__main__':
       ion = finish_plot(field, COS_data, fn_head)
       plot_profile(r_bins, radial_data[0], 'Φ < 45 degrees', colors[0])
       plot_profile(r_bins, radial_data[1], 'Φ > 45 degrees', colors[1])
-      fplot_radius(ion, '')
+      fplot_radius(ion, 'short')
       
 
       # Test plot, should show much higher density in 75-90 degree bins over
