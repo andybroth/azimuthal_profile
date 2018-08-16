@@ -275,7 +275,7 @@ if __name__ == '__main__':
       fplot_angle(ion, 'big')
 
       # Makes plot similar to paper of b vs N
-      a_n_bins = 3
+      a_n_bins = 2
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
       a_bins = np.flip(a_bins, 0)
 
@@ -285,9 +285,9 @@ if __name__ == '__main__':
       
       cden_data, radius_data = big_profile(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
       ion = finish_plot(field, COS_data, fn_head)
-      plot_big_radius(radius_data[0], cden_data[0], '0 < Φ < 30 degrees', colors[0], markers[0])
-      plot_big_radius(radius_data[1], cden_data[1], '30 < Φ < 60 degrees', colors[3], markers[1])
-      plot_big_radius(radius_data[2], cden_data[2], '60 < Φ < 90 degrees', colors[6], markers[2])
+      plot_big_radius(radius_data[0], cden_data[0], 'Φ < 45 degrees', colors[0], markers[0])
+      plot_big_radius(radius_data[1], cden_data[1], 'Φ > 45 degrees', colors[3], markers[1])
+      # plot_big_radius(radius_data[2], cden_data[2], '60 < Φ < 90 degrees', colors[6], markers[2])
       fplot_radius(ion, 'big')
 
 
