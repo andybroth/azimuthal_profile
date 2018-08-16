@@ -133,12 +133,11 @@ def plot_big_angle(angle_data, cden_data, label, color, marker):
   a error bar of 1 std for each axis at each point
   '''
   # makes sure the error bars never go below 0
-  ylower = np.maximum(1e-5, cden_data[0,:] - cden_data[1,:])
+  ylower = np.maximum(1e12, cden_data[0,:] - cden_data[1,:])
   yerr_lower = cden_data[0,:] - ylower
   
   # plots points
-  # plt.errorbar(angle_data[0,:], cden_data[0,:], xerr=angle_data[1,:], yerr=[yerr_lower, cden_data[1,:]], marker=marker, label=label)
-  plt.errorbar(angle_data[0,:], cden_data[0,:], xerr=0, yerr=0, marker=marker, label=label)
+  plt.errorbar(angle_data[0,:], cden_data[0,:], xerr=angle_data[1,:], yerr=[yerr_lower, cden_data[1,:]], marker=marker, label=label)
   plt.semilogy()
 
 def plot_big_radius(radius_data, cden_data, label, color, marker):
@@ -147,12 +146,11 @@ def plot_big_radius(radius_data, cden_data, label, color, marker):
   a error bar of 1 std for each axis at each point
   '''
   # makes sure the error bars never go below 0
-  ylower = np.maximum(1e-5, cden_data[0,:] - cden_data[1,:])
+  ylower = np.maximum(1e12, cden_data[0,:] - cden_data[1,:])
   yerr_lower = cden_data[0,:] - ylower
   
   # plots points
-  # plt.errorbar(radius_data[0,:], cden_data[0,:], xerr=radius_data[1,:], yerr=[yerr_lower, cden_data[1,:]], marker=marker, label=label)
-  plt.errorbar(radius_data[0,:], cden_data[0,:], xerr=0, yerr=0, marker=marker, label=label)
+  plt.errorbar(radius_data[0,:], cden_data[0,:], xerr=radius_data[1,:], yerr=[yerr_lower, cden_data[1,:]], marker=marker, label=label)
   plt.semilogy()
 
 if __name__ == '__main__':
