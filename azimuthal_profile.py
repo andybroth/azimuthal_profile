@@ -113,7 +113,7 @@ def fplot_radius(ion, description):
   max = 150
   if description == 'test':
     max = 50
-  elif description == 'big' or  description == 'short':
+  elif description == 'big':
     max = 80
   plt.xlim((0,max))
   # if limits_from_field(field):
