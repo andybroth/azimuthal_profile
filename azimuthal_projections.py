@@ -70,7 +70,7 @@ def make_off_axis_projection(ds, vec, north_vec, ion_fields, center, width, data
         p.set_background_color(field)
     if dir is None:
         dir = 'face/'
-    p.save(os.path.join('%s_images' % fn_data, dir))
+    p.save(os.path.join('%s/images' % fn_data, dir))
     return p.frb
 
 if __name__ == '__main__':
