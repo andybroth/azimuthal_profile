@@ -26,7 +26,7 @@ import ytree
 import sys
 sys.path.insert(0, '/home/andyr/src/frb')
 from yt.utilities.math_utils import ortho_find
-from radial_profile1 import *
+from radial_profile1 import set_image_details, get_amiga_data, smooth_amiga, GizmoDataset, read_amiga_center, read_amiga_rvir
 
 def find_angular_momentum(sp, c):
     """
@@ -52,6 +52,26 @@ def find_angular_momentum(sp, c):
     ang_mom = yt.YTArray([x_ang_mom, y_ang_mom, z_ang_mom])
     ang_mom, b1, b2 = ortho_find(ang_mom)
     return ang_mom, b1, b2
+
+def make_off_axis_projection(ds, vec, north_vec, ion_fields, center, width, data_source, radius, fn_data, weight_field=None, dir=None):
+    """
+    Use OffAxisProjectionPlot to make projection (cannot specify resolution)
+    """
+    p = yt.OffAxisProjectionPlot(ds, vec, ion_fields, center=center, width=width, 
+                                 data_source=data_source, north_vector=north_vec, weight_field=weight_field)
+    p.hide_axes()
+    p.annotate_scale()
+    p.annotate_timestamp(redshift=True)
+    r = radius.in_units('kpc')
+    p.annotate_sphere(center, (r, 'kpc'), circle_args={'color':'white', 'alpha':0.5, 'linestyle':'dashed', 'linewidth':5})
+    for field in ion_fields:
+        p.set_cmap(field, 'dusk')
+        set_image_details(p, field, True)
+        p.set_background_color(field)
+    if dir is None:
+        dir = 'face/'
+    p.save(os.path.join('%s_images' % fn_data, dir))
+    return p.frb
 
 if __name__ == '__main__':
 	"""
@@ -180,7 +200,7 @@ if __name__ == '__main__':
 		log('Generating Edge on Projections with 1st vec')
 		log('Ion Fields')
 		frb = make_off_axis_projection(ds, E1, L, full_ion_fields, \
-		                           c, width, box, rvir, dir='1/')
+		                           c, width, box, rvir, fn_data, dir='1/')
 		
 		for i, ion_field in enumerate(ion_fields):
 			dset = "%s/%s" % (ion_field, 'edge')
@@ -191,7 +211,7 @@ if __name__ == '__main__':
 		log('Other fields')
 
 		frb = make_off_axis_projection(ds, E1, L, full_other_fields, \
-			                           c, width, box, rvir, weight_field=('gas', 'density'), dir='1/')
+			                           c, width, box, rvir, fn_data, weight_field=('gas', 'density'), dir='1/')
 		for i, other_field in enumerate(other_fields):
 			dset = "%s/%s" % (other_field, 'edge')
 			if dset not in cdens_file_1.keys():
@@ -210,7 +230,7 @@ if __name__ == '__main__':
 		log('Generating Edge on Projections with 2nd vec')
 		log('Ion Fields')
 		frb = make_off_axis_projection(ds, E2, L, full_ion_fields, \
-		                           c, width, box, rvir, dir='2/')
+		                           c, width, box, rvir, fn_data, dir='2/')
 		
 		for i, ion_field in enumerate(ion_fields):
 			dset = "%s/%s" % (ion_field, 'edge')
@@ -221,7 +241,7 @@ if __name__ == '__main__':
 		log('Other fields')
 
 		frb = make_off_axis_projection(ds, E2, L, full_other_fields, \
-			                           c, width, box, rvir, weight_field=('gas', 'density'), dir='2/')
+			                           c, width, box, rvir, fn_data, weight_field=('gas', 'density'), dir='2/')
 		for i, other_field in enumerate(other_fields):
 			dset = "%s/%s" % (other_field, 'edge')
 			if dset not in cdens_file_2.keys():
