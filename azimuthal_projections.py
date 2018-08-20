@@ -75,6 +75,7 @@ if __name__ == '__main__':
 
 	for fn in yt.parallel_objects(fns):
 		fn = fn.strip() # Get rid of trailing \n
+		import pdb; pdb.set_trace()
 		fn_head = fn.split('/')[-1]
 		cdens_fn_1 = "%s_1_cdens.h5" % fn_head
 		cdens_fn_2 = "%s_2_cdens.h5" % fn_head
