@@ -164,7 +164,7 @@ def limits_from_field(field):
   elif field == 'density':
     return (4e-5, 1e-2)
   elif field == 'temperature':
-    return (1e4, 1e6)
+    return (1e4, 2e5)
   elif field == 'C_p1_number_density':
     return (1e-12, 1e-3)
   elif field == 'C_p2_number_density':
