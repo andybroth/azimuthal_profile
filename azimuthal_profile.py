@@ -92,7 +92,7 @@ def big_profile(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins):
       angle_data[r_bin_id][1,a_bin_id] = np.std(a_arr[ids])
   return cden_data, angle_data
 
-def fplot_angle(ion, description, fn):
+def fplot_angle(ion, description, fn, field):
   plt.title('%s' % ion)
   plt.xlabel('Azimuthal Angle [degrees]')
   plt.xlim((0,90))
@@ -107,7 +107,7 @@ def fplot_angle(ion, description, fn):
     plt.savefig('%s/plots/%s_angle.png' % (fn, ion))
   plt.clf()
 
-def fplot_radius(ion, description, fn):
+def fplot_radius(ion, description, fn, field):
   plt.title('%s' % ion)
   plt.xlabel('Impact Parameter [kpc]')
   max = 150
@@ -234,7 +234,7 @@ if __name__ == '__main__':
         plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], '%s < b < %s kpc' % \
                     (50*i, 50*i + 50), colors[3*i])
       ion = finish_plot(field, COS_data, fn_head)
-      fplot_angle(ion, '', fn_head)
+      fplot_angle(ion, '', fn_head, field)
 
       # redefine bins
       a_n_bins = 2
@@ -251,7 +251,7 @@ if __name__ == '__main__':
       ion = finish_plot(field, COS_data, fn_head)
       plot_profile(r_bins_plot, radial_data[0], 'Φ < 45 degrees', colors[0])
       plot_profile(r_bins_plot, radial_data[1], 'Φ > 45 degrees', colors[6])
-      fplot_radius(ion, 'short', fn_head)
+      fplot_radius(ion, 'short', fn_head, field)
       
 
       # Test plot, should show much higher density in 75-90 degree bins over
@@ -275,7 +275,7 @@ if __name__ == '__main__':
         i=8
         plot_profile(r_bins_plot, radial_data[i], '%s < Φ < %s degrees' % \
                       (angle*i, angle*i + angle), colors[3])
-        fplot_radius(ion, 'test', fn_head)
+        fplot_radius(ion, 'test', fn_head, field)
 
 
       # Make plot similar to paper of phi vs N
@@ -293,7 +293,7 @@ if __name__ == '__main__':
       for i in range(1,3):
         plot_big_angle(angle_data[i], cden_data[i], '%s < b < %s kpc' % \
                     (i*20 + 20, i*20 + 40), colors[3*i], markers[i])
-      fplot_angle(ion, 'big', fn_head)
+      fplot_angle(ion, 'big', fn_head, field)
 
       # Makes plot similar to paper of b vs N
       a_n_bins = 2
@@ -309,6 +309,6 @@ if __name__ == '__main__':
       plot_big_radius(radius_data[0], cden_data[0], 'Φ < 45 degrees', colors[0], markers[0])
       plot_big_radius(radius_data[1], cden_data[1], 'Φ > 45 degrees', colors[3], markers[1])
       # plot_big_radius(radius_data[2], cden_data[2], '60 < Φ < 90 degrees', colors[6], markers[2])
-      fplot_radius(ion, 'big', fn_head)
+      fplot_radius(ion, 'big', fn_head, field)
 
 
