@@ -96,8 +96,8 @@ def fplot_angle(ion, description, fn, field):
   plt.title('%s' % ion)
   plt.xlabel('Azimuthal Angle [degrees]')
   plt.xlim((0,90))
-  if limits_from_field(ion):
-    plt.ylim(limits_from_field(ion))
+  if limits_from_field(field):
+    plt.ylim(limits_from_field(field))
   plt.legend(title='Radius')
   if len(description) > 0:
     print('%s_%s_angle.png' % (ion, description))
@@ -116,8 +116,8 @@ def fplot_radius(ion, description, fn, field):
   elif description == 'big':
     max = 80
   plt.xlim((0,max))
-  if limits_from_field(ion):
-    plt.ylim(limits_from_field(ion))
+  if limits_from_field(field):
+    plt.ylim(limits_from_field(field))
   plt.legend(title='Azimuthal Angle')
   if len(description) > 0 and not description == 'short':
     print('%s_%s_radius.png' % (ion, description))
