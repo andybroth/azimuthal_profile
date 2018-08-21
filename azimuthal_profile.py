@@ -26,7 +26,7 @@ from matplotlib.colors import LogNorm
 import sys
 sys.path.insert(0, '/home/andyr/src/frb')
 from get_COS_data import get_COS_data, plot_COS_data
-from radial_profile2 import read_parameter_file, plot_profile, finish_plot, limits_from_field
+from radial_profile2 import read_parameter_file, plot_profile, finish_plot
 
 def make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins, normalize):
   '''
@@ -92,22 +92,22 @@ def big_profile(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins):
       angle_data[r_bin_id][1,a_bin_id] = np.std(a_arr[ids])
   return cden_data, angle_data
 
-def fplot_angle(ion, description):
+def fplot_angle(ion, description, fn):
   plt.title('%s' % ion)
   plt.xlabel('Azimuthal Angle [degrees]')
   plt.xlim((0,90))
-  # if limits_from_field(field):
-  #   plt.ylim(limits_from_field(field))
+  if limits_from_field(field):
+    plt.ylim(limits_from_field(field))
   plt.legend(title='Radius')
   if len(description) > 0:
     print('%s_%s_angle.png' % (ion, description))
-    plt.savefig('plots/%s_%s_angle.png' % (ion, description))
+    plt.savefig('%s/plots/%s_%s_angle.png' % (fn, ion, description))
   else:
     print('%s_angle.png' % ion)
-    plt.savefig('plots/%s_angle.png' % ion)
+    plt.savefig('%s/plots/%s_angle.png' % (fn, ion))
   plt.clf()
 
-def fplot_radius(ion, description):
+def fplot_radius(ion, description, fn):
   plt.title('%s' % ion)
   plt.xlabel('Impact Parameter [kpc]')
   max = 150
@@ -116,15 +116,15 @@ def fplot_radius(ion, description):
   elif description == 'big':
     max = 80
   plt.xlim((0,max))
-  # if limits_from_field(field):
-  #   plt.ylim(limits_from_field(field))
+  if limits_from_field(field):
+    plt.ylim(limits_from_field(field))
   plt.legend(title='Azimuthal Angle')
   if len(description) > 0 and not description == 'short':
     print('%s_%s_radius.png' % (ion, description))
-    plt.savefig('plots/%s_%s_radius.png' % (ion, description))
+    plt.savefig('%s/plots/%s_%s_radius.png' % (fn, ion, description))
   else:
     print('%s_radial.png' % ion)
-    plt.savefig('plots/%s_radial.png' % ion)
+    plt.savefig('%s/plots/%s_radial.png' % (fn, ion))
   plt.clf()
 
 def plot_big_angle(angle_data, cden_data, label, color, marker):
@@ -152,6 +152,32 @@ def plot_big_radius(radius_data, cden_data, label, color, marker):
   # plots points
   plt.errorbar(radius_data[0,:], cden_data[0,:], xerr=radius_data[1,:], yerr=yerr_lower, marker=marker, label=label)
   plt.semilogy()
+
+def limits_from_field(field):
+  '''Give limits for the plots depending on the ion field'''
+  return None
+  if field == 'H_number_density':
+    return (1e13, 1e23)
+  elif field == 'O_p5_number_density':
+    return (1e15, 1e18)
+  elif field == 'Mg_p1_number_density':
+    return (1e13, 1e20)
+  elif field == 'density':
+    return (1e-5, 1e1)
+  elif field == 'temperature':
+    return (1e3, 1e6)
+  elif field == 'C_p1_number_density':
+    return (1e1, 1e1)
+  elif field == 'C_p2_number_density':
+    return (1e1, 1e1) 
+  elif field == 'Ne_p7_number_density':
+    return (1e1, 1e1)
+  elif field == 'Si_p3_number_density':
+    return (1e1, 1e1)
+  elif field == 'metal_density':
+    return (1e-7, 1e-1)
+  else:
+    return None
 
 if __name__ == '__main__':
   """
@@ -209,7 +235,7 @@ if __name__ == '__main__':
         plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], '%s < b < %s kpc' % \
                     (50*i, 50*i + 50), colors[3*i])
       ion = finish_plot(field, COS_data, fn_head)
-      fplot_angle(ion, '')
+      fplot_angle(ion, '', fn_head)
 
       # redefine bins
       a_n_bins = 2
@@ -226,30 +252,31 @@ if __name__ == '__main__':
       ion = finish_plot(field, COS_data, fn_head)
       plot_profile(r_bins_plot, radial_data[0], 'Φ < 45 degrees', colors[0])
       plot_profile(r_bins_plot, radial_data[1], 'Φ > 45 degrees', colors[6])
-      fplot_radius(ion, 'short')
+      fplot_radius(ion, 'short', fn_head)
       
 
       # Test plot, should show much higher density in 75-90 degree bins over
       # 0-15 degree bin
-      a_n_bins = 9
-      a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
-      a_bins = np.flip(a_bins, 0)
+      if ion == 'density':
+        a_n_bins = 9
+        a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
+        a_bins = np.flip(a_bins, 0)
 
-      r_n_bins = 15
-      r_bins = np.linspace(150, 0, r_n_bins, endpoint=False)
-      r_bins = np.flip(r_bins, 0)
-      r_bins_plot = np.linspace(0, 150, r_n_bins)
+        r_n_bins = 15
+        r_bins = np.linspace(150, 0, r_n_bins, endpoint=False)
+        r_bins = np.flip(r_bins, 0)
+        r_bins_plot = np.linspace(0, 150, r_n_bins)
 
-      radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins, False)
-      ion = finish_plot(field, COS_data, fn_head)
-      angle = 90/a_n_bins
-      i=0
-      plot_profile(r_bins_plot, radial_data[i], '%s < Φ < %s degrees' % \
-                    (angle*i, angle*i + angle), colors[0])
-      i=8
-      plot_profile(r_bins_plot, radial_data[i], '%s < Φ < %s degrees' % \
-                    (angle*i, angle*i + angle), colors[3])
-      fplot_radius(ion, 'test')
+        radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins, False)
+        ion = finish_plot(field, COS_data, fn_head)
+        angle = 90/a_n_bins
+        i=0
+        plot_profile(r_bins_plot, radial_data[i], '%s < Φ < %s degrees' % \
+                      (angle*i, angle*i + angle), colors[0])
+        i=8
+        plot_profile(r_bins_plot, radial_data[i], '%s < Φ < %s degrees' % \
+                      (angle*i, angle*i + angle), colors[3])
+        fplot_radius(ion, 'test', fn_head)
 
 
       # Make plot similar to paper of phi vs N
@@ -267,7 +294,7 @@ if __name__ == '__main__':
       for i in range(1,3):
         plot_big_angle(angle_data[i], cden_data[i], '%s < b < %s kpc' % \
                     (i*20 + 20, i*20 + 40), colors[3*i], markers[i])
-      fplot_angle(ion, 'big')
+      fplot_angle(ion, 'big', fn_head)
 
       # Makes plot similar to paper of b vs N
       a_n_bins = 2
@@ -283,6 +310,6 @@ if __name__ == '__main__':
       plot_big_radius(radius_data[0], cden_data[0], 'Φ < 45 degrees', colors[0], markers[0])
       plot_big_radius(radius_data[1], cden_data[1], 'Φ > 45 degrees', colors[3], markers[1])
       # plot_big_radius(radius_data[2], cden_data[2], '60 < Φ < 90 degrees', colors[6], markers[2])
-      fplot_radius(ion, 'big')
+      fplot_radius(ion, 'big', fn_head)
 
 
