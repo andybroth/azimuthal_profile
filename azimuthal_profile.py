@@ -116,8 +116,8 @@ def fplot_radius(ion, description, fn):
   elif description == 'big':
     max = 80
   plt.xlim((0,max))
-  if limits_from_field(field):
-    plt.ylim(limits_from_field(field))
+  if limits_from_field(ion):
+    plt.ylim(limits_from_field(ion))
   plt.legend(title='Azimuthal Angle')
   if len(description) > 0 and not description == 'short':
     print('%s_%s_radius.png' % (ion, description))
@@ -167,13 +167,13 @@ def limits_from_field(field):
   elif field == 'temperature':
     return (1e3, 1e6)
   elif field == 'C_p1_number_density':
-    return (1e1, 1e1)
+    return (1e-12, 1e-3)
   elif field == 'C_p2_number_density':
-    return (1e1, 1e1) 
+    return (1e-9, 1e-4) 
   elif field == 'Ne_p7_number_density':
-    return (1e1, 1e1)
+    return (1e-9, 1e-7)
   elif field == 'Si_p3_number_density':
-    return (1e1, 1e1)
+    return (1e-13, 1e-6)
   elif field == 'metal_density':
     return (1e-7, 1e-1)
   else:
@@ -257,7 +257,7 @@ if __name__ == '__main__':
 
       # Test plot, should show much higher density in 75-90 degree bins over
       # 0-15 degree bin
-      if ion == 'density':
+      if field == 'density':
         a_n_bins = 9
         a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
         a_bins = np.flip(a_bins, 0)
