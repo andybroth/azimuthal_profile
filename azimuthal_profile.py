@@ -195,7 +195,7 @@ if __name__ == '__main__':
   colors = 3*['black', 'cyan', 'green', 'magenta', 'yellow', 'blue', 'red']
   markers = ['o', '^', 's']
 
-  fn_head = sys.argv[1].split('.')[0]
+  fn_head = sys.argv[1].split('.')[0][:-11]
   profiles_dict = read_parameter_file(sys.argv[1])
 
   # Get the list of ion_fields from the first file available
