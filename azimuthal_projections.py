@@ -150,11 +150,10 @@ if __name__ == '__main__':
 		full_other_fields.append(('gas', 'temperature'))
 
 		log("Starting projections for %s" % fn)
-		import pdb; pdb.set_trace()
 		ds = GizmoDataset(fn)
 
 		trident.add_ion_fields(ds, ions=ions, ftype='gas')
-
+		import pdb; pdb.set_trace()
 		radial_extent = ds.quan(250, 'kpc')
 		width = 2*radial_extent
 
