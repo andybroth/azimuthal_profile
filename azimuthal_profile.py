@@ -156,15 +156,15 @@ def plot_big_radius(radius_data, cden_data, label, color, marker):
 def limits_from_field(field):
   '''Give limits for the plots depending on the ion field'''
   if field == 'H_number_density':
-    return (1e13, 1e23)
-  elif field == 'O_p5_number_density':
-    return (1e15, 1e18)
-  elif field == 'Mg_p1_number_density':
     return (1e13, 1e20)
+  elif field == 'O_p5_number_density':
+    return (1e16, 1e18)
+  elif field == 'Mg_p1_number_density':
+    return (1e13, 1e18)
   elif field == 'density':
     return (1e-5, 1e-2)
   elif field == 'temperature':
-    return (1e3, 1e6)
+    return (1e4, 1e6)
   elif field == 'C_p1_number_density':
     return (1e-12, 1e-3)
   elif field == 'C_p2_number_density':
@@ -172,9 +172,9 @@ def limits_from_field(field):
   elif field == 'Ne_p7_number_density':
     return (1e-9, 1e-7)
   elif field == 'Si_p3_number_density':
-    return (1e-13, 1e-6)
+    return (1e-10, 1e-6)
   elif field == 'metal_density':
-    return (1e-7, 1e-1)
+    return (1e-7, 1e-5)
   else:
     return None
 
