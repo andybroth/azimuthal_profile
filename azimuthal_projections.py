@@ -96,7 +96,7 @@ if __name__ == '__main__':
 	for fn in yt.parallel_objects(fns):
 		fn = fn.strip() # Get rid of trailing \n
 		fn_head = fn.split('/')[-1]
-		fn_data = fn.split('/')[-4][:-3]
+		fn_data = fn.split('/')[-4]#[:-3]
 		cdens_fn_1 = "%s/%s_1_cdens.h5" % (fn_data, fn_head)
 		cdens_fn_2 = "%s/%s_2_cdens.h5" % (fn_data, fn_head)
 
