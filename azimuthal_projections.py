@@ -134,20 +134,20 @@ if __name__ == '__main__':
 		ions.append('C III')
 		ion_fields.append('C_p2_number_density')
 		full_ion_fields.append(('gas', 'C_p2_number_density'))
-		ions.append('Ne VIII')
-		ion_fields.append('Ne_p7_number_density')
-		full_ion_fields.append(('gas', 'Ne_p7_number_density'))
-		ions.append('O VI')
-		ion_fields.append('O_p5_number_density')
-		full_ion_fields.append(('gas', 'O_p5_number_density'))
+		# ions.append('Ne VIII')
+		# ion_fields.append('Ne_p7_number_density')
+		# full_ion_fields.append(('gas', 'Ne_p7_number_density'))
+		# ions.append('O VI')
+		# ion_fields.append('O_p5_number_density')
+		# full_ion_fields.append(('gas', 'O_p5_number_density'))
 		n_fields = len(ion_fields)
 
 		others = []
 		other_fields = []
 		full_other_fields = []
-		others.append('Temperature')
-		other_fields.append('temperature')
-		full_other_fields.append(('gas', 'temperature'))
+		# others.append('Temperature')
+		# other_fields.append('temperature')
+		# full_other_fields.append(('gas', 'temperature'))
 
 		log("Starting projections for %s" % fn)
 		ds = GizmoDataset(fn)
@@ -159,12 +159,12 @@ if __name__ == '__main__':
 		# ions.append('O_nuclei_density')
 		# ion_fields.append('O_nuclei_density')
 		# full_ion_fields.append(('gas', 'O_nuclei_density'))
-		ions.append('density')
-		ion_fields.append('density')
-		full_ion_fields.append(('gas', 'density'))
-		ions.append('metal_density')
-		ion_fields.append('metal_density')
-		full_ion_fields.append(('gas', 'metal_density'))
+		# ions.append('density')
+		# ion_fields.append('density')
+		# full_ion_fields.append(('gas', 'density'))
+		# ions.append('metal_density')
+		# ion_fields.append('metal_density')
+		# full_ion_fields.append(('gas', 'metal_density'))
 
 		# Figure out centroid and r_vir info
 		log("Reading amiga center for halo in %s" % fn)
