@@ -104,21 +104,21 @@ if __name__ == '__main__':
 		ions = []
 		ion_fields = []
 		full_ion_fields = []
-		# ions.append('H I')
-		# ion_fields.append('H_number_density')
-		# full_ion_fields.append(('gas', 'H_number_density'))
-		# ions.append('Mg II')
-		# ion_fields.append('Mg_p1_number_density')
-		# full_ion_fields.append(('gas', 'Mg_p1_number_density'))
+		ions.append('H I')
+		ion_fields.append('H_number_density')
+		full_ion_fields.append(('gas', 'H_number_density'))
+		ions.append('Mg II')
+		ion_fields.append('Mg_p1_number_density')
+		full_ion_fields.append(('gas', 'Mg_p1_number_density'))
 		# ions.append('Si II')
 		# ion_fields.append('Si_p1_number_density')
 		# full_ion_fields.append(('gas', 'Si_p1_number_density'))
 		# ions.append('Si III')
 		# ion_fields.append('Si_p2_number_density')
 		# full_ion_fields.append(('gas', 'Si_p2_number_density'))
-		# ions.append('Si IV')
-		# ion_fields.append('Si_p3_number_density')
-		# full_ion_fields.append(('gas', 'Si_p3_number_density'))
+		ions.append('Si IV')
+		ion_fields.append('Si_p3_number_density')
+		full_ion_fields.append(('gas', 'Si_p3_number_density'))
 		# ions.append('N II')
 		# ion_fields.append('N_p1_number_density')
 		# full_ion_fields.append(('gas', 'N_p1_number_density'))
@@ -128,12 +128,12 @@ if __name__ == '__main__':
 		# ions.append('N V')
 		# ion_fields.append('N_p4_number_density')
 		# full_ion_fields.append(('gas', 'N_p4_number_density'))
-		# ions.append('C II')
-		# ion_fields.append('C_p1_number_density')
-		# full_ion_fields.append(('gas', 'C_p1_number_density'))
-		# ions.append('C III')
-		# ion_fields.append('C_p2_number_density')
-		# full_ion_fields.append(('gas', 'C_p2_number_density'))
+		ions.append('C II')
+		ion_fields.append('C_p1_number_density')
+		full_ion_fields.append(('gas', 'C_p1_number_density'))
+		ions.append('C III')
+		ion_fields.append('C_p2_number_density')
+		full_ion_fields.append(('gas', 'C_p2_number_density'))
 		ions.append('Ne VIII')
 		ion_fields.append('Ne_p7_number_density')
 		full_ion_fields.append(('gas', 'Ne_p7_number_density'))
@@ -218,6 +218,7 @@ if __name__ == '__main__':
 				cdens_file_1.flush()
 		cdens_file_1.close()
 
+		'''
 		# Identify the radius from the center of each pixel (in sim units)
 		if "radius" not in cdens_file_2.keys():
 			cdens_file_2.create_dataset("radius", data=radius.ravel())
@@ -247,4 +248,4 @@ if __name__ == '__main__':
 				cdens_file_2.create_dataset(dset, data=frb[full_other_fields[i]].ravel())
 				cdens_file_2.flush()
 		cdens_file_2.close()
-
+		'''
