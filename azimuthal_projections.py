@@ -195,7 +195,7 @@ if __name__ == '__main__':
 		sp = ds.sphere(c, (15, 'kpc'))
 		L = sp.quantities.angular_momentum_vector(use_gas=False, use_particles=True, particle_type='PartType0')
 		L, E1, E2 = ortho_find(L)
-
+		'''
 		log('Generating Edge on Projections with 1st vec')
 		log('Ion Fields')
 		frb = make_off_axis_projection(ds, E1, L, full_ion_fields, \
@@ -248,4 +248,4 @@ if __name__ == '__main__':
 				cdens_file_2.create_dataset(dset, data=frb[full_other_fields[i]].ravel())
 				cdens_file_2.flush()
 		cdens_file_2.close()
-		'''
+		
