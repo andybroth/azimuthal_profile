@@ -218,7 +218,7 @@ if __name__ == '__main__':
 				cdens_file_1.flush()
 		cdens_file_1.close()
 
-		
+		'''
 		# Identify the radius from the center of each pixel (in sim units)
 		if "radius" not in cdens_file_2.keys():
 			cdens_file_2.create_dataset("radius", data=radius.ravel())
@@ -248,4 +248,4 @@ if __name__ == '__main__':
 				cdens_file_2.create_dataset(dset, data=frb[full_other_fields[i]].ravel())
 				cdens_file_2.flush()
 		cdens_file_2.close()
-		
+		'''
