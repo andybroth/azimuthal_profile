@@ -119,9 +119,10 @@ if __name__ == '__main__':
 		L = sp.quantities.angular_momentum_vector(use_gas=False, use_particles=True, particle_type='PartType0')
 
 		log('Adding to file')
+		mag = np.linalg.norm(L)
 
-		cdens_file_1.attrs.create('Ang_Mom', L)
-		cdens_file_2.attrs.create('Ang_Mom', L)
+		cdens_file_1.attrs.create('Ang_Mom', mag)
+		cdens_file_2.attrs.create('Ang_Mom', mag)
 
 		L, E1, E2 = ortho_find(L)
 
