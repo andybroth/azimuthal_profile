@@ -36,6 +36,72 @@ if __name__ == '__main__':
 	amiga_data = smooth_amiga(amiga_data)
 
 	for fn in yt.parallel_objects(fns):
+		# Define ions we care about
+		ions = []
+		ion_fields = []
+		full_ion_fields = []
+		ions.append('H I')
+		ion_fields.append('H_number_density')
+		full_ion_fields.append(('gas', 'H_number_density'))
+		ions.append('Mg II')
+		ion_fields.append('Mg_p1_number_density')
+		full_ion_fields.append(('gas', 'Mg_p1_number_density'))
+		# ions.append('Si II')
+		# ion_fields.append('Si_p1_number_density')
+		# full_ion_fields.append(('gas', 'Si_p1_number_density'))
+		# ions.append('Si III')
+		# ion_fields.append('Si_p2_number_density')
+		# full_ion_fields.append(('gas', 'Si_p2_number_density'))
+		ions.append('Si IV')
+		ion_fields.append('Si_p3_number_density')
+		full_ion_fields.append(('gas', 'Si_p3_number_density'))
+		# ions.append('N II')
+		# ion_fields.append('N_p1_number_density')
+		# full_ion_fields.append(('gas', 'N_p1_number_density'))
+		# ions.append('N III')
+		# ion_fields.append('N_p2_number_density')
+		# full_ion_fields.append(('gas', 'N_p2_number_density'))
+		# ions.append('N V')
+		# ion_fields.append('N_p4_number_density')
+		# full_ion_fields.append(('gas', 'N_p4_number_density'))
+		ions.append('C II')
+		ion_fields.append('C_p1_number_density')
+		full_ion_fields.append(('gas', 'C_p1_number_density'))
+		ions.append('C III')
+		ion_fields.append('C_p2_number_density')
+		full_ion_fields.append(('gas', 'C_p2_number_density'))
+		ions.append('Ne VIII')
+		ion_fields.append('Ne_p7_number_density')
+		full_ion_fields.append(('gas', 'Ne_p7_number_density'))
+		ions.append('O VI')
+		ion_fields.append('O_p5_number_density')
+		full_ion_fields.append(('gas', 'O_p5_number_density'))
+
+		others = []
+		other_fields = []
+		full_other_fields = []
+		others.append('Temperature')
+		other_fields.append('temperature')
+		full_other_fields.append(('gas', 'temperature'))
+
+		log("Starting projections for %s" % fn)
+		ds = GizmoDataset(fn)
+		trident.add_ion_fields(ds, ions=ions, ftype='gas')
+
+		radial_extent = ds.quan(250, 'kpc')
+		width = 2*radial_extent
+
+		# ions.append('O_nuclei_density')
+		# ion_fields.append('O_nuclei_density')
+		# full_ion_fields.append(('gas', 'O_nuclei_density'))
+		ions.append('density')
+		ion_fields.append('density')
+		full_ion_fields.append(('gas', 'density'))
+		ions.append('metal_density')
+		ion_fields.append('metal_density')
+		full_ion_fields.append(('gas', 'metal_density'))
+
+
 		fn = fn.strip() # Get rid of trailing \n
 		fn_head = fn.split('/')[-1]
 		fn_data = fn.split('/')[-4]
