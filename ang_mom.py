@@ -85,6 +85,7 @@ if __name__ == '__main__':
 		full_other_fields.append(('gas', 'temperature'))
 
 		log("Starting projections for %s" % fn)
+		import pdb; pdb.set_trace()
 		ds = GizmoDataset(fn)
 		trident.add_ion_fields(ds, ions=ions, ftype='gas')
 
@@ -107,11 +108,6 @@ if __name__ == '__main__':
 		fn_data = fn.split('/')[-4]
 		cdens_fn_1 = "%s/%s_1_cdens.h5" % (fn_data, fn_head)
 		cdens_fn_2 = "%s/%s_2_cdens.h5" % (fn_data, fn_head)
-
-		log("Starting projections for %s" % fn)
-		import pdb; pdb.set_trace()
-		ds = GizmoDataset(fn)
-		trident.add_ion_fields(ds, ions=ions, ftype='gas')
 
 		# Figure out centroid and r_vir info
 		log("Reading amiga center for halo in %s" % fn)
