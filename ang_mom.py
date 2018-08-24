@@ -120,12 +120,10 @@ if __name__ == '__main__':
 
 		log('Adding to file')
 		mag = np.linalg.norm(L)
+		L, E1, E2 = ortho_find(L)
 
 		cdens_file_1.attrs.create('Ang_Mom', mag)
 		cdens_file_2.attrs.create('Ang_Mom', mag)
-
-		L, E1, E2 = ortho_find(L)
-
 		cdens_file_1.attrs.create('Ang_Mom_Norm', L)
 		cdens_file_2.attrs.create('Ang_Mom_Norm', L)
 
