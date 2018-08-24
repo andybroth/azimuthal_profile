@@ -169,6 +169,9 @@ if __name__ == '__main__':
 		c = read_amiga_center(amiga_data, fn, ds)
 		rvir = read_amiga_rvir(amiga_data, fn, ds)
 
+		log(c)
+		'''
+
 		cdens_file_1 = h5.File(cdens_fn_1, 'a')
 		cdens_file_2 = h5.File(cdens_fn_2, 'a')
 
@@ -216,7 +219,7 @@ if __name__ == '__main__':
 				cdens_file_1.flush()
 		cdens_file_1.close()
 
-		'''
+		
 		# Identify the radius from the center of each pixel (in sim units)
 		if "radius" not in cdens_file_2.keys():
 			cdens_file_2.create_dataset("radius", data=radius.ravel())
@@ -246,4 +249,4 @@ if __name__ == '__main__':
 				cdens_file_2.create_dataset(dset, data=frb[full_other_fields[i]].ravel())
 				cdens_file_2.flush()
 		cdens_file_2.close()
-		'''
+		
