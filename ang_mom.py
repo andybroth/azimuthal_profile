@@ -109,6 +109,7 @@ if __name__ == '__main__':
 		cdens_fn_2 = "%s/%s_2_cdens.h5" % (fn_data, fn_head)
 
 		log("Starting projections for %s" % fn)
+		import pdb; pdb.set_trace()
 		ds = GizmoDataset(fn)
 		trident.add_ion_fields(ds, ions=ions, ftype='gas')
 
