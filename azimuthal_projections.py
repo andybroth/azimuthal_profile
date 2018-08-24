@@ -169,6 +169,8 @@ if __name__ == '__main__':
 		c = read_amiga_center(amiga_data, fn, ds)
 		rvir = read_amiga_rvir(amiga_data, fn, ds)
 
+		log(c)
+
 		cdens_file_1 = h5.File(cdens_fn_1, 'a')
 		cdens_file_2 = h5.File(cdens_fn_2, 'a')
 
@@ -193,7 +195,7 @@ if __name__ == '__main__':
 		sp = ds.sphere(c, (15, 'kpc'))
 		L = sp.quantities.angular_momentum_vector(use_gas=False, use_particles=True, particle_type='PartType0')
 		L, E1, E2 = ortho_find(L)
-		'''
+		
 		log('Generating Edge on Projections with 1st vec')
 		log('Ion Fields')
 		frb = make_off_axis_projection(ds, E1, L, full_ion_fields, \
@@ -216,7 +218,7 @@ if __name__ == '__main__':
 				cdens_file_1.flush()
 		cdens_file_1.close()
 
-		'''
+		
 		# Identify the radius from the center of each pixel (in sim units)
 		if "radius" not in cdens_file_2.keys():
 			cdens_file_2.create_dataset("radius", data=radius.ravel())
