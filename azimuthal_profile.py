@@ -26,7 +26,7 @@ from matplotlib.colors import LogNorm
 import sys
 sys.path.insert(0, '/home/andyr/src/frb')
 from get_COS_data import get_COS_data, plot_COS_data
-from radial_profile2 import read_parameter_file, plot_profile, finish_plot
+from radial_profile2 import plot_profile, finish_plot
 
 def make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins, normalize):
   '''
@@ -177,6 +177,28 @@ def limits_from_field(field):
     return (1e-7, 1e-5)
   else:
     return None
+
+def read_parameter_file(fn):
+    """
+    read the parameter file and return a dictionary with pairs of:
+
+    label : [fn1, fn2, fn3]
+    """
+    f = open(fn, 'r')
+    profiles = {}
+    text = f.readlines()
+    i = 0
+    while i < len(text):
+        profile_label = text[i].split()[0][:-1]
+        print(profile_label)
+        i += 1
+        profile_list = []
+        while not text[i].split() == []: 
+            profile_list.append(text[i].split()[0])
+            i += 1
+        profiles[profile_label] = profile_list
+        i += 1
+    return profiles
 
 if __name__ == '__main__':
   """
