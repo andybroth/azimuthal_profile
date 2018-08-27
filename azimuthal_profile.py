@@ -113,8 +113,6 @@ def fplot_radius(ion, description, fn, field):
   max = 150
   if description == 'test':
     max = 50
-  elif description == 'big':
-    max = 80
   plt.xlim((0,max))
   if limits_from_field(field):
     plt.ylim(limits_from_field(field))
@@ -162,7 +160,7 @@ def limits_from_field(field):
   elif field == 'Mg_p1_number_density':
     return (1e11, 1e18)
   elif field == 'density':
-    return (4e-5, 1e-2)
+    return (1e-5, 1e-1)
   elif field == 'temperature':
     return (1e4, 2e5)
   elif field == 'C_p1_number_density':
