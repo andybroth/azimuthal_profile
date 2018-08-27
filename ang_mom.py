@@ -117,6 +117,7 @@ if __name__ == '__main__':
 		log('Finding Angular Momentum of Galaxy')
 		sp = ds.sphere(c, (15, 'kpc'))
 		L = sp.quantities.angular_momentum_vector(use_gas=False, use_particles=True, particle_type='PartType0')
+		mass = sp.quantities.total_mass()
 
 		log('Adding to file')
 		mag = np.linalg.norm(L)
@@ -126,4 +127,6 @@ if __name__ == '__main__':
 		cdens_file_2.attrs.create('Ang_Mom', mag)
 		cdens_file_1.attrs.create('Ang_Mom_Norm', L)
 		cdens_file_2.attrs.create('Ang_Mom_Norm', L)
+		cdens_file_1.attrs.create('mass', mass)
+		cdens_file_2.attrs.create('mass', mass)
 
