@@ -173,7 +173,7 @@ if __name__ == '__main__':
 
 		log(c.in_units('kpc'))
 		center = [26402.32078663, 29193.90002137, 32830.23823524] * code_length
-		log(center.in_units('kpc')
+		log(center.in_units('kpc'))
 
 
 		cdens_file_1 = h5.File(cdens_fn_1, 'a')
