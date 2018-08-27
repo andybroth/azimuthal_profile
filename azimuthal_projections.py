@@ -178,6 +178,7 @@ if __name__ == '__main__':
 		log(center)
 		log(center.in_units('kpc'))
 
+		c = center
 
 		cdens_file_1 = h5.File(cdens_fn_1, 'a')
 		cdens_file_2 = h5.File(cdens_fn_2, 'a')
