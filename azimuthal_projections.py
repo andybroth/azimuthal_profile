@@ -26,6 +26,7 @@ import ytree
 sys.path.insert(0, '/home/andyr/src/frb')
 from yt.utilities.math_utils import ortho_find
 from radial_profile1 import set_image_details, get_amiga_data, smooth_amiga, GizmoDataset, read_amiga_center, read_amiga_rvir, log
+from yt.units import code_length
 
 def find_angular_momentum(sp, c):
     """
@@ -170,9 +171,10 @@ if __name__ == '__main__':
 		c = read_amiga_center(amiga_data, fn, ds)
 		rvir = read_amiga_rvir(amiga_data, fn, ds)
 
-		log(c)
-		c = [26402.32078663, 29193.90002137, 32830.23823524] * code_length
-		log(c)
+		log(c.in_units('kpc'))
+		center = [26402.32078663, 29193.90002137, 32830.23823524] * code_length
+		log(center.in_units('kpc')
+
 
 		cdens_file_1 = h5.File(cdens_fn_1, 'a')
 		cdens_file_2 = h5.File(cdens_fn_2, 'a')
