@@ -198,6 +198,7 @@ def read_parameter_file(fn):
             L = file.attrs.get('Ang_Mom')
             mass = file.attrs.get('mass')[0]
             if L/mass > 5*10**-15:
+              print(file_name)
               profile_list.append(file_name)
             file.close()
             i += 1
