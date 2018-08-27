@@ -171,6 +171,8 @@ if __name__ == '__main__':
 		rvir = read_amiga_rvir(amiga_data, fn, ds)
 
 		log(c)
+		c = [26402.32078663, 29193.90002137, 32830.23823524] * code_length
+		log(c)
 
 		cdens_file_1 = h5.File(cdens_fn_1, 'a')
 		cdens_file_2 = h5.File(cdens_fn_2, 'a')
