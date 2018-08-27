@@ -195,9 +195,9 @@ def read_parameter_file(fn):
         while not text[i].split() == []: 
             file_name = text[i].split()[0]
             file = h5.File(file_name,'a')
-            print(file.attrs.get('val'))
-            print(file.attrs.get('val')[0])
-            if file.attrs.get('val')[0] > 5*10**-15:
+            L = file.attrs.get('Ang_Mom')
+            mass = file.attrs.get('mass')[0]
+            if L/mass > 5*10**-15:
               profile_list.append(file_name)
             file.close()
             i += 1

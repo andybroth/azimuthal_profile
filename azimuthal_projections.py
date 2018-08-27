@@ -169,14 +169,9 @@ if __name__ == '__main__':
 		log("Reading amiga center for halo in %s" % fn)
 		c = read_amiga_center(amiga_data, fn, ds)
 		rvir = read_amiga_rvir(amiga_data, fn, ds)
-
-		log(c)
-		log(c.in_units('kpc'))
 		
 		center = [26402.32078663, 29193.90002137, 32830.23823524]
 		center = ds.arr(center, 'code_length')
-		log(center)
-		log(center.in_units('kpc'))
 
 		c = center
 
