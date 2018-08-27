@@ -190,11 +190,12 @@ def read_parameter_file(fn):
     i = 0
     while i < len(text):
         profile_label = text[i].split()[0][:-1]
-        print(profile_label)
         i += 1
         profile_list = []
         while not text[i].split() == []: 
-            profile_list.append(text[i].split()[0])
+            thing = text[i].split()[0]
+            print(thing)
+            profile_list.append(thing)
             i += 1
         profiles[profile_label] = profile_list
         i += 1
