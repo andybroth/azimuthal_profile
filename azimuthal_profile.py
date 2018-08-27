@@ -158,11 +158,11 @@ def limits_from_field(field):
   elif field == 'O_p5_number_density':
     return (2e16, 5e17)
   elif field == 'Mg_p1_number_density':
-    return (1e11, 1e18)
+    return (1e8, 1e18)
   elif field == 'density':
     return (1e-5, 1e-1)
   elif field == 'temperature':
-    return (1e4, 2e5)
+    return (1e4, 1e7)
   elif field == 'C_p1_number_density':
     return (1e-12, 1e-3)
   elif field == 'C_p2_number_density':
@@ -309,8 +309,8 @@ if __name__ == '__main__':
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
       a_bins = np.flip(a_bins, 0)
 
-      r_n_bins = 3
-      r_bins = np.linspace(80, 20, r_n_bins, endpoint=False)
+      r_n_bins = 7
+      r_bins = np.linspace(140, 20, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
 
       cden_data, angle_data = big_profile(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins)
