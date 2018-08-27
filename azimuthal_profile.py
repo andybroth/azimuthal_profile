@@ -197,7 +197,7 @@ def read_parameter_file(fn):
             file = h5.File(file_name,'a')
             L = file.attrs.get('Ang_Mom')
             mass = file.attrs.get('mass')[0]
-            if L/mass > 9*10**-15:
+            if L/mass > 1*10**-14:
               print(file_name)
               profile_list.append(file_name)
             file.close()
