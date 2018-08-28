@@ -317,6 +317,9 @@ if __name__ == '__main__':
       ion = finish_plot(field, COS_data, fn_head)
       plot_big_angle(angle_data[0], cden_data[0], 'b < 20 kpc', colors[0], markers[0])
       for i in range(1, r_n_bins):
+        color = i
+        while color >= len(colors):
+          color -= len(colors)
         plot_big_angle(angle_data[i], cden_data[i], '%s < b < %s kpc' % \
                     (i*20 + 20, i*20 + 40), colors[i], markers[i])
       fplot_angle(ion, 'big', fn_head, field)
