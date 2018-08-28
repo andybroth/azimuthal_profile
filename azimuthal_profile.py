@@ -80,9 +80,9 @@ def big_profile(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins):
       ids = np.logical_and(r_bin_ids == r_bin_id, a_bin_ids == a_bin_id)
       sample = cdens_arr[ids]
       cden_data[r_bin_id][0,a_bin_id] = np.median(sample)
-      cden_data[r_bin_id][1,a_bin_id] = np.std(sample)
+      # cden_data[r_bin_id][1,a_bin_id] = np.std(sample)
       angle_data[r_bin_id][0,a_bin_id] = np.median(a_arr[ids])
-      angle_data[r_bin_id][1,a_bin_id] = np.std(a_arr[ids])
+      # angle_data[r_bin_id][1,a_bin_id] = np.std(a_arr[ids])
   return cden_data, angle_data
 
 def fplot_angle(ion, description, fn, field):
@@ -118,30 +118,13 @@ def fplot_radius(ion, description, fn, field):
     plt.savefig('%s/plots/%s_radial.png' % (fn, ion))
   plt.clf()
 
-def plot_big_angle(angle_data, cden_data, label, color, marker):
+def plot_big(angle_data, cden_data, label, color, marker):
   '''
   Plots the azimuthal angle vs Cden for 3 angular and 3 radial bins along with
   a error bar of 1 std for each axis at each point
   '''
   # makes sure the error bars never go below 0
-  ylower = np.maximum(1e16, cden_data[0,:] - cden_data[1,:])
-  yerr_lower = cden_data[0,:] - ylower
-  
-  # plots points
-  plt.errorbar(angle_data[0,:], cden_data[0,:], xerr=angle_data[1,:], yerr=0, marker=marker, label=label)
-  plt.semilogy()
-
-def plot_big_radius(radius_data, cden_data, label, color, marker):
-  '''
-  Plots b vs Cden for 2 angular and 4 radial bins along with
-  a error bar of 1 std for each axis at each point
-  '''
-  # makes sure the error bars never go below 0
-  ylower = np.maximum(1e16, cden_data[0,:] - cden_data[1,:])
-  yerr_lower = cden_data[0,:] - ylower
-  
-  # plots points
-  plt.errorbar(radius_data[0,:], cden_data[0,:], xerr=radius_data[1,:], yerr=0, marker=marker, label=label)
+  plt.plot(angle_data[0,:], cden_data[0,:], label=label, marker=marker, color=color)
   plt.semilogy()
 
 def limits_from_field(field):
@@ -316,7 +299,7 @@ if __name__ == '__main__':
         marker = i
         while marker >= len(markers):
             marker -= len(markers)
-        plot_big_angle(angle_data[i], cden_data[i], '%s < b < %s kpc' % \
+        plot_big(angle_data[i], cden_data[i], '%s < b < %s kpc' % \
                     (i*35 + 35, i*35 + 35), colors[color], markers[marker])
       fplot_angle(ion, 'big', fn_head, field)
 
@@ -331,9 +314,9 @@ if __name__ == '__main__':
       
       cden_data, radius_data = big_profile(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
       ion = finish_plot(field, COS_data, fn_head)
-      plot_big_radius(radius_data[0], cden_data[0], '0 < Φ < 30 degrees', colors[0], markers[0])
-      plot_big_radius(radius_data[1], cden_data[1], '30 < Φ < 60 degrees', colors[3], markers[1])
-      plot_big_radius(radius_data[2], cden_data[2], '60 < Φ < 90 degrees', colors[6], markers[2])
+      plot_big(radius_data[0], cden_data[0], '0 < Φ < 30 degrees', colors[0], markers[0])
+      plot_big(radius_data[1], cden_data[1], '30 < Φ < 60 degrees', colors[3], markers[1])
+      plot_big(radius_data[2], cden_data[2], '60 < Φ < 90 degrees', colors[6], markers[2])
       fplot_radius(ion, 'big', fn_head, field)
 
 
