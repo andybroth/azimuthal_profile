@@ -28,7 +28,7 @@ sys.path.insert(0, '/home/andyr/src/frb')
 from get_COS_data import get_COS_data, plot_COS_data
 from radial_profile2 import plot_profile, finish_plot
 
-def make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins, normalize):
+def make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins):
   '''
   Default is angle vs N plot w/ 3 radial bins in legend. normalize should be set
   to true for this to work. To make radius vs N plots, flip all angular and radius
@@ -36,22 +36,15 @@ def make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins, 
   '''
   r_bin_ids = np.digitize(r_arr, r_bins)
   a_bin_ids = np.digitize(a_arr, a_bins)
-  if normalize:
-    radii = [0, 10, 20]
-  else:
-    radii = range(r_n_bins)
 
   profile_data = [np.zeros([3, a_n_bins]) for _ in range(r_n_bins)]
   for a_bin_id in range(a_n_bins):
-    for j, radius in enumerate(radii):
-      if normalize:
-        sample = normalize_by_radius(cdens_arr, r_bin_ids, radius, a_bin_ids, a_bin_id)
-      else:
-        ids = np.logical_and(r_bin_ids == j, a_bin_ids == a_bin_id)
-        sample = cdens_arr[ids]
-      profile_data[j][0,a_bin_id] = np.median(sample)
-      profile_data[j][1,a_bin_id] = np.percentile(sample, 25)
-      profile_data[j][2,a_bin_id] = np.percentile(sample, 75)
+    for r_bin_id in range(r_n_bins):
+      ids = np.logical_and(r_bin_ids == r_bin_id, a_bin_ids == a_bin_id)
+      sample = cdens_arr[ids]
+      profile_data[r_bin_id][0,a_bin_id] = np.median(sample)
+      profile_data[r_bin_id][1,a_bin_id] = np.percentile(sample, 25)
+      profile_data[r_bin_id][2,a_bin_id] = np.percentile(sample, 75)
   return profile_data
 
 def normalize_by_radius(cdens_arr, r_bin_ids, r, a_bin_ids, a_bin_id):
@@ -255,7 +248,7 @@ if __name__ == '__main__':
       r_bins = np.linspace(150, 0, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
 
-      profile_data = make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins, True)
+      profile_data = make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins)
       for i in range(3):
         plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], '%s < b < %s kpc' % \
                     (50*i, 50*i + 50), colors[3*i])
@@ -273,7 +266,7 @@ if __name__ == '__main__':
       r_bins_plot = np.linspace(0, 150, r_n_bins)
 
       # Step through each ion and make plots of radius vs N for 3 radial bins
-      radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins, False)
+      radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
       ion = finish_plot(field, COS_data, fn_head)
       plot_profile(r_bins_plot, radial_data[0], 'Φ < 45 degrees', colors[0])
       plot_profile(r_bins_plot, radial_data[1], 'Φ > 45 degrees', colors[6])
@@ -292,7 +285,7 @@ if __name__ == '__main__':
         r_bins = np.flip(r_bins, 0)
         r_bins_plot = np.linspace(0, 150, r_n_bins)
 
-        radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins, False)
+        radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
         ion = finish_plot(field, COS_data, fn_head)
         angle = 90/a_n_bins
         i=0
