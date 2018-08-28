@@ -56,23 +56,23 @@ def make_off_axis_projection(ds, vec, north_vec, ion_fields, center, width, data
     """
     Use OffAxisProjectionPlot to make projection (cannot specify resolution)
     """
-    log(center)
-    import pdb;pdb.set_trace()
-	p = yt.OffAxisProjectionPlot(ds, vec, ion_fields, center=center, width=width, 
-	                             data_source=data_source, north_vector=north_vec, weight_field=weight_field)
+	log(center)
+	import pdb;pdb.set_trace()
+	p = yt.OffAxisProjectionPlot(ds, vec, ion_fields, center=center, width=width,
+		data_source=data_source, north_vector=north_vec, weight_field=weight_field)
 	p.hide_axes()
-    p.annotate_scale()
-    p.annotate_timestamp(redshift=True)
-    r = radius.in_units('kpc')
-    p.annotate_sphere(center, (r, 'kpc'), circle_args={'color':'white', 'alpha':0.5, 'linestyle':'dashed', 'linewidth':5})
-    for field in ion_fields:
-        p.set_cmap(field, 'dusk')
-        set_image_details(p, field, True)
-        p.set_background_color(field)
-    if dir is None:
-        dir = 'face/'
-    p.save(os.path.join('%s/images' % fn_data, dir))
-    return p.frb
+	p.annotate_scale()
+	p.annotate_timestamp(redshift=True)
+	r = radius.in_units('kpc')
+	p.annotate_sphere(center, (r, 'kpc'), circle_args={'color':'white', 'alpha':0.5, 'linestyle':'dashed', 'linewidth':5})
+	for field in ion_fields:
+		p.set_cmap(field, 'dusk')
+		set_image_details(p, field, True)
+		p.set_background_color(field)
+	if dir is None:
+		dir = 'face/'
+	p.save(os.path.join('%s/images' % fn_data, dir))
+	return p.frb
 
 if __name__ == '__main__':
 	"""
