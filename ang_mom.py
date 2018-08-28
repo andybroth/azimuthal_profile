@@ -129,6 +129,6 @@ if __name__ == '__main__':
 		cdens_file_2.attrs.create('Ang_Mom_Norm', L)
 		cdens_file_1.attrs.create('mass', mass)
 		cdens_file_2.attrs.create('mass', mass)
-		cdens_file_1.attrs.create('val', mag/mass)
-		cdens_file_2.attrs.create('val', mag/mass)
+		cdens_file_1.attrs.create('val', mag/mass[0])
+		cdens_file_2.attrs.create('val', mag/mass[0])
 
