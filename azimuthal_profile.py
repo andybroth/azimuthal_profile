@@ -320,8 +320,11 @@ if __name__ == '__main__':
         color = i
         while color >= len(colors):
           color -= len(colors)
+        marker = i
+        while marker >= len(markers):
+            marker -= len(markers)
         plot_big_angle(angle_data[i], cden_data[i], '%s < b < %s kpc' % \
-                    (i*20 + 20, i*20 + 40), colors[i], markers[i])
+                    (i*20 + 20, i*20 + 40), colors[color], markers[marker])
       fplot_angle(ion, 'big', fn_head, field)
 
       # Makes plot similar to paper of b vs N
