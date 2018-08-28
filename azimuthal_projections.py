@@ -27,6 +27,7 @@ sys.path.insert(0, '/home/andyr/src/frb')
 from yt.utilities.math_utils import ortho_find
 from radial_profile1 import set_image_details, get_amiga_data, smooth_amiga, GizmoDataset, read_amiga_center, read_amiga_rvir, log
 
+'''
 def find_angular_momentum(sp, c):
     """
     Finds the average angular momentum of a sphere of particles around a 
@@ -51,6 +52,7 @@ def find_angular_momentum(sp, c):
     ang_mom = yt.YTArray([x_ang_mom, y_ang_mom, z_ang_mom])
     ang_mom, b1, b2 = ortho_find(ang_mom)
     return ang_mom, b1, b2
+'''
 
 def make_off_axis_projection(ds, vec, north_vec, ion_fields, center, width, data_source, radius, fn_data, weight_field=None, dir=None):
     """
