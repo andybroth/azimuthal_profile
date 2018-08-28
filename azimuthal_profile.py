@@ -309,13 +309,13 @@ if __name__ == '__main__':
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
       a_bins = np.flip(a_bins, 0)
 
-      r_n_bins = 7
-      r_bins = np.linspace(140, 20, r_n_bins, endpoint=False)
+      r_n_bins = 5
+      r_bins = np.linspace(160, 20, r_n_bins)
       r_bins = np.flip(r_bins, 0)
 
       cden_data, angle_data = big_profile(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins)
       ion = finish_plot(field, COS_data, fn_head)
-      plot_big_angle(angle_data[0], cden_data[0], 'b < 40 kpc', colors[0], markers[0])
+      plot_big_angle(angle_data[0], cden_data[0], 'b < 20 kpc', colors[0], markers[0])
       for i in range(1, r_n_bins):
         plot_big_angle(angle_data[i], cden_data[i], '%s < b < %s kpc' % \
                     (i*20 + 20, i*20 + 40), colors[i], markers[i])
