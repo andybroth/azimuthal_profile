@@ -173,6 +173,7 @@ def read_parameter_file(fn):
             mass = file.attrs.get('mass')[0]
             if L/mass > 1*10**-14:
               print(file_name)
+              print(L/mass)
               profile_list.append(file_name)
             file.close()
             i += 1
