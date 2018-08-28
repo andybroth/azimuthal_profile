@@ -291,7 +291,7 @@ if __name__ == '__main__':
 
       cden_data, angle_data = big_profile(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins)
       ion = finish_plot(field, COS_data, fn_head)
-      plot_big_angle(angle_data[0], cden_data[0], 'b < 20 kpc', colors[0], markers[0])
+      plot_big(angle_data[0], cden_data[0], 'b < 20 kpc', colors[0], markers[0])
       for i in range(1, r_n_bins):
         color = i
         while color >= len(colors):
