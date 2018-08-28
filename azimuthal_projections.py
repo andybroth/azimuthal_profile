@@ -57,10 +57,10 @@ def make_off_axis_projection(ds, vec, north_vec, ion_fields, center, width, data
     Use OffAxisProjectionPlot to make projection (cannot specify resolution)
     """
     log(center)
-   	import pdb; pdb.set_trace()
-    p = yt.OffAxisProjectionPlot(ds, vec, ion_fields, center=center, width=width, 
-                                 data_source=data_source, north_vector=north_vec, weight_field=weight_field)
-    p.hide_axes()
+    import pdb;pdb.set_trace()
+	p = yt.OffAxisProjectionPlot(ds, vec, ion_fields, center=center, width=width, 
+	                             data_source=data_source, north_vector=north_vec, weight_field=weight_field)
+	p.hide_axes()
     p.annotate_scale()
     p.annotate_timestamp(redshift=True)
     r = radius.in_units('kpc')
