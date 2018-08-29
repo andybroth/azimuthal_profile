@@ -228,14 +228,14 @@ if __name__ == '__main__':
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
       a_bins = np.flip(a_bins, 0)
 
-      r_n_bins = 30
+      r_n_bins = 3
       r_bins = np.linspace(150, 0, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
 
       profile_data = make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins)
-      for i in range(3):
+      for i in range(r_n_bins):
         plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], '%s < b < %s kpc' % \
-                    (50*i, 50*i + 50), colors[3*i])
+                    (50*i, 50*i + 50), colors[i])
       ion = finish_plot(field, COS_data, fn_head)
       fplot_angle(ion, '', fn_head, field)
 
@@ -256,6 +256,24 @@ if __name__ == '__main__':
       plot_profile(r_bins_plot, radial_data[1], 'Φ > 45 degrees', colors[6])
       fplot_radius(ion, 'short', fn_head, field)
       
+      # makes other plot
+      a_n_bins = 3
+      a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
+      a_bins = np.flip(a_bins, 0)
+
+      r_n_bins = 30
+      r_bins = np.linspace(150, 0, r_n_bins, endpoint=False)
+      r_bins = np.flip(r_bins, 0)
+      r_bins_plot = np.linspace(0, 150, r_n_bins)
+
+      # Step through each ion and make plots of radius vs N for 3 radial bins
+      radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
+      ion = finish_plot(field, COS_data, fn_head)
+      plot_profile(r_bins_plot, radial_data[0], '0 < Φ < 30 degrees', colors[0])
+      plot_profile(r_bins_plot, radial_data[1], '30 < Φ < 60 degrees', colors[1])
+      plot_profile(r_bins_plot, radial_data[2], '60 < Φ < 90 degrees', colors[2])
+      fplot_radius(ion, 'short', fn_head, field)
+
 
       # Test plot, should show much higher density in 75-90 degree bins over
       # 0-15 degree bin
@@ -280,7 +298,7 @@ if __name__ == '__main__':
                       (angle*i, angle*i + angle), colors[3])
         fplot_radius(ion, 'test', fn_head, field)
 
-
+      '''
       # Make plot similar to paper of phi vs N
       a_n_bins = 3
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
@@ -319,5 +337,5 @@ if __name__ == '__main__':
       plot_big(radius_data[1], cden_data[1], '30 < Φ < 60 degrees', colors[3], markers[1])
       plot_big(radius_data[2], cden_data[2], '60 < Φ < 90 degrees', colors[6], markers[2])
       fplot_radius(ion, 'big', fn_head, field)
-
+      '''
 
