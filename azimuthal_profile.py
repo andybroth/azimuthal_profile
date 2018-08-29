@@ -272,7 +272,7 @@ if __name__ == '__main__':
       plot_profile(r_bins_plot, radial_data[0], '0 < Φ < 30 degrees', colors[0])
       plot_profile(r_bins_plot, radial_data[1], '30 < Φ < 60 degrees', colors[1])
       plot_profile(r_bins_plot, radial_data[2], '60 < Φ < 90 degrees', colors[2])
-      fplot_radius(ion, 'short', fn_head, field)
+      fplot_radius(ion, '2', fn_head, field)
 
 
       # Test plot, should show much higher density in 75-90 degree bins over
