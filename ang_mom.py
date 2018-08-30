@@ -16,7 +16,7 @@ from scipy.ndimage import filters
 import ytree
 sys.path.insert(0, '/home/andyr/src/frb')
 from yt.utilities.math_utils import ortho_find
-from radial_profile1 import get_amiga_data, smooth_amiga, log, read_amiga_center
+from radial_profile1 import get_amiga_data, smooth_amiga, log, read_amiga_center, read_amiga_rvir
 
 
 if __name__ == '__main__':
