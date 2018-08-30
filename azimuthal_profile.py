@@ -91,7 +91,7 @@ def fplot_angle(ion, description, fn, field):
   plt.xlim((0,90))
   if limits_from_field(field):
     plt.ylim(limits_from_field(field))
-  plt.legend(title='Radius')
+  plt.legend(title='b/rvir')
   if len(description) > 0:
     print('%s_%s_angle.png' % (ion, description))
     plt.savefig('%s/plots/%s_%s_angle.png' % (fn, ion, description))
@@ -102,15 +102,12 @@ def fplot_angle(ion, description, fn, field):
 
 def fplot_radius(ion, description, fn, field):
   plt.title('%s' % ion)
-  plt.xlabel('Impact Parameter [kpc]')
-  max = 150
-  if description == 'test':
-    max = 50
-  plt.xlim((0,max))
+  plt.xlabel('b/rvir')
+  plt.xlim((0,1))
   if limits_from_field(field):
     plt.ylim(limits_from_field(field))
-  plt.legend(title='Azimuthal Angle')
-  if len(description) > 0 and not description == 'short':
+  plt.legend(title='Azimuthal Angle [degrees]')
+  if len(description) > 0:
     print('%s_%s_radius.png' % (ion, description))
     plt.savefig('%s/plots/%s_%s_radius.png' % (fn, ion, description))
   else:
@@ -169,17 +166,28 @@ def read_parameter_file(fn):
         while not text[i].split() == []: 
             file_name = text[i].split()[0]
             file = h5.File(file_name,'a')
-            L = file.attrs.get('Ang_Mom')
-            mass = file.attrs.get('mass')[0]
-            if L/mass > 1*10**-14:
+            if file.attrs.get('val') > 1.1*10**-14:
               print(file_name)
-              print(L/mass)
+              print(file.attrs.get('val'))
               profile_list.append(file_name)
             file.close()
             i += 1
         profiles[profile_label] = profile_list
         i += 1
     return profiles
+
+def get ds(fn):
+  ions = []
+  ions.append('H I')
+  ions.append('Mg II')
+  ions.append('Si IV')
+  ions.append('C II')
+  ions.append('C III')
+  ions.append('Ne VIII')
+  ions.append('O VI')
+
+  ds = GizmoDataset(fn)
+  trident.add_ion_fields(ds, ions=ions, ftype='gas')
 
 if __name__ == '__main__':
   """
@@ -218,8 +226,14 @@ if __name__ == '__main__':
       for j in range(n_files):
         f = h5.File(v[j], 'r')
         a_arr = np.concatenate((a_arr, f['phi'].value))
-        r_arr = np.concatenate((r_arr, f['radius'].value))
         cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
+        
+        # gets data set to use
+        ds = get_ds(f.attrs.get('fn'))
+        rvir = ds.arr(f.attrs.get('rvir'), 'code_length')
+        new_r = ds.arr(f['radius'].value, 'kpc')
+        new_r /= rvir
+        r_arr = np.concatenate((r_arr, new_r))
       if field == 'Mg_p1_number_density' or field == 'O_p5_number_density':
         cdens_arr *= 6.02 * 10**23
 
