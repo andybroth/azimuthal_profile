@@ -29,6 +29,7 @@ import os.path
 from yt.units.yt_array import \
     YTArray, \
     YTQuantity
+from yt.frontends.gizmo.api import GizmoDataset
 import cmocean
 from scipy.signal import filtfilt, gaussian
 from scipy.ndimage import filters
