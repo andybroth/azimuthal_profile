@@ -24,7 +24,15 @@ import numpy as np
 import trident
 import h5py as h5
 import sys
+import glob
+import os.path
+from yt.units.yt_array import \
+    YTArray, \
+    YTQuantity
 from yt.frontends.gizmo.api import GizmoDataset
+import cmocean
+from scipy.signal import filtfilt, gaussian
+from scipy.ndimage import filters
 import ytree
 
 from matplotlib.colors import LogNorm
