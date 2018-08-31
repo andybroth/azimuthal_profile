@@ -21,33 +21,16 @@ import numpy as np
 import trident
 import h5py as h5
 import sys
-import glob
-import os.path
-from yt.units.yt_array import \
-    YTArray, \
-    YTQuantity
 from yt.frontends.gizmo.api import GizmoDataset
-import cmocean
-from scipy.signal import filtfilt, gaussian
-from scipy.ndimage import filters
 import ytree
-sys.path.insert(0, '/home/andyr/src/frb')
-from yt.utilities.math_utils import ortho_find
-from radial_profile1 import get_amiga_data, smooth_amiga, log, read_amiga_center, read_amiga_rvir
 
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import yt
-import numpy as np
-import h5py as h5
-import sys
 from matplotlib.colors import LogNorm
-import sys
 sys.path.insert(0, '/home/andyr/src/frb')
 from get_COS_data import get_COS_data, plot_COS_data
 from radial_profile2 import plot_profile, finish_plot
-from yt.frontends.gizmo.api import GizmoDataset
 
 def make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins):
   '''
@@ -189,7 +172,7 @@ def read_parameter_file(fn):
             file = h5.File(file_name,'a')
             if file.attrs.get('Ang_Mom')/file.attrs.get('mass')[0] > 1.1*10**-14:
               print(file_name)
-              print(file.attrs.get('val'))
+              print(file.attrs.get('Ang_Mom')/file.attrs.get('mass')[0])
               profile_list.append(file_name)
             file.close()
             i += 1
@@ -205,10 +188,6 @@ def get_ds(fn):
   else:
     filename += fn[12:26]
   filename += 'halo/ahf/halo_00000_smooth.dat'
-  log(filename)
-
-  filename = filename.strip()
-  log(filename)
 
   ions = []
   ions.append('H I')
