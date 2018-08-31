@@ -197,6 +197,8 @@ def get_ds(fn):
   else:
     filename += fn[12:26]
     snapnum = fn[55:58]
+  print(fn)
+  print(snapnum)
   filename += 'output/snapdir_%s/snapshot_%s.0.hdf5' % (snapnum, snapnum)
 
 
