@@ -28,20 +28,20 @@ if __name__ == '__main__':
 	# Loading datasets
 	fn_list = open(sys.argv[1], 'r')
 	fns = fn_list.readlines()
-
+	'''
 	# Import FIRE Data
 	# Read in halo information from amiga output if present
 	amiga_data = get_amiga_data(sys.argv[2])
 	# Smooth the data to remove jumps in centroid
 	amiga_data = smooth_amiga(amiga_data)
-
+	'''
 	for fn in yt.parallel_objects(fns):
 		fn = fn.strip() # Get rid of trailing \n
 		fn_head = fn.split('/')[-1]
 		fn_data = fn.split('/')[-4]
 		cdens_fn_1 = "%s/%s_1_cdens.h5" % (fn_data, fn_head)
 		cdens_fn_2 = "%s/%s_2_cdens.h5" % (fn_data, fn_head)
-
+		'''
 		# Define ions we care about
 		ions = []
 		ions.append('H I')
@@ -72,7 +72,7 @@ if __name__ == '__main__':
 		log('Adding to file')
 		mag = np.linalg.norm(L)
 		L, E1, E2 = ortho_find(L)
-
+		
 		cdens_file_1.attrs.create('Ang_Mom', mag)
 		cdens_file_2.attrs.create('Ang_Mom', mag)
 		cdens_file_1.attrs.create('Ang_Mom_Norm', L)
@@ -83,5 +83,6 @@ if __name__ == '__main__':
 		cdens_file_2.attrs.create('val', mag/mass[0])
 		cdens_file_1.attrs.create('rvir', rvir)
 		cdens_file_2.attrs.create('rvir', rvir)
-		# cdens_file_1.attrs.create('fn', fn)
-		# cdens_file_2.attrs.create('fn', fn)
+		'''
+		cdens_file_1.attrs.create('fn', [fn])
+		cdens_file_2.attrs.create('fn', [fn])
