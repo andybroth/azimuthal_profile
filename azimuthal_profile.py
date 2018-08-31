@@ -193,7 +193,7 @@ def get_ds(fn):
   if '_md' in  fn:
     filename += 'metaldiff/'
     filename += fn[12:28]
-    snapnum = fn[38:41]
+    snapnum = fn[37:40]
   else:
     filename += fn[12:26]
     snapnum = fn[35:38]
