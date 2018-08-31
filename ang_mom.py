@@ -53,6 +53,7 @@ if __name__ == '__main__':
 		ions.append('O VI')
 
 		log("Starting projections for %s" % fn)
+		log(fn)
 		ds = GizmoDataset(fn)
 		trident.add_ion_fields(ds, ions=ions, ftype='gas')
 
