@@ -178,7 +178,7 @@ def read_parameter_file(fn):
         while not text[i].split() == []: 
             file_name = text[i].split()[0]
             file = h5.File(file_name,'a')
-            if file.attrs.get('Ang_Mom')/file.attrs.get('mass')[0] > 1.1*10**-14:
+            if file.attrs.get('Ang_Mom')/file.attrs.get('mass')[0] > 1.2*10**-14:
               print(file_name)
               print(file.attrs.get('Ang_Mom')/file.attrs.get('mass')[0])
               profile_list.append(file_name)
@@ -264,14 +264,14 @@ if __name__ == '__main__':
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
       a_bins = np.flip(a_bins, 0)
 
-      r_n_bins = 3
-      r_bins = np.linspace(150, 0, r_n_bins, endpoint=False)
+      r_n_bins = 4
+      r_bins = np.linspace(1, 0, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
 
       profile_data = make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins)
       for i in range(r_n_bins):
-        plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], '%s < b < %s kpc' % \
-                    (50*i, 50*i + 50), colors[i])
+        plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], '%s < b/rvir < %s' % \
+                    (.25*i, .25*i + .25), colors[i])
       ion = finish_plot(field, COS_data, fn_head)
       fplot_angle(ion, '', fn_head, field)
 
@@ -280,8 +280,8 @@ if __name__ == '__main__':
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
       a_bins = np.flip(a_bins, 0)
 
-      r_n_bins = 30
-      r_bins = np.linspace(150, 0, r_n_bins, endpoint=False)
+      r_n_bins = 20
+      r_bins = np.linspace(1, 0, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
       r_bins_plot = np.linspace(0, 150, r_n_bins)
 
@@ -297,10 +297,10 @@ if __name__ == '__main__':
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
       a_bins = np.flip(a_bins, 0)
 
-      r_n_bins = 30
-      r_bins = np.linspace(150, 0, r_n_bins, endpoint=False)
+      r_n_bins = 20
+      r_bins = np.linspace(1, 0, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
-      r_bins_plot = np.linspace(0, 150, r_n_bins)
+      r_bins_plot = np.linspace(0, 1, r_n_bins)
 
       # Step through each ion and make plots of radius vs N for 3 radial bins
       radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
