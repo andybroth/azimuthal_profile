@@ -15,6 +15,26 @@ snapshot_600_cdens.h5
 
 REMEMBER THE TRAILING WHITESPACE LINE AT THE BOTTOM OF THIS FILE.
 """
+import yt
+yt.enable_parallelism()
+import numpy as np
+import trident
+import h5py as h5
+import sys
+import glob
+import os.path
+from yt.units.yt_array import \
+    YTArray, \
+    YTQuantity
+from yt.frontends.gizmo.api import GizmoDataset
+import cmocean
+from scipy.signal import filtfilt, gaussian
+from scipy.ndimage import filters
+import ytree
+sys.path.insert(0, '/home/andyr/src/frb')
+from yt.utilities.math_utils import ortho_find
+from radial_profile1 import get_amiga_data, smooth_amiga, log, read_amiga_center, read_amiga_rvir
+
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -27,7 +47,7 @@ import sys
 sys.path.insert(0, '/home/andyr/src/frb')
 from get_COS_data import get_COS_data, plot_COS_data
 from radial_profile2 import plot_profile, finish_plot
-from radial_profile1 import GizmoDataset
+from yt.frontends.gizmo.api import GizmoDataset
 
 def make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins):
   '''
@@ -185,6 +205,10 @@ def get_ds(fn):
   else:
     filename += fn[12:26]
   filename += 'halo/ahf/halo_00000_smooth.dat'
+  log(filename)
+
+  filename = filename.strip()
+  log(filename)
 
   ions = []
   ions.append('H I')
@@ -194,7 +218,7 @@ def get_ds(fn):
   ions.append('C III')
   ions.append('Ne VIII')
   ions.append('O VI')
-  print(filename)
+
   ds = GizmoDataset(filename)
   trident.add_ion_fields(ds, ions=ions, ftype='gas')
   return ds
