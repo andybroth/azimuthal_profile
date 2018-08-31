@@ -193,12 +193,10 @@ def get_ds(fn):
   if '_md' in  fn:
     filename += 'metaldiff/'
     filename += fn[12:28]
-    snapnum = fn[67:70]
+    snapnum = fn[38:41]
   else:
     filename += fn[12:26]
-    snapnum = fn[55:58]
-  print(fn)
-  print(snapnum)
+    snapnum = fn[35:38]
   filename += 'output/snapdir_%s/snapshot_%s.0.hdf5' % (snapnum, snapnum)
 
 
