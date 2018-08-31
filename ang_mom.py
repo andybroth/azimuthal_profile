@@ -85,3 +85,5 @@ if __name__ == '__main__':
 		cdens_file_2.attrs.create('rvir', rvir)
 		cdens_file_1.close()
 		cdens_file_2.close()
+		log(fn)
+		log(mag/mass[0])
