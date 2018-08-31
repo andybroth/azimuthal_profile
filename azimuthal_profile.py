@@ -28,7 +28,7 @@ import glob
 import os.path
 from yt.units.yt_array import \
     YTArray, \
-    YTQuantit
+    YTQuantity
 import cmocean
 from scipy.signal import filtfilt, gaussian
 from scipy.ndimage import filters
