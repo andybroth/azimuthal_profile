@@ -177,6 +177,14 @@ def read_parameter_file(fn):
     return profiles
 
 def get ds(fn):
+  filename = '/mnt/data1/GalaxiesOnFire/'
+  if '_md' in  fn:
+    filename += 'metaldiff/'
+    filename += fn[0:16]
+  else:
+    filename += fn[0:14]
+  filename += 'halo/ahf/halo_00000_smooth.dat'
+
   ions = []
   ions.append('H I')
   ions.append('Mg II')
@@ -186,8 +194,9 @@ def get ds(fn):
   ions.append('Ne VIII')
   ions.append('O VI')
 
-  ds = GizmoDataset(fn)
+  ds = GizmoDataset(filename)
   trident.add_ion_fields(ds, ions=ions, ftype='gas')
+  return ds
 
 if __name__ == '__main__':
   """
@@ -227,9 +236,7 @@ if __name__ == '__main__':
         f = h5.File(v[j], 'r')
         a_arr = np.concatenate((a_arr, f['phi'].value))
         cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
-        
-        # gets data set to use
-        ds = get_ds(f.attrs.get('fn'))
+        ds = get_ds(v[j])
         rvir = ds.arr(f.attrs.get('rvir'), 'code_length')
         new_r = ds.arr(f['radius'].value, 'kpc')
         new_r /= rvir
