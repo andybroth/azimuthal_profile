@@ -194,7 +194,7 @@ def get_ds(fn):
   ions.append('C III')
   ions.append('Ne VIII')
   ions.append('O VI')
-
+  print(filename)
   ds = GizmoDataset(filename)
   trident.add_ion_fields(ds, ions=ions, ftype='gas')
   return ds
