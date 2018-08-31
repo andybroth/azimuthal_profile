@@ -176,7 +176,7 @@ def read_parameter_file(fn):
         i += 1
     return profiles
 
-def get ds(fn):
+def get_ds(fn):
   filename = '/mnt/data1/GalaxiesOnFire/'
   if '_md' in  fn:
     filename += 'metaldiff/'
