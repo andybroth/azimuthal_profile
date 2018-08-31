@@ -15,6 +15,9 @@ snapshot_600_cdens.h5
 
 REMEMBER THE TRAILING WHITESPACE LINE AT THE BOTTOM OF THIS FILE.
 """
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 import yt
 yt.enable_parallelism()
 import numpy as np
@@ -24,9 +27,6 @@ import sys
 from yt.frontends.gizmo.api import GizmoDataset
 import ytree
 
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
 sys.path.insert(0, '/home/andyr/src/frb')
 from get_COS_data import get_COS_data, plot_COS_data
