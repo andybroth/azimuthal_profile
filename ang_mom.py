@@ -84,7 +84,7 @@ if __name__ == '__main__':
 		cdens_file_1.attrs.create('rvir', rvir)
 		cdens_file_2.attrs.create('rvir', rvir)
 		'''
-		cdens_file_1.attrs.create('fn', [fn])
-		cdens_file_2.attrs.create('fn', [fn])
+		cdens_file_1.attrs.create('fn', np.array([fn]))
+		cdens_file_2.attrs.create('fn', np.array([fn]))
 		cdens_file_1.close()
 		cdens_file_2.close()
