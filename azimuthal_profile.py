@@ -27,6 +27,7 @@ import sys
 sys.path.insert(0, '/home/andyr/src/frb')
 from get_COS_data import get_COS_data, plot_COS_data
 from radial_profile2 import plot_profile, finish_plot
+from radial_profile1 import GizmoDataset
 
 def make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins):
   '''
