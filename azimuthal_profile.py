@@ -28,8 +28,7 @@ import glob
 import os.path
 from yt.units.yt_array import \
     YTArray, \
-    YTQuantity
-from yt.frontends.gizmo.api import GizmoDataset
+    YTQuantit
 import cmocean
 from scipy.signal import filtfilt, gaussian
 from scipy.ndimage import filters
@@ -193,9 +192,12 @@ def get_ds(fn):
   if '_md' in  fn:
     filename += 'metaldiff/'
     filename += fn[12:28]
+    snapnum = fn[67:70]
   else:
     filename += fn[12:26]
-  filename += 'halo/ahf/halo_00000_smooth.dat'
+    snapnum = fn[55:58]
+  filename += 'output/snapdir_%s/snapshot_%s.0.hdf5' % snapnum
+
 
   ions = []
   ions.append('H I')
