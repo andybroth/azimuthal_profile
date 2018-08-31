@@ -60,10 +60,10 @@ if __name__ == '__main__':
 		log("Reading amiga center for halo in %s" % fn)
 		c = read_amiga_center(amiga_data, fn, ds)
 		rvir = read_amiga_rvir(amiga_data, fn, ds)
-
+		'''
 		cdens_file_1 = h5.File(cdens_fn_1, 'a')
 		cdens_file_2 = h5.File(cdens_fn_2, 'a')
-
+		'''
 		log('Finding Angular Momentum of Galaxy')
 		sp = ds.sphere(c, (15, 'kpccm'))
 		L = sp.quantities.angular_momentum_vector(use_gas=False, use_particles=True, particle_type='PartType0')
@@ -86,3 +86,5 @@ if __name__ == '__main__':
 		'''
 		cdens_file_1.attrs.create('fn', [fn])
 		cdens_file_2.attrs.create('fn', [fn])
+		cdens_file_1.close()
+		cdens_file_2.close()
