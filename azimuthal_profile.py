@@ -181,9 +181,9 @@ def get_ds(fn):
   filename = '/mnt/data1/GalaxiesOnFire/'
   if '_md' in  fn:
     filename += 'metaldiff/'
-    filename += fn[0:16]
+    filename += fn[12:28]
   else:
-    filename += fn[0:14]
+    filename += fn[12:26]
   filename += 'halo/ahf/halo_00000_smooth.dat'
 
   ions = []
