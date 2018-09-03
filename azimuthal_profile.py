@@ -177,7 +177,7 @@ def read_parameter_file(fn):
         while not text[i].split() == []: 
             file_name = text[i].split()[0]
             file = h5.File(file_name,'a')
-            if file.attrs.get('val2') > 2*10**-12:
+            if file.attrs.get('val2') > 2.5*10**-12:
               if '_1_' in file_name:
                 print(file_name)
                 print(file.attrs.get('val2'))
