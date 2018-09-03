@@ -177,9 +177,9 @@ def read_parameter_file(fn):
         while not text[i].split() == []: 
             file_name = text[i].split()[0]
             file = h5.File(file_name,'a')
-            if file.attrs.get('Ang_Mom')/file.attrs.get('mass')[0] > 1.2*10**-14:
+            if file.attrs.get('val') > 0:
               print(file_name)
-              print(file.attrs.get('Ang_Mom')/file.attrs.get('mass')[0])
+              print(file.attrs.get('val'))
               profile_list.append(file_name)
             file.close()
             i += 1
