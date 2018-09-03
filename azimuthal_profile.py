@@ -179,7 +179,7 @@ def read_parameter_file(fn):
             file = h5.File(file_name,'a')
             if file.attrs.get('val2') > 2*10**-12:
               print(file_name)
-              print(file.attrs.get('val'))
+              print(file.attrs.get('val2'))
               profile_list.append(file_name)
             file.close()
             i += 1
