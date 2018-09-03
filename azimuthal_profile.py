@@ -140,9 +140,9 @@ def limits_from_field(field):
   if field == 'H_number_density':
     return (1e13, 1e20)
   elif field == 'O_p5_number_density':
-    return (2e16, 5e17)
+    return (1e15, 1e19)
   elif field == 'Mg_p1_number_density':
-    return (1e8, 1e18)
+    return (1e6, 1e18)
   elif field == 'density':
     return (1e-5, 1e-1)
   elif field == 'temperature':
@@ -150,13 +150,13 @@ def limits_from_field(field):
   elif field == 'C_p1_number_density':
     return (1e-12, 1e-3)
   elif field == 'C_p2_number_density':
-    return (1e-9, 1e-4) 
+    return (1e-12, 1e-4) 
   elif field == 'Ne_p7_number_density':
-    return (5e-9, 1e-7)
-  elif field == 'Si_p3_number_density':
     return (1e-10, 1e-6)
+  elif field == 'Si_p3_number_density':
+    return (1e-14, 1e-6)
   elif field == 'metal_density':
-    return (1e-7, 1e-5)
+    return (1e-9, 1e-5)
   else:
     return None
 
