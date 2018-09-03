@@ -52,7 +52,7 @@ if __name__ == '__main__':
 		ions.append('Ne VIII')
 		ions.append('O VI')
 
-		log("Starting projections for %s" % fn)
+		log("Loading dataset for %s" % fn)
 		ds = GizmoDataset(fn)
 		trident.add_ion_fields(ds, ions=ions, ftype='gas')
 
@@ -61,8 +61,8 @@ if __name__ == '__main__':
 		c = read_amiga_center(amiga_data, fn, ds)
 		rvir = read_amiga_rvir(amiga_data, fn, ds)
 		
-		cdens_file_1 = h5.File(cdens_fn_1, 'a')
-		cdens_file_2 = h5.File(cdens_fn_2, 'a')
+		cdens_file_1 = h5.File(cdens_fn_1, 'r+')
+		cdens_file_2 = h5.File(cdens_fn_2, 'r+')
 		
 		log('Finding Angular Momentum of Galaxy')
 		sp = ds.sphere(c, (15, 'kpccm'))
@@ -74,7 +74,7 @@ if __name__ == '__main__':
 		L, E1, E2 = ortho_find(L)
 		
 		val = mag/(mass[0]*rvir.in_units('kpc'))
-		
+
 		cdens_file_1.attrs.create('Ang_Mom', mag)
 		cdens_file_2.attrs.create('Ang_Mom', mag)
 		cdens_file_1.attrs.create('Ang_Mom_Norm', L)
