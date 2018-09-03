@@ -73,14 +73,16 @@ if __name__ == '__main__':
 		mag = np.linalg.norm(L)
 		L, E1, E2 = ortho_find(L)
 		
+		val = mag/(mass[0]*rvir.in_units('kpc'))
+		
 		cdens_file_1.attrs.create('Ang_Mom', mag)
 		cdens_file_2.attrs.create('Ang_Mom', mag)
 		cdens_file_1.attrs.create('Ang_Mom_Norm', L)
 		cdens_file_2.attrs.create('Ang_Mom_Norm', L)
 		cdens_file_1.attrs.create('mass', mass)
 		cdens_file_2.attrs.create('mass', mass)
-		cdens_file_1.attrs.create('val', mag/(mass[0]*rvir.in_units('kpc')))
-		cdens_file_2.attrs.create('val', mag/(mass[0]*rvir.in_units('kpc')))
+		cdens_file_1.attrs.create('val', val)
+		cdens_file_2.attrs.create('val', val)
 		cdens_file_1.attrs.create('rvir', rvir.in_units('kpc'))
 		cdens_file_2.attrs.create('rvir', rvir.in_units('kpc'))
 		cdens_file_1.close()
