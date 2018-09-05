@@ -156,7 +156,7 @@ def limits_from_field(field):
   elif field == 'Si_p3_number_density':
     return (1e-14, 1e-6)
   elif field == 'metal_density':
-    return (1e-9, 1e-5)
+    return (1e-8, 1e-5)
   else:
     return None
 
