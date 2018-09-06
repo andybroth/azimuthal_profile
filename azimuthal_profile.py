@@ -177,10 +177,10 @@ def read_parameter_file(fn):
         while not text[i].split() == []: 
             file_name = text[i].split()[0]
             file = h5.File(file_name,'a')
-            if file.attrs.get('val') > 1.2*10**-14:
+            if file.attrs.get('Ang_Mom') > 0:
               if '_1_' in file_name:
                 print(file_name)
-                print(file.attrs.get('val'))
+                print(file.attrs.get('Ang_Mom'))
               profile_list.append(file_name)
             file.close()
             i += 1
