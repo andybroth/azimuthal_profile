@@ -241,7 +241,8 @@ if __name__ == '__main__':
   ion_fields.remove('phi')
   f.close()
 
-  fig = GridFigure(2, 5)
+  fig = GridFigure(2, 5, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, right_buffer=0.02, vertical_buffer=0.01, horizontal_buffer=0.01, figsize=(8,8))
+
 
   # Step through each ion and make plots of azimuthal angle vs N
   for field in ion_fields:
