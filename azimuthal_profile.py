@@ -227,11 +227,11 @@ if __name__ == '__main__':
   threshold = {'H_number_density' : 10**16, 'O_p5_number_density':1e14, 'density':1e-4}
 
   # Color cycling
-  colors = ['yellow', 'blue', 'red']
+  colors = ['yellow', 'blue', 'red', 'green']
   '''
   'green'
   'cyan'
-  'blac'
+  'black'
   '''
   markers = ['o', '^', 's']
 
