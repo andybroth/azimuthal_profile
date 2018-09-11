@@ -206,8 +206,8 @@ if __name__ == '__main__':
 		dirs = ['20n/', '10n/', '10/', '20/']
 
 		for i, angle in enumerate(inclines):
-			cdens_file_1 = dirs[i] + cdens_file_1
-			cdens_file_2 = dirs[i] + cdens_file_2
+			cdens_fn_1 = dirs[i] + cdens_fn_1
+			cdens_fn_2 = dirs[i] + cdens_fn_2
 			cdens_file_1 = h5.File(cdens_fn_1, 'a')
 			cdens_file_2 = h5.File(cdens_fn_2, 'a')
 
