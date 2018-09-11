@@ -247,7 +247,7 @@ if __name__ == '__main__':
   f.close()
 
   fig = GridFigure(2, 5, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
-    right_buffer=0.02, vertical_buffer=0.01, horizontal_buffer=0.01, figsize=(20,8))
+    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,8))
 
 
   # Step through each ion and make plots of azimuthal angle vs N
@@ -286,7 +286,7 @@ if __name__ == '__main__':
   plt.savefig('%s/fig1.png' % fn_head)
 
   fig = GridFigure(2, 5, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
-    right_buffer=0.02, vertical_buffer=0.01, horizontal_buffer=0.01, figsize=(20,8))
+    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,8))
 
   for i, field in enumerate(ion_fields):
     for c, (k,v) in enumerate(profiles_dict.items()):
@@ -324,7 +324,7 @@ if __name__ == '__main__':
   plt.savefig('%s/fig2.png' % fn_head)
   
   fig = GridFigure(2, 5, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
-    right_buffer=0.02, vertical_buffer=0.01, horizontal_buffer=0.01, figsize=(20,8))
+    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,8))
 
   for i, field in enumerate(ion_fields):
     for c, (k,v) in enumerate(profiles_dict.items()):
