@@ -71,7 +71,7 @@ def make_off_axis_projection(ds, vec, north_vec, ion_fields, center, width, data
 		p.set_background_color(field)
 	if dir is None:
 		dir = 'face/'
-	p.save(os.path.join('%s/images' % fn_data, dir))
+	p.save(os.path.join('%s/' % fn_data, dir))
 	return p.frb
 
 def rotate(theta, E1, E2):
@@ -211,8 +211,8 @@ if __name__ == '__main__':
 			cdens_file_1 = h5.File(cdens_fn_1, 'a')
 			cdens_file_2 = h5.File(cdens_fn_2, 'a')
 
-			dir1 = dirs[i] + '1/'
-			dir1 = dirs[i] + '2/'
+			dir1 = dirs[i] + 'images/1/'
+			dir1 = dirs[i] + 'images/2/'
 
 			E1 = rotate(angle, v1, v2)
 			E2 = rotate(angle, v2, v1)
