@@ -35,9 +35,6 @@ from scipy.ndimage import filters
 import ytree
 
 from matplotlib.colors import LogNorm
-sys.path.insert(0, '/home/andyr/src/frb')
-from get_COS_data import get_COS_data, plot_COS_data
-from radial_profile2 import plot_profile, finish_plot
 from grid_figure import GridFigure
 
 def make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins):
@@ -84,8 +81,6 @@ def fplot_angle(ion, description, fn, field, ax):
   ax.title('%s' % ion)
   ax.xlabel('Azimuthal Angle [degrees]')
   ax.xlim((0,90))
-  if limits_from_field(field):
-    ax.ylim(limits_from_field(field))
   ax.legend(title='b/rvir')
   # if len(description) > 0:
   #   print('%s_%s_angle.png' % (ion, description))
@@ -99,8 +94,6 @@ def fplot_radius(ion, description, fn, field, ax):
   ax.title('%s' % ion)
   ax.xlabel('b/rvir')
   ax.xlim((0,1))
-  if limits_from_field(field):
-    ax.ylim(limits_from_field(field))
   ax.legend(title='Azimuthal Angle [degrees]')
   # if len(description) > 0:
   #   print('%s_%s_radius.png' % (ion, description))
@@ -136,38 +129,89 @@ def limits_from_field(field):
     return None
 
 def read_parameter_file(fn):
-    """
-    read the parameter file and return a dictionary with pairs of:
+  """
+  read the parameter file and return a dictionary with pairs of:
 
-    label : [fn1, fn2, fn3]
-    """
-    f = open(fn, 'r')
-    profiles = {}
-    text = f.readlines()
-    i = 0
-    while i < len(text):
-        profile_label = text[i].split()[0][:-1]
-        i += 1
-        profile_list = []
-        while not text[i].split() == []: 
-            file_name = text[i].split()[0]
-            file = h5.File(file_name,'a')
-            if file.attrs.get('Ang_Mom') > 3*10**29:
-              if '_1_' in file_name:
-                print(file_name)
-                print(file.attrs.get('Ang_Mom'))
-              profile_list.append(file_name)
-            file.close()
-            i += 1
-        profiles[profile_label] = profile_list
-        i += 1
-    return profiles
+  label : [fn1, fn2, fn3]
+  """
+  f = open(fn, 'r')
+  profiles = {}
+  text = f.readlines()
+  i = 0
+  while i < len(text):
+      profile_label = text[i].split()[0][:-1]
+      i += 1
+      profile_list = []
+      while not text[i].split() == []: 
+          file_name = text[i].split()[0]
+          file = h5.File(file_name,'a')
+          if file.attrs.get('Ang_Mom') > 3*10**29:
+            if '_1_' in file_name:
+              print(file_name)
+              print(file.attrs.get('Ang_Mom'))
+            profile_list.append(file_name)
+          file.close()
+          i += 1
+      profiles[profile_label] = profile_list
+      i += 1
+  return profiles
+
+def plot_profile(r_bins, profile_data, label, color, ax):
+  '''
+  Takes data from profiles and creates plot that is a part of the larger
+  plot image
+  '''
+  ax.semilogy(r_bins, profile_data[0,:], label=label, color=color, linestyle='dashed', linewidth=4)  
+  ax.fill_between(r_bins, profile_data[1,:], profile_data[2,:], facecolor=color, alpha=0.2)
+
+def finish_plot(field, ax):
+  if limits_from_field(field):
+    ax.ylim(limits_from_field(field))
+  ylabel = None
+  if field == 'H_number_density':
+    ion = 'HI'
+  elif field == 'Mg_p1_number_density':
+    ion = 'MgII'
+  elif field == 'Si_p1_number_density':
+    ion = 'SiII'
+  elif field == 'Si_p2_number_density':
+    ion = 'SiIII'
+  elif field == 'Si_p3_number_density':
+    ion = 'SiIV'
+  elif field == 'N_p1_number_density':
+    ion = 'NII'
+  elif field == 'N_p2_number_density':
+    ion = 'NIII'
+  elif field == 'N_p4_number_density':
+    ion = 'NV'
+  elif field == 'C_p1_number_density':
+    ion = 'CII'
+  elif field == 'C_p2_number_density':
+    ion = 'CIII'
+  elif field == 'Ne_p7_number_density':
+    ion = 'NeVIII'
+  elif field == 'O_p5_number_density':
+    ion = 'OVI'
+  elif field == 'density':
+    ion = 'density'
+    ylabel = "Projected Density"
+  elif field == 'temperature':
+    ion = 'temperature'
+    ylabel = ion
+  elif field == 'metal_density':
+    ion = 'metal_density'
+    ylabel = "Projected Metal Density"
+  elif field == 'O_nuclei_density':
+    ion = 'oxygen'
+    ylabel = "Projected Oxygen Density"
+  else:
+    sys.exit('Unidentified Field.')
+  if not ylabel:
+    ylabel = "N$_{%s}$ [cm$^{-2}$]" % ion
+  ax.ylabel(ylabel)
 
 ''''
 Things to fix to make correct images:
-- plot_profile()
-    Make it use ax instead of plt
-
 - Fix titles/labels
     Won't be sure how it all works until I run it for the first time
 '''
@@ -179,10 +223,6 @@ if __name__ == '__main__':
   """
 
   threshold = {'H_number_density' : 10**16, 'O_p5_number_density':1e14, 'density':1e-4}
-
-  # # Get observational data from file
-  # COS_data = get_COS_data()
-  COS_data = ""
 
   # Color cycling
   colors = 3*['black', 'cyan', 'green', 'magenta', 'yellow', 'blue', 'red']
@@ -231,7 +271,7 @@ if __name__ == '__main__':
       for i in range(r_n_bins):
         plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], '%s < b/rvir < %s' % \
                     (.25*i, .25*i + .25), colors[i], ax)
-      ion = finish_plot(field, COS_data, fn_head)
+      ion = finish_plot(field, ax)
       fplot_angle(ion, '', fn_head, field, ax)
 
   plt.savefig('fig1.png')
@@ -266,7 +306,7 @@ if __name__ == '__main__':
       # Step through each ion and make plots of radius vs N for 3 radial bins
       ax = fig[c]
       radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
-      ion = finish_plot(field, COS_data, fn_head)
+      ion = finish_plot(field, ax)
       plot_profile(r_bins_plot, radial_data[0], 'Φ < 45 degrees', colors[0], ax)
       plot_profile(r_bins_plot, radial_data[1], 'Φ > 45 degrees', colors[6], ax)
       fplot_radius(ion, 'short', fn_head, field, ax)
@@ -303,7 +343,7 @@ if __name__ == '__main__':
       # Step through each ion and make plots of radius vs N for 3 radial bins
       ax = fig[c]
       radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
-      ion = finish_plot(field, COS_data, fn_head)
+      ion = finish_plot(field, ax)
       plot_profile(r_bins_plot, radial_data[0], '0 < Φ < 30 degrees', colors[0], ax)
       plot_profile(r_bins_plot, radial_data[1], '30 < Φ < 60 degrees', colors[1], ax)
       plot_profile(r_bins_plot, radial_data[2], '60 < Φ < 90 degrees', colors[2], ax)
@@ -339,7 +379,7 @@ if __name__ == '__main__':
         r_bins_plot = np.linspace(0, 1, r_n_bins)
 
         radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
-        ion = finish_plot(field, COS_data, fn_head)
+        ion = finish_plot(field, plt)
         angle = 90/a_n_bins
         i=0
         plot_profile(r_bins_plot, radial_data[i], '%s < Φ < %s degrees' % \
