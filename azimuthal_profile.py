@@ -351,6 +351,8 @@ if __name__ == '__main__':
 
   plt.savefig('%s/fig3.png' % fn_head)
 
+
+  '''
   for field in ion_fields:
     for c, (k,v) in enumerate(profiles_dict.items()):
       n_files = len(v)
@@ -390,5 +392,5 @@ if __name__ == '__main__':
         fplot_radius(ion, 'test', fn_head, field, plt)
         plt.savefig('%s/test_plot.png' % fn_head)
         plt.close()
-
+    '''
 
