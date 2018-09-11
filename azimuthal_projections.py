@@ -92,7 +92,7 @@ def rotate(theta, E1, E2):
 	R[2][0] = z * x * (1 - np.cos(theta)) - y * np.sin(theta)
 	R[2][1] = z * y * (1 - np.cos(theta)) + x * np.sin(theta)
 	R[2][2] = np.cos(theta) + z**2 * (1 - np.cos(theta))
-	return R*E1
+	return (R*E1)[[0,1,2],[0,0,0]]
 
 if __name__ == '__main__':
 	"""
@@ -114,6 +114,9 @@ if __name__ == '__main__':
 	# Smooth the data to remove jumps in centroid
 	amiga_data = smooth_amiga(amiga_data)
 
+	dir1 = '1/'
+	dir2 = '2/'
+
 	for fn in yt.parallel_objects(fns):
 		fn = fn.strip() # Get rid of trailing \n
 		fn_head = fn.split('/')[-1]
@@ -125,9 +128,9 @@ if __name__ == '__main__':
 		ions = []
 		ion_fields = []
 		full_ion_fields = []
-		# ions.append('H I')
-		# ion_fields.append('H_number_density')
-		# full_ion_fields.append(('gas', 'H_number_density'))
+		ions.append('H I')
+		ion_fields.append('H_number_density')
+		full_ion_fields.append(('gas', 'H_number_density'))
 		# ions.append('Mg II')
 		# ion_fields.append('Mg_p1_number_density')
 		# full_ion_fields.append(('gas', 'Mg_p1_number_density'))
@@ -191,81 +194,90 @@ if __name__ == '__main__':
 		c = read_amiga_center(amiga_data, fn, ds)
 		rvir = read_amiga_rvir(amiga_data, fn, ds)
 
-		cdens_file_1 = h5.File(cdens_fn_1, 'a')
-		cdens_file_2 = h5.File(cdens_fn_2, 'a')
-
 		# Create box around galaxy so we're only sampling galaxy out to 1 Mpc
 		one = ds.arr([.5, .5, .5], 'Mpc')
 		box = ds.box(c-one, c+one)
 
-		# Identify the radius from the center of each pixel (in sim units)
-		px, py = np.mgrid[-width/2:width/2:res*1j, -width/2:width/2:res*1j]	
-		radius = (px**2.0 + py**2.0)**0.5
-		if "radius" not in cdens_file_1.keys():
-			cdens_file_1.create_dataset("radius", data=radius.ravel())
-
-		# Finds azimuthal angle for each pixel
-		phi = np.abs(np.arctan(py / px))
-
-		phi *= 180 / np.pi
-		if "phi" not in cdens_file_1.keys():
-			cdens_file_1.create_dataset("phi", data=phi.ravel())
-
 		log('Finding Angular Momentum of Galaxy')
 		sp = ds.sphere(c, (15, 'kpc'))
 		L = sp.quantities.angular_momentum_vector(use_gas=False, use_particles=True, particle_type='PartType0')
-		L, E1, E2 = ortho_find(L)
-		
-		log('Generating Edge on Projections with 1st vec')
-		log('Ion Fields')
-		frb = make_off_axis_projection(ds, E1, L, full_ion_fields, \
-		                           c, width, box, rvir, fn_data, dir='1/')
-		
-		for i, ion_field in enumerate(ion_fields):
-			dset = "%s/%s" % (ion_field, 'edge')
-			if dset not in cdens_file_1.keys():
-			    cdens_file_1.create_dataset(dset, data=frb[full_ion_fields[i]].ravel())
-			    cdens_file_1.flush()
-		
-		log('Other fields')
+		L, v1, v2 = ortho_find(L)
+		inclines = [-20, -10, 10, 20]
+		dirs = ['20n/', '10n/', '10/', '20/']
 
-		frb = make_off_axis_projection(ds, E1, L, full_other_fields, \
-			                           c, width, box, rvir, fn_data, weight_field=('gas', 'density'), dir='1/')
-		for i, other_field in enumerate(other_fields):
-			dset = "%s/%s" % (other_field, 'edge')
-			if dset not in cdens_file_1.keys():
-				cdens_file_1.create_dataset(dset, data=frb[full_other_fields[i]].ravel())
-				cdens_file_1.flush()
-		cdens_file_1.close()
+		for i, angle in enumerate(inclines):
+			cdens_file_1 = dirs[i] + cdens_file_1
+			cdens_file_2 = dirs[i] + cdens_file_2
+			cdens_file_1 = h5.File(cdens_fn_1, 'a')
+			cdens_file_2 = h5.File(cdens_fn_2, 'a')
 
-		
-		# Identify the radius from the center of each pixel (in sim units)
-		if "radius" not in cdens_file_2.keys():
-			cdens_file_2.create_dataset("radius", data=radius.ravel())
+			E1 = rotate(angle, v1, v2)
+			E2 = rotate(angle, v2, v1)
 
-		# Finds azimuthal angle for each pixel
-		if "phi" not in cdens_file_2.keys():
-			cdens_file_2.create_dataset("phi", data=phi.ravel())
+			# Identify the radius from the center of each pixel (in sim units)
+			px, py = np.mgrid[-width/2:width/2:res*1j, -width/2:width/2:res*1j]	
+			radius = (px**2.0 + py**2.0)**0.5
+			if "radius" not in cdens_file_1.keys():
+				cdens_file_1.create_dataset("radius", data=radius.ravel())
 
-		log('Generating Edge on Projections with 2nd vec')
-		log('Ion Fields')
-		frb = make_off_axis_projection(ds, E2, L, full_ion_fields, \
-		                           c, width, box, rvir, fn_data, dir='2/')
-		
-		for i, ion_field in enumerate(ion_fields):
-			dset = "%s/%s" % (ion_field, 'edge')
-			if dset not in cdens_file_2.keys():
-			    cdens_file_2.create_dataset(dset, data=frb[full_ion_fields[i]].ravel())
-			    cdens_file_2.flush()
-		
-		log('Other fields')
+			# Finds azimuthal angle for each pixel
+			phi = np.abs(np.arctan(py / px))
 
-		frb = make_off_axis_projection(ds, E2, L, full_other_fields, \
-			                           c, width, box, rvir, fn_data, weight_field=('gas', 'density'), dir='2/')
-		for i, other_field in enumerate(other_fields):
-			dset = "%s/%s" % (other_field, 'edge')
-			if dset not in cdens_file_2.keys():
-				cdens_file_2.create_dataset(dset, data=frb[full_other_fields[i]].ravel())
-				cdens_file_2.flush()
-		cdens_file_2.close()
+			phi *= 180 / np.pi
+			if "phi" not in cdens_file_1.keys():
+				cdens_file_1.create_dataset("phi", data=phi.ravel())
+
+
+			log('Generating Edge on Projections with 1st vec')
+			log('Ion Fields')
+			frb = make_off_axis_projection(ds, E1, L, full_ion_fields, \
+			                           c, width, box, rvir, fn_data, dir=dir1)
+			
+			for i, ion_field in enumerate(ion_fields):
+				dset = "%s/%s" % (ion_field, 'edge')
+				if dset not in cdens_file_1.keys():
+				    cdens_file_1.create_dataset(dset, data=frb[full_ion_fields[i]].ravel())
+				    cdens_file_1.flush()
+			
+			log('Other fields')
+
+			frb = make_off_axis_projection(ds, E1, L, full_other_fields, \
+				                           c, width, box, rvir, fn_data, weight_field=('gas', 'density'), dir=dir1)
+			for i, other_field in enumerate(other_fields):
+				dset = "%s/%s" % (other_field, 'edge')
+				if dset not in cdens_file_1.keys():
+					cdens_file_1.create_dataset(dset, data=frb[full_other_fields[i]].ravel())
+					cdens_file_1.flush()
+			cdens_file_1.close()
+
+			
+			# Identify the radius from the center of each pixel (in sim units)
+			if "radius" not in cdens_file_2.keys():
+				cdens_file_2.create_dataset("radius", data=radius.ravel())
+
+			# Finds azimuthal angle for each pixel
+			if "phi" not in cdens_file_2.keys():
+				cdens_file_2.create_dataset("phi", data=phi.ravel())
+
+			log('Generating Edge on Projections with 2nd vec')
+			log('Ion Fields')
+			frb = make_off_axis_projection(ds, E2, L, full_ion_fields, \
+			                           c, width, box, rvir, fn_data, dir=dir2)
+			
+			for i, ion_field in enumerate(ion_fields):
+				dset = "%s/%s" % (ion_field, 'edge')
+				if dset not in cdens_file_2.keys():
+				    cdens_file_2.create_dataset(dset, data=frb[full_ion_fields[i]].ravel())
+				    cdens_file_2.flush()
+			
+			log('Other fields')
+
+			frb = make_off_axis_projection(ds, E2, L, full_other_fields, \
+				                           c, width, box, rvir, fn_data, weight_field=('gas', 'density'), dir=dir2)
+			for i, other_field in enumerate(other_fields):
+				dset = "%s/%s" % (other_field, 'edge')
+				if dset not in cdens_file_2.keys():
+					cdens_file_2.create_dataset(dset, data=frb[full_other_fields[i]].ravel())
+					cdens_file_2.flush()
+			cdens_file_2.close()
 		
