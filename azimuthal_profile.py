@@ -274,7 +274,7 @@ if __name__ == '__main__':
       ion = finish_plot(field, ax)
       fplot_angle(ion, '', fn_head, field, ax)
 
-  plt.savefig('fig1.png')
+  plt.savefig('%s/fig1.png' % fn_head)
 
   fig = GridFigure(2, 5)
 
@@ -311,7 +311,7 @@ if __name__ == '__main__':
       plot_profile(r_bins_plot, radial_data[1], 'Φ > 45 degrees', colors[6], ax)
       fplot_radius(ion, 'short', fn_head, field, ax)
 
-  plt.savefig('fig2.png')
+  plt.savefig('%s/fig2.png' % fn_head)
   
   fig = GridFigure(2, 5)
 
@@ -349,7 +349,7 @@ if __name__ == '__main__':
       plot_profile(r_bins_plot, radial_data[2], '60 < Φ < 90 degrees', colors[2], ax)
       fplot_radius(ion, '2', fn_head, field, ax)
 
-  plt.savefig('fig3.png')
+  plt.savefig('%s/fig3.png' % fn_head)
 
   for field in ion_fields:
     for c, (k,v) in enumerate(profiles_dict.items()):
@@ -388,7 +388,7 @@ if __name__ == '__main__':
         plot_profile(r_bins_plot, radial_data[i], '%s < Φ < %s degrees' % \
                       (angle*i, angle*i + angle), colors[3], plt)
         fplot_radius(ion, 'test', fn_head, field, plt)
-        plt.savefig('test_plot.png')
+        plt.savefig('%s/test_plot.png' % fn_head)
         plt.close()
 
 
