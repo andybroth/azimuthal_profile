@@ -81,7 +81,8 @@ def fplot_angle(ion, description, fn, field, ax):
   # ax.title('%s' % ion)
   ax.set_xlabel('Azimuthal Angle [degrees]')
   ax.set_xlim((0,90))
-  ax.legend(title='b/rvir')
+  # ax.legend(title='b/rvir')
+  
   # if len(description) > 0:
   #   print('%s_%s_angle.png' % (ion, description))
   #   # ax.savefig('%s/plots/%s_%s_angle.png' % (fn, ion, description))
@@ -94,7 +95,8 @@ def fplot_radius(ion, description, fn, field, ax):
   # ax.title('%s' % ion)
   ax.set_xlabel('b/rvir')
   ax.set_xlim((0,1))
-  ax.legend(title='Azimuthal Angle [degrees]')
+  # ax.legend(title='Azimuthal Angle [degrees]')
+  
   # if len(description) > 0:
   #   print('%s_%s_radius.png' % (ion, description))
   #   ax.savefig('%s/plots/%s_%s_radius.png' % (fn, ion, description))
