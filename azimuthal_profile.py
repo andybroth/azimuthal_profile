@@ -171,29 +171,29 @@ def finish_plot(field, ax):
     ax.set_ylim(limits_from_field(field))
   ylabel = None
   if field == 'H_number_density':
-    ion = 'HI'
+    ion = 'H I'
   elif field == 'Mg_p1_number_density':
-    ion = 'MgII'
+    ion = 'Mg II'
   elif field == 'Si_p1_number_density':
-    ion = 'SiII'
+    ion = 'Si II'
   elif field == 'Si_p2_number_density':
-    ion = 'SiIII'
+    ion = 'Si III'
   elif field == 'Si_p3_number_density':
-    ion = 'SiIV'
+    ion = 'Si IV'
   elif field == 'N_p1_number_density':
-    ion = 'NII'
+    ion = 'N II'
   elif field == 'N_p2_number_density':
-    ion = 'NIII'
+    ion = 'N III'
   elif field == 'N_p4_number_density':
-    ion = 'NV'
+    ion = 'N V'
   elif field == 'C_p1_number_density':
-    ion = 'CII'
+    ion = 'C II'
   elif field == 'C_p2_number_density':
-    ion = 'CIII'
+    ion = 'C III'
   elif field == 'Ne_p7_number_density':
-    ion = 'NeVIII'
+    ion = 'Ne VIII'
   elif field == 'O_p5_number_density':
-    ion = 'OVI'
+    ion = 'O VI'
   elif field == 'density':
     ion = 'density'
     ylabel = "Projected Density"
@@ -209,7 +209,7 @@ def finish_plot(field, ax):
   else:
     sys.exit('Unidentified Field.')
   if not ylabel:
-    ylabel = "N$_{%s}$ [cm$^{-2}$]" % ion
+    ylabel = "%s Column Density [cm$^{-2}$]" % ion
   ax.set_ylabel(ylabel)
 
 ''''
@@ -227,7 +227,12 @@ if __name__ == '__main__':
   threshold = {'H_number_density' : 10**16, 'O_p5_number_density':1e14, 'density':1e-4}
 
   # Color cycling
-  colors = 3*['black', 'cyan', 'green', 'magenta', 'yellow', 'blue', 'red']
+  colors = ['yellow', 'blue', 'red']
+  '''
+  'green'
+  'cyan'
+  'blac'
+  '''
   markers = ['o', '^', 's']
 
   fn_head = sys.argv[1].split('.')[0][:-11]
@@ -313,7 +318,7 @@ if __name__ == '__main__':
       radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
       ion = finish_plot(field, ax)
       plot_profile(r_bins_plot, radial_data[0], 'Φ < 45 degrees', colors[0], ax)
-      plot_profile(r_bins_plot, radial_data[1], 'Φ > 45 degrees', colors[6], ax)
+      plot_profile(r_bins_plot, radial_data[1], 'Φ > 45 degrees', colors[1], ax)
       fplot_radius(ion, 'short', fn_head, field, ax)
 
   plt.savefig('%s/fig2.png' % fn_head)
