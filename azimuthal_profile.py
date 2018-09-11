@@ -78,9 +78,9 @@ def big_profile(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins):
   return cden_data, angle_data
 
 def fplot_angle(ion, description, fn, field, ax):
-  ax.title('%s' % ion)
-  ax.xlabel('Azimuthal Angle [degrees]')
-  ax.xlim((0,90))
+  # ax.title('%s' % ion)
+  ax.set_xlabel('Azimuthal Angle [degrees]')
+  ax.set_xlim((0,90))
   ax.legend(title='b/rvir')
   # if len(description) > 0:
   #   print('%s_%s_angle.png' % (ion, description))
@@ -91,9 +91,9 @@ def fplot_angle(ion, description, fn, field, ax):
   # # plt.clf()
 
 def fplot_radius(ion, description, fn, field, ax):
-  ax.title('%s' % ion)
-  ax.xlabel('b/rvir')
-  ax.xlim((0,1))
+  # ax.title('%s' % ion)
+  ax.set_xlabel('b/rvir')
+  ax.set_xlim((0,1))
   ax.legend(title='Azimuthal Angle [degrees]')
   # if len(description) > 0:
   #   print('%s_%s_radius.png' % (ion, description))
@@ -166,7 +166,7 @@ def plot_profile(r_bins, profile_data, label, color, ax):
 
 def finish_plot(field, ax):
   if limits_from_field(field):
-    ax.ylim(limits_from_field(field))
+    ax.set_ylim(limits_from_field(field))
   ylabel = None
   if field == 'H_number_density':
     ion = 'HI'
@@ -208,7 +208,7 @@ def finish_plot(field, ax):
     sys.exit('Unidentified Field.')
   if not ylabel:
     ylabel = "N$_{%s}$ [cm$^{-2}$]" % ion
-  ax.ylabel(ylabel)
+  ax.set_ylabel(ylabel)
 
 ''''
 Things to fix to make correct images:
