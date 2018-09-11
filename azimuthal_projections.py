@@ -58,7 +58,6 @@ def make_off_axis_projection(ds, vec, north_vec, ion_fields, center, width, data
 	"""
 	Use OffAxisProjectionPlot to make projection (cannot specify resolution)
 	"""
-	import pdb;pdb.set_trace()
 	p = yt.OffAxisProjectionPlot(ds, vec, ion_fields, center=center, width=width,
 		data_source=data_source, north_vector=north_vec, weight_field=weight_field)
 	p.hide_axes()
@@ -74,6 +73,26 @@ def make_off_axis_projection(ds, vec, north_vec, ion_fields, center, width, data
 		dir = 'face/'
 	p.save(os.path.join('%s/images' % fn_data, dir))
 	return p.frb
+
+def rotate(theta, E1, E2):
+	'''
+	Rotates vector E1 an angle theta around E2
+	'''
+	theta *= (np.pi/180)
+	x = E2[0]
+	y = E2[1]
+	z = E2[2]
+	R = np.zeros((3,3))
+	R[0][0] = np.cos(theta) + x**2 * (1-np.cos(theta))
+	R[0][1] = x * y * (1 - np.cos(theta)) - z * np.sin(theta)
+	R[0][2] = x * z * (1 - np.cos(theta)) + y * np.sin(theta)
+	R[1][0] = y * x * (1 - np.cos(theta)) + z * np.sin(theta)
+	R[1][1] = np.cos(theta) + y**2 * (1 - np.cos(theta))
+	R[1][2] = y * z * (1 - np.cos(theta)) - x * np.sin(theta)
+	R[2][0] = z * x * (1 - np.cos(theta)) - y * np.sin(theta)
+	R[2][1] = z * y * (1 - np.cos(theta)) + x * np.sin(theta)
+	R[2][2] = np.cos(theta) + z**2 * (1 - np.cos(theta))
+	return R*E1
 
 if __name__ == '__main__':
 	"""
@@ -171,11 +190,6 @@ if __name__ == '__main__':
 		log("Reading amiga center for halo in %s" % fn)
 		c = read_amiga_center(amiga_data, fn, ds)
 		rvir = read_amiga_rvir(amiga_data, fn, ds)
-		
-		center = [26402.32078663, 29193.90002137, 32830.23823524]
-		center = ds.arr(center, 'code_length')
-
-		c = center
 
 		cdens_file_1 = h5.File(cdens_fn_1, 'a')
 		cdens_file_2 = h5.File(cdens_fn_2, 'a')
