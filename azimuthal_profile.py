@@ -245,7 +245,7 @@ if __name__ == '__main__':
 
 
   # Step through each ion and make plots of azimuthal angle vs N
-  for field in ion_fields:
+  for i, field in enumerate(ion_fields):
     for c, (k,v) in enumerate(profiles_dict.items()):
       n_files = len(v)
       cdens_arr = np.array([])
@@ -269,7 +269,7 @@ if __name__ == '__main__':
       r_bins = np.linspace(1, 0, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
 
-      ax = fig[c]
+      ax = fig[i]
       profile_data = make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins)
       for i in range(r_n_bins):
         plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], '%s < b/rvir < %s' % \
@@ -279,9 +279,9 @@ if __name__ == '__main__':
 
   plt.savefig('%s/fig1.png' % fn_head)
 
-  fig = GridFigure(2, 5)
+  fig = GridFigure(2, 5, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, right_buffer=0.02, vertical_buffer=0.01, horizontal_buffer=0.01, figsize=(8,8))
 
-  for field in ion_fields:
+  for i, field in enumerate(ion_fields):
     for c, (k,v) in enumerate(profiles_dict.items()):
       n_files = len(v)
       cdens_arr = np.array([])
@@ -307,7 +307,7 @@ if __name__ == '__main__':
       r_bins_plot = np.linspace(0, 1, r_n_bins)
 
       # Step through each ion and make plots of radius vs N for 3 radial bins
-      ax = fig[c]
+      ax = fig[i]
       radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
       ion = finish_plot(field, ax)
       plot_profile(r_bins_plot, radial_data[0], 'Φ < 45 degrees', colors[0], ax)
@@ -316,9 +316,9 @@ if __name__ == '__main__':
 
   plt.savefig('%s/fig2.png' % fn_head)
   
-  fig = GridFigure(2, 5)
+  fig = GridFigure(2, 5, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, right_buffer=0.02, vertical_buffer=0.01, horizontal_buffer=0.01, figsize=(8,8))
 
-  for field in ion_fields:
+  for i, field in enumerate(ion_fields):
     for c, (k,v) in enumerate(profiles_dict.items()):
       n_files = len(v)
       cdens_arr = np.array([])
@@ -344,7 +344,7 @@ if __name__ == '__main__':
       r_bins_plot = np.linspace(0, 1, r_n_bins)
 
       # Step through each ion and make plots of radius vs N for 3 radial bins
-      ax = fig[c]
+      ax = fig[i]
       radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
       ion = finish_plot(field, ax)
       plot_profile(r_bins_plot, radial_data[0], '0 < Φ < 30 degrees', colors[0], ax)
