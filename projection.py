@@ -9,6 +9,7 @@ import trident
 from grid_figure import GridFigure
 from matplotlib.colors import LogNorm
 from matplotlib.patches import Circle
+from yt.utilities.math_utils import ortho_find
 
 import sys
 sys.path.insert(0, '/home/andyr/src/frb')
