@@ -10,6 +10,8 @@ from grid_figure import GridFigure
 from matplotlib.colors import LogNorm
 from matplotlib.patches import Circle
 
+import sys
+sys.path.insert(0, '/home/andyr/src/frb')
 from radial_profile1 import get_amiga_data, smooth_amiga, GizmoDataset, read_amiga_center, read_amiga_rvir, log
 
 if __name__ == '__main__':
