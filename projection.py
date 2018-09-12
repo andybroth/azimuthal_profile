@@ -49,16 +49,16 @@ if __name__ == '__main__':
 	box = ds.box(c-one, c+one)
 
 	log('Generating Plot 1')
-	p1 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'density'), center=center, 
+	p1 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'density'), center=c, 
 		width=width, data_source=box, north_vector=L, weight_field=None)
 	log('Generating Plot 2')
-	p2 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'H_number_density'), center=center, 
+	p2 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'H_number_density'), center=c, 
 		width=width, data_source=box, north_vector=L, weight_field=None)
 	log('Generating Plot 3')
-	p3 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'Mg_p1_number_density'), center=center, 
+	p3 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'Mg_p1_number_density'), center=c, 
 		width=width, data_source=box, north_vector=L, weight_field=None)
 	log('Generating Plot 4')
-	p4 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'O_p5_number_density'), center=center, 
+	p4 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'O_p5_number_density'), center=c, 
 		width=width, data_source=box, north_vector=L, weight_field=None)
 
 	print("Stitching together")
