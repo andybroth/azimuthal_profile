@@ -289,9 +289,9 @@ if __name__ == '__main__':
 	end = time.time()
 	elapsed = int(end - start)
 	if elapsed > 3600:
-		log('%s Hours' % ())
+		log('%s Hours' % (elapsed/3600))
 		elapsed %= 3600
 	if elapsed > 60:
-		log('%s Minutes' % ())
+		log('%s Minutes' % (elapsed/60))
 		elapsed %= 60
-	log('%s Seconds' % ())
+	log('%s Seconds' % (elapsed))
