@@ -212,7 +212,7 @@ if __name__ == '__main__':
 			cdens_file_2 = h5.File(cdens_fn_2, 'a')
 
 			dir1 = dirs[i] + 'images/1/'
-			dir1 = dirs[i] + 'images/2/'
+			dir2 = dirs[i] + 'images/2/'
 
 			E1 = rotate(angle, v1, v2)
 			E2 = rotate(angle, v2, v1)
