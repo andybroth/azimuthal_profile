@@ -73,11 +73,11 @@ if __name__ == '__main__':
 	plot2.set_clim((1e13, 1e25))
 	plot2.set_cmap('thermal')
 
-	plot3 = fig[2].imshow(p3.frb['Mg_p1_number_density'])
+	plot3 = fig[2].imshow(p3.frb['Mg_p1_number_density'], norm=LogNorm())
 	plot3.set_clim((1e-13, 1e21))
 	plot3.set_cmap('thermal')
 
-	plot4 = fig[3].imshow(p4.frb['O_p5_number_density'])
+	plot4 = fig[3].imshow(p4.frb['O_p5_number_density'], norm=LogNorm())
 	plot4.set_clim((5e12, 1e18))
 	plot4.set_cmap('thermal')
 
@@ -89,7 +89,7 @@ if __name__ == '__main__':
 		ax.yaxis.set_visible(False)
 
 		# Add virial radius circles to each plot
-		cir = Circle((0.5, 0.5), rvir1/width1, fill=False, color='white', linestyle='dashed', linewidth=5, transform=ax.transAxes, alpha=0.5)
+		cir = Circle((0.5, 0.5), rvir/width1, fill=False, color='white', linestyle='dashed', linewidth=5, transform=ax.transAxes, alpha=0.5)
 		ax.add_patch(cir)
 
 	'''
