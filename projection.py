@@ -59,38 +59,38 @@ if __name__ == '__main__':
 		width=width, data_source=box, north_vector=L, weight_field=None)
 
 	print("Stitching together")
-    fig = GridFigure(2, 2, top_buffer=0.01, bottom_buffer=0.01, left_buffer=0.01, right_buffer=0.13, vertical_buffer=0.01, horizontal_buffer=0.01, figsize=(9,8))
+	fig = GridFigure(2, 2, top_buffer=0.01, bottom_buffer=0.01, left_buffer=0.01, right_buffer=0.13, vertical_buffer=0.01, horizontal_buffer=0.01, figsize=(9,8))
 
 	# Actually plot in the different axes
-    plot1 = fig[0].imshow(p1.frb['density'], norm=LogNorm())
-    plot1.set_clim((1e-5, 3.5e-1))
-    plot1.set_cmap('thermal')
+	plot1 = fig[0].imshow(p1.frb['density'], norm=LogNorm())
+	plot1.set_clim((1e-5, 3.5e-1))
+	plot1.set_cmap('thermal')
 
-    plot2 = fig[1].imshow(p2.frb['H_number_density'], norm=LogNorm())
-    plot2.set_clim((1e13, 1e25))
-    plot2.set_cmap('thermal')
+	plot2 = fig[1].imshow(p2.frb['H_number_density'], norm=LogNorm())
+	plot2.set_clim((1e13, 1e25))
+	plot2.set_cmap('thermal')
 
-    plot3 = fig[2].imshow(p3.frb['Mg_p1_number_density'])
-    plot3.set_clim((1e-13, 1e21))
-    plot3.set_cmap('thermal')
+	plot3 = fig[2].imshow(p3.frb['Mg_p1_number_density'])
+	plot3.set_clim((1e-13, 1e21))
+	plot3.set_cmap('thermal')
 
-    plot4 = fig[3].imshow(p4.frb['O_p5_number_density'])
-    plot4.set_clim((5e12, 1e18))
-    plot4.set_cmap('thermal')
+	plot4 = fig[3].imshow(p4.frb['O_p5_number_density'])
+	plot4.set_clim((5e12, 1e18))
+	plot4.set_cmap('thermal')
 
-    for i in range(len(fig)):
+	for i in range(len(fig)):
 
-        # Set all of the axis labels to be invisible
-        ax = fig[i]
-        ax.xaxis.set_visible(False)
-        ax.yaxis.set_visible(False)
+		# Set all of the axis labels to be invisible
+		ax = fig[i]
+		ax.xaxis.set_visible(False)
+		ax.yaxis.set_visible(False)
 
-        # Add virial radius circles to each plot
-        cir = Circle((0.5, 0.5), rvir1/width1, fill=False, color='white', linestyle='dashed', linewidth=5, transform=ax.transAxes, alpha=0.5)
-        ax.add_patch(cir)
+		# Add virial radius circles to each plot
+		cir = Circle((0.5, 0.5), rvir1/width1, fill=False, color='white', linestyle='dashed', linewidth=5, transform=ax.transAxes, alpha=0.5)
+		ax.add_patch(cir)
 
-    '''
+	'''
 	Do some stuff to add in axis to the plot
-    '''
+	'''
 
-    plt.savefig('projections.png')
+	plt.savefig('projections.png')
