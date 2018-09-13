@@ -89,7 +89,7 @@ if __name__ == '__main__':
 		ax.yaxis.set_visible(False)
 
 		# Add virial radius circles to each plot
-		cir = Circle((0.5, 0.5), rvir/width1, fill=False, color='white', linestyle='dashed', linewidth=5, transform=ax.transAxes, alpha=0.5)
+		cir = Circle((0.5, 0.5), rvir/width, fill=False, color='white', linestyle='dashed', linewidth=5, transform=ax.transAxes, alpha=0.5)
 		ax.add_patch(cir)
 
 	'''
