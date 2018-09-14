@@ -94,7 +94,10 @@ def fplot_angle(ion, description, fn, field, ax):
 def fplot_radius(ion, description, fn, field, ax):
   # ax.title('%s' % ion)
   ax.set_xlabel('b/rvir')
-  ax.set_xlim((0,1))
+  if description == 'long' or description == 'long2':
+    ax.set_xlim((0,1.25))
+  else:
+    ax.set_xlim((0,1))
   # ax.legend(title='Azimuthal Angle [degrees]')
   
   # if len(description) > 0:
@@ -244,7 +247,7 @@ if __name__ == '__main__':
   ion_fields = ['density', 'metal_density', 'temperature', 'H_number_density']
 
   fig = GridFigure(2, 2, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
-    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,8))
+    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(9,8))
 
   # Step through each ion and make plots of azimuthal angle vs N
   for i, field in enumerate(ion_fields):
@@ -282,7 +285,7 @@ if __name__ == '__main__':
   plt.savefig('%s/fig1a.png' % fn_head)
 
   fig = GridFigure(2, 2, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
-    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,8))
+    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(9,8))
 
   for i, field in enumerate(ion_fields):
     for c, (k,v) in enumerate(profiles_dict.items()):
@@ -320,7 +323,7 @@ if __name__ == '__main__':
   plt.savefig('%s/fig1b.png' % fn_head)
   
   fig = GridFigure(2, 2, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
-    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,8))
+    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(9,8))
 
   for i, field in enumerate(ion_fields):
     for c, (k,v) in enumerate(profiles_dict.items()):
@@ -432,7 +435,7 @@ if __name__ == '__main__':
       ion = finish_plot(field, ax)
       plot_profile(r_bins_plot, radial_data[0], 'Φ < 45 degrees', colors[0], ax)
       plot_profile(r_bins_plot, radial_data[1], 'Φ > 45 degrees', colors[1], ax)
-      fplot_radius(ion, 'short', fn_head, field, ax)
+      fplot_radius(ion, 'long', fn_head, field, ax)
 
   plt.savefig('%s/fig2b.png' % fn_head)
   
@@ -471,14 +474,14 @@ if __name__ == '__main__':
       plot_profile(r_bins_plot, radial_data[0], '0 < Φ < 30 degrees', colors[0], ax)
       plot_profile(r_bins_plot, radial_data[1], '30 < Φ < 60 degrees', colors[1], ax)
       plot_profile(r_bins_plot, radial_data[2], '60 < Φ < 90 degrees', colors[2], ax)
-      fplot_radius(ion, '2', fn_head, field, ax)
+      fplot_radius(ion, 'long2', fn_head, field, ax)
 
   plt.savefig('%s/fig2c.png' % fn_head)
 
   ion_fields = ['Mg_p1_number_density']
 
   fig = GridFigure(1, 1, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
-    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,8))
+    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(4,4))
 
   # Step through each ion and make plots of azimuthal angle vs N
   for i, field in enumerate(ion_fields):
@@ -516,7 +519,7 @@ if __name__ == '__main__':
   plt.savefig('%s/fig3a.png' % fn_head)
 
   fig = GridFigure(1, 1, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
-    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,8))
+    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(4,4))
 
   for i, field in enumerate(ion_fields):
     for c, (k,v) in enumerate(profiles_dict.items()):
@@ -554,7 +557,7 @@ if __name__ == '__main__':
   plt.savefig('%s/fig3b.png' % fn_head)
   
   fig = GridFigure(1, 1, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
-    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,8))
+    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(4,4))
 
   for i, field in enumerate(ion_fields):
     for c, (k,v) in enumerate(profiles_dict.items()):
