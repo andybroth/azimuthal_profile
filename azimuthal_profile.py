@@ -161,12 +161,12 @@ def read_parameter_file(fn):
       i += 1
   return profiles
 
-def plot_profile(r_bins, profile_data, label, color, ax):
+def plot_profile(r_bins, profile_data, label, color, ax, linestyle='dashed'):
   '''
   Takes data from profiles and creates plot that is a part of the larger
   plot image
   '''
-  ax.semilogy(r_bins, profile_data[0,:], label=label, color=color, linestyle='dashed', linewidth=4)  
+  ax.semilogy(r_bins, profile_data[0,:], label=label, color=color, linestyle=linestyle, linewidth=4)  
   ax.fill_between(r_bins, profile_data[1,:], profile_data[2,:], facecolor=color, alpha=0.2)
 
 def finish_plot(field, ax):
@@ -231,12 +231,7 @@ if __name__ == '__main__':
 
   # Color cycling
   colors = ['red', 'blue', 'cyan', 'green', 'yellow', 'black']
-  '''
-  'green'
-  'cyan'
-  'black'
-  '''
-  markers = ['o', '^', 's']
+  linestyles = ['-', '--', ':', '-.']
 
   fn_head = sys.argv[1].split('.')[0][:-11]
   profiles_dict = read_parameter_file(sys.argv[1])
@@ -278,7 +273,7 @@ if __name__ == '__main__':
       profile_data = make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins)
       for i in range(r_n_bins):
         plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], '%s < b/rvir < %s' % \
-                    (.25*i, .25*i + .25), colors[i], ax)
+                    (.25*i, .25*i + .25), colors[i], ax, linestyles[i])
       ion = finish_plot(field, ax)
       fplot_angle(ion, '', fn_head, field, ax)
 
@@ -316,8 +311,8 @@ if __name__ == '__main__':
       ax = fig[i]
       radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
       ion = finish_plot(field, ax)
-      plot_profile(r_bins_plot, radial_data[0], 'Φ < 45 degrees', colors[0], ax)
-      plot_profile(r_bins_plot, radial_data[1], 'Φ > 45 degrees', colors[1], ax)
+      plot_profile(r_bins_plot, radial_data[0], 'Φ < 45 degrees', colors[0], ax, linestyles[0])
+      plot_profile(r_bins_plot, radial_data[1], 'Φ > 45 degrees', colors[1], ax, linestyles[1])
       fplot_radius(ion, 'short', fn_head, field, ax)
 
   plt.savefig('%s/fig1b.png' % fn_head)
@@ -354,9 +349,9 @@ if __name__ == '__main__':
       ax = fig[i]
       radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
       ion = finish_plot(field, ax)
-      plot_profile(r_bins_plot, radial_data[0], '0 < Φ < 30 degrees', colors[0], ax)
-      plot_profile(r_bins_plot, radial_data[1], '30 < Φ < 60 degrees', colors[1], ax)
-      plot_profile(r_bins_plot, radial_data[2], '60 < Φ < 90 degrees', colors[2], ax)
+      plot_profile(r_bins_plot, radial_data[0], '0 < Φ < 30 degrees', colors[0], ax, linestyles[0])
+      plot_profile(r_bins_plot, radial_data[1], '30 < Φ < 60 degrees', colors[1], ax, linestyles[1])
+      plot_profile(r_bins_plot, radial_data[2], '60 < Φ < 90 degrees', colors[2], ax, linestyles[2])
       fplot_radius(ion, '2', fn_head, field, ax)
 
   plt.savefig('%s/fig1c.png' % fn_head)
@@ -364,7 +359,7 @@ if __name__ == '__main__':
   ion_fields = ['C_p1_number_density', 'C_p2_number_density', 'Ne_p7_number_density', 'O_p5_number_density', 'Si_p3_number_density']
 
   fig = GridFigure(1, 5, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
-    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,8))
+    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,4))
 
   # Step through each ion and make plots of azimuthal angle vs N
   for i, field in enumerate(ion_fields):
@@ -395,14 +390,14 @@ if __name__ == '__main__':
       profile_data = make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins)
       for i in range(r_n_bins):
         plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], '%s < b/rvir < %s' % \
-                    (.25*i, .25*i + .25), colors[i], ax)
+                    (.25*i, .25*i + .25), colors[i], ax, linestyles[i])
       ion = finish_plot(field, ax)
       fplot_angle(ion, '', fn_head, field, ax)
 
   plt.savefig('%s/fig2a.png' % fn_head)
 
   fig = GridFigure(1, 5, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
-    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,8))
+    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,4))
 
   for i, field in enumerate(ion_fields):
     for c, (k,v) in enumerate(profiles_dict.items()):
@@ -427,20 +422,20 @@ if __name__ == '__main__':
       r_n_bins = 25
       r_bins = np.linspace(1.25, 0, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
-      r_bins_plot = np.linspace(0, 1, r_n_bins)
+      r_bins_plot = np.linspace(0, 1.25, r_n_bins)
 
       # Step through each ion and make plots of radius vs N for 3 radial bins
       ax = fig[i]
       radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
       ion = finish_plot(field, ax)
-      plot_profile(r_bins_plot, radial_data[0], 'Φ < 45 degrees', colors[0], ax)
-      plot_profile(r_bins_plot, radial_data[1], 'Φ > 45 degrees', colors[1], ax)
+      plot_profile(r_bins_plot, radial_data[0], 'Φ < 45 degrees', colors[0], ax, linestyles[0])
+      plot_profile(r_bins_plot, radial_data[1], 'Φ > 45 degrees', colors[1], ax, linestyles[1])
       fplot_radius(ion, 'long', fn_head, field, ax)
 
   plt.savefig('%s/fig2b.png' % fn_head)
   
   fig = GridFigure(1, 5, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
-    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,8))
+    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,4))
 
   for i, field in enumerate(ion_fields):
     for c, (k,v) in enumerate(profiles_dict.items()):
@@ -465,15 +460,15 @@ if __name__ == '__main__':
       r_n_bins = 25
       r_bins = np.linspace(1.25, 0, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
-      r_bins_plot = np.linspace(0, 1, r_n_bins)
+      r_bins_plot = np.linspace(0, 1.25, r_n_bins)
 
       # Step through each ion and make plots of radius vs N for 3 radial bins
       ax = fig[i]
       radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
       ion = finish_plot(field, ax)
-      plot_profile(r_bins_plot, radial_data[0], '0 < Φ < 30 degrees', colors[0], ax)
-      plot_profile(r_bins_plot, radial_data[1], '30 < Φ < 60 degrees', colors[1], ax)
-      plot_profile(r_bins_plot, radial_data[2], '60 < Φ < 90 degrees', colors[2], ax)
+      plot_profile(r_bins_plot, radial_data[0], '0 < Φ < 30 degrees', colors[0], ax, linestyles[0])
+      plot_profile(r_bins_plot, radial_data[1], '30 < Φ < 60 degrees', colors[1], ax, linestyles[1])
+      plot_profile(r_bins_plot, radial_data[2], '60 < Φ < 90 degrees', colors[2], ax, linestyles[2])
       fplot_radius(ion, 'long2', fn_head, field, ax)
 
   plt.savefig('%s/fig2c.png' % fn_head)
@@ -512,7 +507,7 @@ if __name__ == '__main__':
       profile_data = make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins)
       for i in range(r_n_bins):
         plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], '%s < b/rvir < %s' % \
-                    (.25*i, .25*i + .25), colors[i], ax)
+                    (.25*i, .25*i + .25), colors[i], ax, linestyles[i])
       ion = finish_plot(field, ax)
       fplot_angle(ion, '', fn_head, field, ax)
 
@@ -550,8 +545,8 @@ if __name__ == '__main__':
       ax = fig[i]
       radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
       ion = finish_plot(field, ax)
-      plot_profile(r_bins_plot, radial_data[0], 'Φ < 45 degrees', colors[0], ax)
-      plot_profile(r_bins_plot, radial_data[1], 'Φ > 45 degrees', colors[1], ax)
+      plot_profile(r_bins_plot, radial_data[0], 'Φ < 45 degrees', colors[0], ax, linestyles[0])
+      plot_profile(r_bins_plot, radial_data[1], 'Φ > 45 degrees', colors[1], ax, linestyles[1])
       fplot_radius(ion, 'short', fn_head, field, ax)
 
   plt.savefig('%s/fig3b.png' % fn_head)
@@ -588,9 +583,9 @@ if __name__ == '__main__':
       ax = fig[i]
       radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
       ion = finish_plot(field, ax)
-      plot_profile(r_bins_plot, radial_data[0], '0 < Φ < 30 degrees', colors[0], ax)
-      plot_profile(r_bins_plot, radial_data[1], '30 < Φ < 60 degrees', colors[1], ax)
-      plot_profile(r_bins_plot, radial_data[2], '60 < Φ < 90 degrees', colors[2], ax)
+      plot_profile(r_bins_plot, radial_data[0], '0 < Φ < 30 degrees', colors[0], ax, linestyles[0])
+      plot_profile(r_bins_plot, radial_data[1], '30 < Φ < 60 degrees', colors[1], ax, linestyles[1])
+      plot_profile(r_bins_plot, radial_data[2], '60 < Φ < 90 degrees', colors[2], ax, linestyles[2])
       fplot_radius(ion, '2', fn_head, field, ax)
 
   plt.savefig('%s/fig3c.png' % fn_head)
