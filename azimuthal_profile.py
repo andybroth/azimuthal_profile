@@ -384,8 +384,8 @@ if __name__ == '__main__':
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
       a_bins = np.flip(a_bins, 0)
 
-      r_n_bins = 6
-      r_bins = np.linspace(1.5, 0, r_n_bins, endpoint=False)
+      r_n_bins = 4
+      r_bins = np.linspace(1, 0, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
 
       ax = fig[i]
@@ -421,8 +421,8 @@ if __name__ == '__main__':
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
       a_bins = np.flip(a_bins, 0)
 
-      r_n_bins = 30
-      r_bins = np.linspace(1.5, 0, r_n_bins, endpoint=False)
+      r_n_bins = 25
+      r_bins = np.linspace(1.25, 0, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
       r_bins_plot = np.linspace(0, 1, r_n_bins)
 
@@ -459,8 +459,8 @@ if __name__ == '__main__':
       a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
       a_bins = np.flip(a_bins, 0)
 
-      r_n_bins = 30
-      r_bins = np.linspace(1.5, 0, r_n_bins, endpoint=False)
+      r_n_bins = 25
+      r_bins = np.linspace(1.25, 0, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
       r_bins_plot = np.linspace(0, 1, r_n_bins)
 
