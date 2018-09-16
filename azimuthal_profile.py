@@ -112,8 +112,8 @@ def limits_from_field(field):
   '''Give limits for the plots depending on the ion field'''
   if field == 'H_number_density':
     return (1e13, 1e20)
-  # elif field == 'O_p5_number_density':
-  #   return (1e15, 1e19)
+  elif field == 'O_p5_number_density':
+    return (1e15, 1e19)
   elif field == 'Mg_p1_number_density':
     return (1e6, 1e18)
   elif field == 'density':
@@ -358,7 +358,7 @@ if __name__ == '__main__':
 
   ion_fields = ['C_p1_number_density', 'C_p2_number_density', 'Ne_p7_number_density', 'O_p5_number_density', 'Si_p3_number_density']
 
-  fig = GridFigure(1, 5, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
+  fig = GridFigure(1, 5, top_buffer=0.04, bottom_buffer=0.08, left_buffer=0.12, 
     right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,5))
 
   # Step through each ion and make plots of azimuthal angle vs N
@@ -396,7 +396,7 @@ if __name__ == '__main__':
 
   plt.savefig('%s/fig2a.png' % fn_head)
 
-  fig = GridFigure(1, 5, top_buffer=0.01, bottom_buffer=0.12, left_buffer=0.12, 
+  fig = GridFigure(1, 5, top_buffer=0.04, bottom_buffer=0.12, left_buffer=0.12, 
     right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,5))
 
   for i, field in enumerate(ion_fields):
@@ -434,7 +434,7 @@ if __name__ == '__main__':
 
   plt.savefig('%s/fig2b.png' % fn_head)
   
-  fig = GridFigure(1, 5, top_buffer=0.01, bottom_buffer=0.12, left_buffer=0.12, 
+  fig = GridFigure(1, 5, top_buffer=0.04, bottom_buffer=0.12, left_buffer=0.12, 
     right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,5))
 
   for i, field in enumerate(ion_fields):
@@ -586,7 +586,7 @@ if __name__ == '__main__':
       plot_profile(r_bins_plot, radial_data[0], '0 < Φ < 30 degrees', colors[0], ax, linestyles[0])
       plot_profile(r_bins_plot, radial_data[1], '30 < Φ < 60 degrees', colors[1], ax, linestyles[1])
       plot_profile(r_bins_plot, radial_data[2], '60 < Φ < 90 degrees', colors[2], ax, linestyles[2])
-      fplot_radius(ion, '2', fn_head, field, ax)
+      fplot_radius(ion, 'long2', fn_head, field, ax)
 
   plt.savefig('%s/fig3c.png' % fn_head)
 
