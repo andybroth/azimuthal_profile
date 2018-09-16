@@ -577,7 +577,7 @@ if __name__ == '__main__':
       r_n_bins = 25
       r_bins = np.linspace(1.25, 0, r_n_bins, endpoint=False)
       r_bins = np.flip(r_bins, 0)
-      r_bins_plot = np.linspace(0, 1, r_n_bins)
+      r_bins_plot = np.linspace(0, 1.25, r_n_bins)
 
       # Step through each ion and make plots of radius vs N for 3 radial bins
       ax = fig[i]
