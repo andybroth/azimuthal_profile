@@ -242,7 +242,7 @@ if __name__ == '__main__':
   ion_fields = ['density', 'metal_density', 'temperature', 'H_number_density']
 
   fig = GridFigure(2, 2, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
-    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(12,8))
+    right_buffer=0.02, vertical_buffer=0.08, horizontal_buffer=0.08, figsize=(12,8))
 
   # Step through each ion and make plots of azimuthal angle vs N
   for i, field in enumerate(ion_fields):
@@ -280,7 +280,7 @@ if __name__ == '__main__':
   plt.savefig('%s/fig1a.png' % fn_head)
 
   fig = GridFigure(2, 2, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
-    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(12,8))
+    right_buffer=0.02, vertical_buffer=0.08, horizontal_buffer=0.08, figsize=(12,8))
 
   for i, field in enumerate(ion_fields):
     for c, (k,v) in enumerate(profiles_dict.items()):
@@ -318,7 +318,7 @@ if __name__ == '__main__':
   plt.savefig('%s/fig1b.png' % fn_head)
   
   fig = GridFigure(2, 2, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
-    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(12,8))
+    right_buffer=0.02, vertical_buffer=0.08, horizontal_buffer=0.08, figsize=(12,8))
 
   for i, field in enumerate(ion_fields):
     for c, (k,v) in enumerate(profiles_dict.items()):
