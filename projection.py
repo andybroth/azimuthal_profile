@@ -96,7 +96,7 @@ if __name__ == '__main__':
 	row1_cbar = plt.colorbar(plot2, cax=row1_cax, orientation='vertical')
 	row1_cbar.set_label('H I Column Density [cm$^{-2}$]', weight='bold')
 	row1_cbar.ax.yaxis.label.set_font_properties(matplotlib.font_manager.FontProperties(size=16))
-	row1_cbar.ax.tick_params(labelsize=14) p
+	row1_cbar.ax.tick_params(labelsize=14)
 
 	row2_cax = fig.add_cax(fig[3], 'right', buffer=0.01, length=1, width=0.05)
 	row2_cbar = plt.colorbar(plot4, cax=row2_cax, orientation='vertical')
