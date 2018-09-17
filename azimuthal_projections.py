@@ -204,7 +204,6 @@ if __name__ == '__main__':
 		sp = ds.sphere(c, (15, 'kpc'))
 		L = sp.quantities.angular_momentum_vector(use_gas=False, use_particles=True, particle_type='PartType0')
 		log(L)
-		'''
 		L, v1, v2 = ortho_find(L)
 		inclines = [-20, -10, 10, 20]
 		dirs = ['20n/', '10n/', '10/', '20/']
@@ -297,4 +296,4 @@ if __name__ == '__main__':
 		log('%s Minutes' % int(elapsed/60))
 		elapsed %= 60
 	log('%s Seconds' % (elapsed))
-	'''
+	

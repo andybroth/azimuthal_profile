@@ -151,9 +151,7 @@ def read_parameter_file(fn):
           file_name = text[i].split()[0]
           file = h5.File(file_name,'a')
           if file.attrs.get('Ang_Mom') > 3*10**29:
-            if '_1_' in file_name:
-              print(file_name)
-              print(file.attrs.get('Ang_Mom'))
+            print(file_name)
             profile_list.append(file_name)
           file.close()
           i += 1
