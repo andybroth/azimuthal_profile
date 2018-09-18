@@ -23,7 +23,7 @@ if __name__ == '__main__':
 	amiga_data = get_amiga_data('/mnt/data1/GalaxiesOnFire/metaldiff/m12i_res7100_md/halo/ahf/halo_00000_smooth.dat')
 	amiga_data = smooth_amiga(amiga_data)
 
-	fn = '/mnt/data1/GalaxiesOnFire/metaldiff/m12i_res7100_md/output/snapdir_534/snapshot_534.0.hdf5'
+	fn = '/mnt/data1/GalaxiesOnFire/metaldiff/m12i_res7100_md/output/snapdir_600/snapshot_600.0.hdf5'
 	fn_head = fn.split('/')[-1]
 	fn_data = fn.split('/')[-4]
 
@@ -104,11 +104,11 @@ if __name__ == '__main__':
 	plot2.set_cmap('thermal')
 
 	plot3 = fig[2].imshow(p3.frb['Mg_p1_number_density'], norm=LogNorm())
-	plot3.set_clim((1e-13, 1e21))
+	plot3.set_clim((1e-31, 1e-1))
 	plot3.set_cmap('thermal')
 
 	plot4 = fig[3].imshow(p4.frb['Mg_p1_number_density'], norm=LogNorm())
-	plot4.set_clim((1e-13, 1e21))
+	plot4.set_clim((1e-31, 1e-1))
 	plot4.set_cmap('thermal')
 
 	for i in range(len(fig)):
