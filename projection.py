@@ -20,10 +20,12 @@ if __name__ == '__main__':
 	Makes projections from m12i_res7100_md for density, H I, Mg II, and O VI
 	in a grid figure plot for the paper. 
 	'''
-	amiga_data = get_amiga_data('/mnt/data1/GalaxiesOnFire/metaldiff/m12i_res7100_md/halo/ahf/halo_00000_smooth.dat')
+	fn = 'm11g_res12000'
+
+	amiga_data = get_amiga_data('/mnt/data1/GalaxiesOnFire/%s/halo/ahf/halo_00000_smooth.dat' % fn)
 	amiga_data = smooth_amiga(amiga_data)
 
-	fn = '/mnt/data1/GalaxiesOnFire/metaldiff/m12i_res7100_md/output/snapdir_600/snapshot_600.0.hdf5'
+	fn = '/mnt/data1/GalaxiesOnFire/%s/output/snapdir_600/snapshot_600.0.hdf5' % fn
 	fn_head = fn.split('/')[-1]
 	fn_data = fn.split('/')[-4]
 
@@ -57,14 +59,14 @@ if __name__ == '__main__':
 	p3 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'Mg_p1_number_density'), center=c, 
 		width=width, data_source=box, north_vector=L, weight_field=None)
 	
-	amiga_data = get_amiga_data('/mnt/data1/GalaxiesOnFire/metaldiff/m12f_res7100_md/halo/ahf/halo_00000_smooth.dat')
+	fn = 'm11f_res12000'
+
+	amiga_data = get_amiga_data('/mnt/data1/GalaxiesOnFire/%s/halo/ahf/halo_00000_smooth.dat' % fn)
 	amiga_data = smooth_amiga(amiga_data)
 
-	fn = '/mnt/data1/GalaxiesOnFire/metaldiff/m12f_res7100_md/output/snapdir_600/snapshot_600.0.hdf5'
+	fn = '/mnt/data1/GalaxiesOnFire/%s/output/snapdir_600/snapshot_600.0.hdf5' % fn
 	fn_head = fn.split('/')[-1]
 	fn_data = fn.split('/')[-4]
-
-	ions = ['H I', 'Mg II', 'O VI']
 
 	log("Starting projections for %s" % fn)
 	ds = GizmoDataset(fn)
@@ -96,19 +98,19 @@ if __name__ == '__main__':
 
 	# Actually plot in the different axes
 	plot1 = fig[0].imshow(p1.frb['density'], norm=LogNorm())
-	plot1.set_clim((1e-5, 3.5e-1))
+	clim1 = plot1.get_clim()
 	plot1.set_cmap('thermal')
 
 	plot2 = fig[1].imshow(p2.frb['density'], norm=LogNorm())
-	plot2.set_clim((1e-5, 3.5e-1))
+	plot2.set_clim(clim)
 	plot2.set_cmap('thermal')
 
 	plot3 = fig[2].imshow(p3.frb['Mg_p1_number_density'], norm=LogNorm())
-	plot3.set_clim((1e-31, 1e-1))
+	clim = plot3.get_clim()
 	plot3.set_cmap('thermal')
 
 	plot4 = fig[3].imshow(p4.frb['Mg_p1_number_density'], norm=LogNorm())
-	plot4.set_clim((1e-31, 1e-1))
+	plot4.set_clim(clim)
 	plot4.set_cmap('thermal')
 
 	for i in range(len(fig)):
