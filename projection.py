@@ -64,7 +64,7 @@ if __name__ == '__main__':
 	fn_head = fn.split('/')[-1]
 	fn_data = fn.split('/')[-4]
 
-	ions = ['Mg II']
+	ions = ['H I', 'Mg II', 'O VI']
 
 	log("Starting projections for %s" % fn)
 	ds = GizmoDataset(fn)
@@ -100,7 +100,7 @@ if __name__ == '__main__':
 	plot1.set_cmap('thermal')
 
 	plot2 = fig[1].imshow(p2.frb['density'], norm=LogNorm())
-	plot2.set_clim((1e13, 1e25))
+	plot2.set_clim((1e-5, 3.5e-1))
 	plot2.set_cmap('thermal')
 
 	plot3 = fig[2].imshow(p3.frb['Mg_p1_number_density'], norm=LogNorm())
@@ -108,7 +108,7 @@ if __name__ == '__main__':
 	plot3.set_cmap('thermal')
 
 	plot4 = fig[3].imshow(p4.frb['Mg_p1_number_density'], norm=LogNorm())
-	plot4.set_clim((5e12, 1e18))
+	plot4.set_clim((1e-13, 1e21))
 	plot4.set_cmap('thermal')
 
 	for i in range(len(fig)):
