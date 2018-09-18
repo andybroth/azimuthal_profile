@@ -99,7 +99,7 @@ if __name__ == '__main__':
 	plot1.set_clim((1e-5, 3.5e-1))
 	plot1.set_cmap('thermal')
 
-	plot2 = fig[1].imshow(p2.frb['H_number_density'], norm=LogNorm())
+	plot2 = fig[1].imshow(p2.frb['density'], norm=LogNorm())
 	plot2.set_clim((1e13, 1e25))
 	plot2.set_cmap('thermal')
 
@@ -107,7 +107,7 @@ if __name__ == '__main__':
 	plot3.set_clim((1e-13, 1e21))
 	plot3.set_cmap('thermal')
 
-	plot4 = fig[3].imshow(p4.frb['O_p5_number_density'], norm=LogNorm())
+	plot4 = fig[3].imshow(p4.frb['Mg_p1_number_density'], norm=LogNorm())
 	plot4.set_clim((5e12, 1e18))
 	plot4.set_cmap('thermal')
 
