@@ -127,7 +127,7 @@ if __name__ == '__main__':
 
 	row1_cax = fig.add_cax(fig[1], 'right', buffer=0.01, length=1, width=0.05)
 	row1_cbar = plt.colorbar(plot2, cax=row1_cax, orientation='vertical')
-	row1_cbar.set_label('Projected Density ($\frac{g}{cm^2}$)', weight='bold')
+	row1_cbar.set_label('Projected Density ($g cm^2$)', weight='bold')
 	row1_cbar.ax.yaxis.label.set_font_properties(matplotlib.font_manager.FontProperties(size=16))
 	row1_cbar.ax.tick_params(labelsize=14)
 
