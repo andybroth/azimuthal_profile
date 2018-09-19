@@ -59,7 +59,7 @@ if __name__ == '__main__':
 	p3 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'Mg_p1_number_density'), center=c, 
 		width=width, data_source=box, north_vector=L, weight_field=None)
 	
-	fn = 'm11f_res12000'
+	# fn = 'm11f_res12000'
 
 	amiga_data = get_amiga_data('/mnt/data1/GalaxiesOnFire/%s/halo/ahf/halo_00000_smooth.dat' % fn)
 	amiga_data = smooth_amiga(amiga_data)
