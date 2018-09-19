@@ -37,7 +37,7 @@ if __name__ == '__main__':
 
 	radial_extent = ds.quan(250, 'kpc')
 	width = 2*radial_extent
-	width1= width
+	width1 = width
 
 	log("Reading amiga center for halo in %s" % fn)
 	c = read_amiga_center(amiga_data, fn, ds)
@@ -68,13 +68,15 @@ if __name__ == '__main__':
 	fn_head = fn.split('/')[-1]
 	fn_data = fn.split('/')[-4]
 
+	ions = ['H I', 'Mg II', 'O VI']
+
 	log("Starting projections for %s" % fn)
 	ds = GizmoDataset(fn)
 	trident.add_ion_fields(ds, ions=ions, ftype='gas')
 
 	radial_extent = ds.quan(250, 'kpc')
 	width = 2*radial_extent
-	width2= width
+	width2 = width
 
 	log("Reading amiga center for halo in %s" % fn)
 	c = read_amiga_center(amiga_data, fn, ds)
@@ -86,10 +88,13 @@ if __name__ == '__main__':
 	L = sp.quantities.angular_momentum_vector(use_gas=False, use_particles=True, particle_type='PartType0')
 	L, E1, E2 = ortho_find(L)
 
-	log('Generating Plot 2')
+	one = ds.arr([.5, .5, .5], 'Mpc')
+	box = ds.box(c-one, c+one)
+
+	log('Generating Plot 1')
 	p2 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'density'), center=c, 
 		width=width, data_source=box, north_vector=L, weight_field=None)
-	log('Generating Plot 4')
+	log('Generating Plot 3')
 	p4 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'Mg_p1_number_density'), center=c, 
 		width=width, data_source=box, north_vector=L, weight_field=None)
 
