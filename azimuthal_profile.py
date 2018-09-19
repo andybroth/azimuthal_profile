@@ -22,6 +22,7 @@ import yt
 yt.enable_parallelism()
 import numpy as np
 import h5py as h5
+import sys
 from yt.units.yt_array import \
     YTArray, \
     YTQuantity
