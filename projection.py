@@ -98,19 +98,19 @@ if __name__ == '__main__':
 
 	# Actually plot in the different axes
 	plot1 = fig[0].imshow(p1.frb['density'], norm=LogNorm())
-	clim1 = plot1.get_clim()
+	# clim1 = plot1.get_clim()
 	plot1.set_cmap('thermal')
 
 	plot2 = fig[1].imshow(p2.frb['density'], norm=LogNorm())
-	plot2.set_clim(clim)
+	# plot2.set_clim(clim)
 	plot2.set_cmap('thermal')
 
 	plot3 = fig[2].imshow(p3.frb['Mg_p1_number_density'], norm=LogNorm())
-	clim = plot3.get_clim()
+	# clim = plot3.get_clim()
 	plot3.set_cmap('thermal')
 
 	plot4 = fig[3].imshow(p4.frb['Mg_p1_number_density'], norm=LogNorm())
-	plot4.set_clim(clim)
+	# plot4.set_clim(clim)
 	plot4.set_cmap('thermal')
 
 	for i in range(len(fig)):
