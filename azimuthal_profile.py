@@ -21,19 +21,10 @@ import matplotlib.pyplot as plt
 import yt
 yt.enable_parallelism()
 import numpy as np
-import trident
 import h5py as h5
-import sys
-import glob
-import os.path
 from yt.units.yt_array import \
     YTArray, \
     YTQuantity
-import cmocean
-from scipy.signal import filtfilt, gaussian
-from scipy.ndimage import filters
-import ytree
-
 from matplotlib.colors import LogNorm
 from grid_figure import GridFigure
 
@@ -228,7 +219,7 @@ if __name__ == '__main__':
   threshold = {'H_number_density' : 10**16, 'O_p5_number_density':1e14, 'density':1e-4}
 
   # Color cycling
-  colors = ['red', 'blue', 'cyan', 'green', 'yellow', 'black']
+  colors = ['black', 'red', 'blue', 'cyan', 'green', 'yellow', 'black']
   linestyles = ['-', '--', ':', '-.']
 
   fn_head = sys.argv[1].split('.')[0][:-11]
