@@ -20,7 +20,7 @@ if __name__ == '__main__':
 	Makes projections from m12i_res7100_md for density, H I, Mg II, and O VI
 	in a grid figure plot for the paper. 
 	'''
-	ions = ['Mg II']
+	ions = ['H I', 'Mg II']
 
 	fn = 'm11g_res12000'
 
@@ -51,7 +51,7 @@ if __name__ == '__main__':
 	box = ds.box(c-one, c+one)
 
 	log('Generating Plot 1')
-	p1 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'density'), center=c, 
+	p1 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'H_number_density'), center=c, 
 		width=width, data_source=box, north_vector=L, weight_field=None)
 	log('Generating Plot 3')
 	p3 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'Mg_p1_number_density'), center=c, 
@@ -99,7 +99,7 @@ if __name__ == '__main__':
 	box = ds.box(c-one, c+one)
 
 	log('Generating Plot 2')
-	p2 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'density'), center=c, 
+	p2 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'H_number_density'), center=c, 
 		width=width, data_source=box, north_vector=L, weight_field=None)
 	log('Generating Plot 4')
 	p4 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'Mg_p1_number_density'), center=c, 
@@ -130,13 +130,13 @@ if __name__ == '__main__':
 	
 	row1_cax = fig.add_cax(fig[1], 'right', buffer=0.01, length=1, width=0.05)
 	row1_cbar = plt.colorbar(plot2, cax=row1_cax, orientation='vertical')
-	row1_cbar.set_label('Projected Density ($g cm^2$)', weight='bold')
+	row1_cbar.set_label('H I Column Density [$g cm^2$]', weight='bold')
 	row1_cbar.ax.yaxis.label.set_font_properties(matplotlib.font_manager.FontProperties(size=16))
 	row1_cbar.ax.tick_params(labelsize=14)
 
 	row2_cax = fig.add_cax(fig[3], 'right', buffer=0.01, length=1, width=0.05)
 	row2_cbar = plt.colorbar(plot4, cax=row2_cax, orientation='vertical')
-	row2_cbar.set_label('Mg II Column Density (cm$^{-2}$)', weight='bold')
+	row2_cbar.set_label('Mg II Column Density [cm$^{-2}$]', weight='bold')
 	row2_cbar.ax.yaxis.label.set_font_properties(matplotlib.font_manager.FontProperties(size=16))
 	row2_cbar.ax.tick_params(labelsize=14) 
 	
