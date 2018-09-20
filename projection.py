@@ -127,7 +127,7 @@ if __name__ == '__main__':
 		else:
 			cir = Circle((0.5, 0.5), rvir2/width2, fill=False, color='white', linestyle='dashed', linewidth=5, transform=ax.transAxes, alpha=0.5)
 		ax.add_patch(cir)
-	
+	'''
 	row1_cax = fig.add_cax(fig[1], 'right', buffer=0.01, length=1, width=0.05)
 	row1_cbar = plt.colorbar(plot2, cax=row1_cax, orientation='vertical')
 	row1_cbar.set_label('Projected Density ($g cm^2$)', weight='bold')
@@ -139,5 +139,5 @@ if __name__ == '__main__':
 	row2_cbar.set_label('Mg II Column Density (cm$^{-2}$)', weight='bold')
 	row2_cbar.ax.yaxis.label.set_font_properties(matplotlib.font_manager.FontProperties(size=16))
 	row2_cbar.ax.tick_params(labelsize=14) 
-	
-	plt.savefig('projections.png')
+	'''
+	plt.savefig('projections_basic.png')
