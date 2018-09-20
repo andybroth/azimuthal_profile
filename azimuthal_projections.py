@@ -113,7 +113,7 @@ if __name__ == '__main__':
 
 
 	inclines = [0]
-	dirs = ['']
+	dirs = ['testing/']
 	start = time.time()
 	
 	res = 800
