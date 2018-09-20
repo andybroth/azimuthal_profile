@@ -231,6 +231,8 @@ if __name__ == '__main__':
   # Get the list of ion_fields from the first file available
   fn = list(profiles_dict.values())[0][0]
 
+  print(fn)
+
   ion_fields = ['density', 'metal_density', 'temperature', 'H_number_density']
 
   fig = GridFigure(2, 2, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
@@ -244,6 +246,7 @@ if __name__ == '__main__':
       a_arr = np.array([])
       r_arr = np.array([])
       for j in range(n_files):
+        print(v[j])
         f = h5.File(v[j], 'r')
         a_arr = np.concatenate((a_arr, f['phi'].value))
         cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
