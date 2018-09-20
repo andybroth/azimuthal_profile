@@ -5,7 +5,6 @@ from mpl_toolkits.axes_grid1 import AxesGrid
 import yt
 from yt.units.yt_array import YTQuantity
 import numpy as np
-import trident
 from grid_figure import GridFigure
 from matplotlib.colors import LogNorm
 from matplotlib.patches import Circle
@@ -26,14 +25,9 @@ if __name__ == '__main__':
 	amiga_data = smooth_amiga(amiga_data)
 
 	fn = '/mnt/data1/GalaxiesOnFire/%s/output/snapdir_600/snapshot_600.0.hdf5' % fn
-	fn_head = fn.split('/')[-1]
-	fn_data = fn.split('/')[-4]
-
-	ions = ['H I', 'Mg II', 'O VI']
 
 	log("Starting projections for %s" % fn)
 	ds = GizmoDataset(fn)
-	trident.add_ion_fields(ds, ions=ions, ftype='gas')
 
 	radial_extent = ds.quan(250, 'kpc')
 	width = 2*radial_extent
@@ -66,14 +60,9 @@ if __name__ == '__main__':
 	amiga_data = smooth_amiga(amiga_data)
 
 	fn = '/mnt/data1/GalaxiesOnFire/%s/output/snapdir_600/snapshot_600.0.hdf5' % fn
-	fn_head = fn.split('/')[-1]
-	fn_data = fn.split('/')[-4]
-
-	ions = ['H I', 'Mg II', 'O VI']
 
 	log("Starting projections for %s" % fn)
 	ds = GizmoDataset(fn)
-	trident.add_ion_fields(ds, ions=ions, ftype='gas')
 
 	radial_extent = ds.quan(250, 'kpc')
 	width = 2*radial_extent
@@ -92,10 +81,10 @@ if __name__ == '__main__':
 	one = ds.arr([.5, .5, .5], 'Mpc')
 	box = ds.box(c-one, c+one)
 
-	log('Generating Plot 1')
+	log('Generating Plot 2')
 	p2 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'density'), center=c, 
 		width=width, data_source=box, north_vector=L, weight_field=None)
-	log('Generating Plot 3')
+	log('Generating Plot 4')
 	p4 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'Mg_p1_number_density'), center=c, 
 		width=width, data_source=box, north_vector=L, weight_field=None)
 
@@ -132,7 +121,7 @@ if __name__ == '__main__':
 		else:
 			cir = Circle((0.5, 0.5), rvir2/width2, fill=False, color='white', linestyle='dashed', linewidth=5, transform=ax.transAxes, alpha=0.5)
 		ax.add_patch(cir)
-
+	'''
 	row1_cax = fig.add_cax(fig[1], 'right', buffer=0.01, length=1, width=0.05)
 	row1_cbar = plt.colorbar(plot2, cax=row1_cax, orientation='vertical')
 	row1_cbar.set_label('Projected Density ($g cm^2$)', weight='bold')
@@ -144,5 +133,5 @@ if __name__ == '__main__':
 	row2_cbar.set_label('Mg II Column Density (cm$^{-2}$)', weight='bold')
 	row2_cbar.ax.yaxis.label.set_font_properties(matplotlib.font_manager.FontProperties(size=16))
 	row2_cbar.ax.tick_params(labelsize=14) 
-
-	plt.savefig('projections.png')
+	'''
+	plt.savefig('projections_basic.png')
