@@ -3,6 +3,7 @@ matplotlib.use('Agg')
 from matplotlib import pyplot as plt
 from mpl_toolkits.axes_grid1 import AxesGrid
 import yt
+import trident
 from yt.units.yt_array import YTQuantity
 import numpy as np
 from grid_figure import GridFigure
@@ -19,6 +20,8 @@ if __name__ == '__main__':
 	Makes projections from m12i_res7100_md for density, H I, Mg II, and O VI
 	in a grid figure plot for the paper. 
 	'''
+	ions = ['Mg II']
+
 	fn = 'm11g_res12000'
 
 	amiga_data = get_amiga_data('/mnt/data1/GalaxiesOnFire/%s/halo/ahf/halo_00000_smooth.dat' % fn)
@@ -28,6 +31,7 @@ if __name__ == '__main__':
 
 	log("Starting projections for %s" % fn)
 	ds = GizmoDataset(fn)
+	trident.add_ion_fields(ds, ions=ions, ftype='gas')
 
 	radial_extent = ds.quan(250, 'kpc')
 	width = 2*radial_extent
@@ -53,6 +57,18 @@ if __name__ == '__main__':
 	p3 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'Mg_p1_number_density'), center=c, 
 		width=width, data_source=box, north_vector=L, weight_field=None)
 	
+	print("Stitching together")
+	fig = GridFigure(2, 2, top_buffer=0.01, bottom_buffer=0.01, left_buffer=0.01, right_buffer=0.13, vertical_buffer=0.01, horizontal_buffer=0.01, figsize=(9,8))
+
+	# Actually plot in the different axes
+	plot1 = fig[0].imshow(p1.frb['density'], norm=LogNorm())
+	# clim1 = plot1.get_clim()
+	plot1.set_cmap('thermal')
+
+	plot3 = fig[2].imshow(p3.frb['Mg_p1_number_density'], norm=LogNorm())
+	# clim = plot3.get_clim()
+	plot3.set_cmap('thermal')
+
 	# fn = 'm11f_res12000'
 	fn = 'm11g_res12000'
 
@@ -63,6 +79,7 @@ if __name__ == '__main__':
 
 	log("Starting projections for %s" % fn)
 	ds = GizmoDataset(fn)
+	trident.add_ion_fields(ds, ions=ions, ftype='gas')
 
 	radial_extent = ds.quan(250, 'kpc')
 	width = 2*radial_extent
@@ -88,21 +105,10 @@ if __name__ == '__main__':
 	p4 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'Mg_p1_number_density'), center=c, 
 		width=width, data_source=box, north_vector=L, weight_field=None)
 
-	print("Stitching together")
-	fig = GridFigure(2, 2, top_buffer=0.01, bottom_buffer=0.01, left_buffer=0.01, right_buffer=0.13, vertical_buffer=0.01, horizontal_buffer=0.01, figsize=(9,8))
-
-	# Actually plot in the different axes
-	plot1 = fig[0].imshow(p1.frb['density'], norm=LogNorm())
-	# clim1 = plot1.get_clim()
-	plot1.set_cmap('thermal')
-
+	# Actually plot in different axis
 	plot2 = fig[1].imshow(p2.frb['density'], norm=LogNorm())
 	# plot2.set_clim(clim)
 	plot2.set_cmap('thermal')
-
-	plot3 = fig[2].imshow(p3.frb['Mg_p1_number_density'], norm=LogNorm())
-	# clim = plot3.get_clim()
-	plot3.set_cmap('thermal')
 
 	plot4 = fig[3].imshow(p4.frb['Mg_p1_number_density'], norm=LogNorm())
 	# plot4.set_clim(clim)
