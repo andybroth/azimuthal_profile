@@ -102,6 +102,18 @@ if __name__ == '__main__':
 	"""
 
 	# Variables to set for each run
+
+	# Inclines are the angles at which the projections are inclined, for just 
+	# edge on view set inclinces=[0]
+	inclines = [-20, -10, 10, 20]
+	# Directory for each cdens file to go, each of these corresponds to an
+	# inclination angle. Needed because cdens files have same names based on
+	# snapshot number
+	dirs = ['20n/', '10n/', '10/', '20/']
+
+
+	inclines = [0]
+	dirs = ['']
 	start = time.time()
 	
 	res = 800
@@ -130,21 +142,21 @@ if __name__ == '__main__':
 		ions = []
 		ion_fields = []
 		full_ion_fields = []
-		ions.append('H I')
-		ion_fields.append('H_number_density')
-		full_ion_fields.append(('gas', 'H_number_density'))
-		ions.append('Mg II')
-		ion_fields.append('Mg_p1_number_density')
-		full_ion_fields.append(('gas', 'Mg_p1_number_density'))
+		# ions.append('H I')
+		# ion_fields.append('H_number_density')
+		# full_ion_fields.append(('gas', 'H_number_density'))
+		# ions.append('Mg II')
+		# ion_fields.append('Mg_p1_number_density')
+		# full_ion_fields.append(('gas', 'Mg_p1_number_density'))
 		# ions.append('Si II')
 		# ion_fields.append('Si_p1_number_density')
 		# full_ion_fields.append(('gas', 'Si_p1_number_density'))
 		# ions.append('Si III')
 		# ion_fields.append('Si_p2_number_density')
 		# full_ion_fields.append(('gas', 'Si_p2_number_density'))
-		ions.append('Si IV')
-		ion_fields.append('Si_p3_number_density')
-		full_ion_fields.append(('gas', 'Si_p3_number_density'))
+		# ions.append('Si IV')
+		# ion_fields.append('Si_p3_number_density')
+		# full_ion_fields.append(('gas', 'Si_p3_number_density'))
 		# ions.append('N II')
 		# ion_fields.append('N_p1_number_density')
 		# full_ion_fields.append(('gas', 'N_p1_number_density'))
@@ -154,15 +166,15 @@ if __name__ == '__main__':
 		# ions.append('N V')
 		# ion_fields.append('N_p4_number_density')
 		# full_ion_fields.append(('gas', 'N_p4_number_density'))
-		ions.append('C II')
-		ion_fields.append('C_p1_number_density')
-		full_ion_fields.append(('gas', 'C_p1_number_density'))
-		ions.append('C III')
-		ion_fields.append('C_p2_number_density')
-		full_ion_fields.append(('gas', 'C_p2_number_density'))
-		ions.append('Ne VIII')
-		ion_fields.append('Ne_p7_number_density')
-		full_ion_fields.append(('gas', 'Ne_p7_number_density'))
+		# ions.append('C II')
+		# ion_fields.append('C_p1_number_density')
+		# full_ion_fields.append(('gas', 'C_p1_number_density'))
+		# ions.append('C III')
+		# ion_fields.append('C_p2_number_density')
+		# full_ion_fields.append(('gas', 'C_p2_number_density'))
+		# ions.append('Ne VIII')
+		# ion_fields.append('Ne_p7_number_density')
+		# full_ion_fields.append(('gas', 'Ne_p7_number_density'))
 		ions.append('O VI')
 		ion_fields.append('O_p5_number_density')
 		full_ion_fields.append(('gas', 'O_p5_number_density'))
@@ -170,26 +182,26 @@ if __name__ == '__main__':
 		others = []
 		other_fields = []
 		full_other_fields = []
-		others.append('Temperature')
-		other_fields.append('temperature')
-		full_other_fields.append(('gas', 'temperature'))
+		# others.append('Temperature')
+		# other_fields.append('temperature')
+		# full_other_fields.append(('gas', 'temperature'))
 
 		log("Starting projections for %s" % fn)
 		ds = GizmoDataset(fn)
 		trident.add_ion_fields(ds, ions=ions, ftype='gas')
 
-		radial_extent = ds.quan(250, 'kpc')
+		radial_extent = ds.quan(375, 'kpc')
 		width = 2*radial_extent
 
 		# ions.append('O_nuclei_density')
 		# ion_fields.append('O_nuclei_density')
 		# full_ion_fields.append(('gas', 'O_nuclei_density'))
-		ions.append('density')
-		ion_fields.append('density')
-		full_ion_fields.append(('gas', 'density'))
-		ions.append('metal_density')
-		ion_fields.append('metal_density')
-		full_ion_fields.append(('gas', 'metal_density'))
+		# ions.append('density')
+		# ion_fields.append('density')
+		# full_ion_fields.append(('gas', 'density'))
+		# ions.append('metal_density')
+		# ion_fields.append('metal_density')
+		# full_ion_fields.append(('gas', 'metal_density'))
 
 		# Figure out centroid and r_vir info
 		log("Reading amiga center for halo in %s" % fn)
@@ -203,16 +215,20 @@ if __name__ == '__main__':
 		log('Finding Angular Momentum of Galaxy')
 		sp = ds.sphere(c, (15, 'kpc'))
 		L = sp.quantities.angular_momentum_vector(use_gas=False, use_particles=True, particle_type='PartType0')
-		log(L)
+		magnitude = mag = np.linalg.norm(L)
 		L, v1, v2 = ortho_find(L)
-		inclines = [-20, -10, 10, 20]
-		dirs = ['20n/', '10n/', '10/', '20/']
 
 		for i, angle in enumerate(inclines):
 			cdens_fn_1 = "%s/%s/%s_1_cdens.h5" % (fn_data, dirs[i], fn_head)
 			cdens_fn_2 = "%s/%s/%s_2_cdens.h5" % (fn_data, dirs[i], fn_head)
 			cdens_file_1 = h5.File(cdens_fn_1, 'a')
 			cdens_file_2 = h5.File(cdens_fn_2, 'a')
+
+			# Makes Angular momentum and rvir attributes of the cdens files
+			cdens_file_1.attrs.create('Ang_Mom', magnitude)
+			cdens_file_2.attrs.create('Ang_Mom', magnitude)
+			cdens_file_1.attrs.create('rvir', rvir.in_units('kpc'))
+			cdens_file_2.attrs.create('rvir', rvir.in_units('kpc'))
 
 			dir1 = dirs[i] + 'images/1/'
 			dir2 = dirs[i] + 'images/2/'
@@ -225,13 +241,16 @@ if __name__ == '__main__':
 			radius = (px**2.0 + py**2.0)**0.5
 			if "radius" not in cdens_file_1.keys():
 				cdens_file_1.create_dataset("radius", data=radius.ravel())
+			if "radius" not in cdens_file_2.keys():
+				cdens_file_2.create_dataset("radius", data=radius.ravel())
 
 			# Finds azimuthal angle for each pixel
 			phi = np.abs(np.arctan(py / px))
-
 			phi *= 180 / np.pi
 			if "phi" not in cdens_file_1.keys():
 				cdens_file_1.create_dataset("phi", data=phi.ravel())
+			if "phi" not in cdens_file_2.keys():
+				cdens_file_2.create_dataset("phi", data=phi.ravel())
 
 
 			log('Generating Edge on Projections with 1st vec')
@@ -256,14 +275,6 @@ if __name__ == '__main__':
 					cdens_file_1.flush()
 			cdens_file_1.close()
 
-			
-			# Identify the radius from the center of each pixel (in sim units)
-			if "radius" not in cdens_file_2.keys():
-				cdens_file_2.create_dataset("radius", data=radius.ravel())
-
-			# Finds azimuthal angle for each pixel
-			if "phi" not in cdens_file_2.keys():
-				cdens_file_2.create_dataset("phi", data=phi.ravel())
 
 			log('Generating Edge on Projections with 2nd vec')
 			log('Ion Fields')
