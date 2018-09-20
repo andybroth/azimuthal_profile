@@ -113,7 +113,7 @@ if __name__ == '__main__':
 
 
 	inclines = [0]
-	dirs = ['testing/']
+	dirs = ['']
 	start = time.time()
 	
 	res = 800
@@ -135,8 +135,10 @@ if __name__ == '__main__':
 		fn = fn.strip() # Get rid of trailing \n
 		fn_head = fn.split('/')[-1]
 		fn_data = fn.split('/')[-4]
-		cdens_fn_1 = "%s/%s_1_cdens.h5" % (fn_data, fn_head)
-		cdens_fn_2 = "%s/%s_2_cdens.h5" % (fn_data, fn_head)
+		
+		# CHANGE THIS BACK AFRER TEST
+		cdens_fn_1 = "testing/%s/%s_1_cdens.h5" % (fn_data, fn_head)
+		cdens_fn_2 = "testing/%s/%s_2_cdens.h5" % (fn_data, fn_head)
 
 		# Define ions we care about
 		ions = []
