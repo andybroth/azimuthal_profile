@@ -151,7 +151,7 @@ def read_parameter_file(fn):
           i += 1
       profiles[profile_label] = profile_list
       i += 1
-  return profiles
+  return profiles, profile_label
 
 def plot_profile(r_bins, profile_data, label, color, ax, linestyle='dashed'):
   '''
@@ -225,14 +225,9 @@ if __name__ == '__main__':
   colors = ['black', 'red', 'blue', 'cyan', 'green', 'yellow', 'black']
   linestyles = ['-', '--', ':', '-.']
 
-  fn_head = sys.argv[1].split('.')[0][:-11]
-  profiles_dict = read_parameter_file(sys.argv[1])
+  profiles_dict, fn_head = read_parameter_file(sys.argv[1])
 
   # Get the list of ion_fields from the first file available
-  fn = list(profiles_dict.values())[0][0]
-
-  print('fn')
-  print(fn)
 
   ion_fields = ['density', 'metal_density', 'temperature', 'H_number_density']
 
@@ -247,8 +242,6 @@ if __name__ == '__main__':
       a_arr = np.array([])
       r_arr = np.array([])
       for j in range(n_files):
-        print('v[j]')
-        print(v[j])
         f = h5.File(v[j], 'r')
         a_arr = np.concatenate((a_arr, f['phi'].value))
         cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
