@@ -247,7 +247,7 @@ if __name__ == '__main__':
       a_arr = np.array([])
       r_arr = np.array([])
       for j in range(n_files):
-        print(v[j])
+        print('v[j]')
         print(v[j])
         f = h5.File(v[j], 'r')
         a_arr = np.concatenate((a_arr, f['phi'].value))
