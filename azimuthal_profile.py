@@ -102,6 +102,7 @@ def fplot_radius(ion, description, fn, field, ax):
 
 def limits_from_field(field):
   '''Give limits for the plots depending on the ion field'''
+  return None
   if field == 'H_number_density':
     return (1e13, 1e20)
   elif field == 'O_p5_number_density':
