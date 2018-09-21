@@ -228,6 +228,8 @@ if __name__ == '__main__':
 
   profiles_dict, fn_head = read_parameter_file(sys.argv[1])
 
+  fn_head = 'm12i_res7100_md/%s' % fn_head
+  
   # Get the list of ion_fields from the first file available
 
   ion_fields = ['density', 'metal_density', 'temperature', 'H_number_density']
