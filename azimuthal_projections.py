@@ -72,7 +72,7 @@ def make_off_axis_projection(ds, vec, north_vec, ion_fields, center, width, data
 		p.set_background_color(field)
 	if dir is None:
 		dir = 'face/'
-	p.save(os.path.join('testing/%s/' % fn_data, dir))
+	p.save(os.path.join('%s/' % fn_data, dir))
 	return p.frb
 
 def rotate(theta, E1, E2):
@@ -188,7 +188,7 @@ if __name__ == '__main__':
 		ds = GizmoDataset(fn)
 		trident.add_ion_fields(ds, ions=ions, ftype='gas')
 
-		radial_extent = ds.quan(375, 'kpc')
+		radial_extent = ds.quan(250, 'kpc')
 		width = 2*radial_extent
 
 		# ions.append('O_nuclei_density')
@@ -217,8 +217,8 @@ if __name__ == '__main__':
 		L, v1, v2 = ortho_find(L)
 
 		for i, angle in enumerate(inclines):
-			cdens_fn_1 = "testing/%s/%s%s_1_cdens.h5" % (fn_data, dirs[i], fn_head)
-			cdens_fn_2 = "testing/%s/%s%s_2_cdens.h5" % (fn_data, dirs[i], fn_head)
+			cdens_fn_1 = "%s/%s%s_1_cdens.h5" % (fn_data, dirs[i], fn_head)
+			cdens_fn_2 = "%s/%s%s_2_cdens.h5" % (fn_data, dirs[i], fn_head)
 			cdens_file_1 = h5.File(cdens_fn_1, 'a')
 			cdens_file_2 = h5.File(cdens_fn_2, 'a')
 
