@@ -188,7 +188,7 @@ if __name__ == '__main__':
 		ds = GizmoDataset(fn)
 		trident.add_ion_fields(ds, ions=ions, ftype='gas')
 
-		radial_extent = ds.quan(250, 'kpc')
+		radial_extent = ds.quan(375, 'kpc')
 		width = 2*radial_extent
 
 		# ions.append('O_nuclei_density')
