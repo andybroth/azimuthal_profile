@@ -135,10 +135,6 @@ if __name__ == '__main__':
 		fn = fn.strip() # Get rid of trailing \n
 		fn_head = fn.split('/')[-1]
 		fn_data = fn.split('/')[-4]
-		
-		# CHANGE THIS BACK AFRER TEST
-		cdens_fn_1 = "testing/%s/%s_1_cdens.h5" % (fn_data, fn_head)
-		cdens_fn_2 = "testing/%s/%s_2_cdens.h5" % (fn_data, fn_head)
 
 		# Define ions we care about
 		ions = []
@@ -221,8 +217,8 @@ if __name__ == '__main__':
 		L, v1, v2 = ortho_find(L)
 
 		for i, angle in enumerate(inclines):
-			cdens_fn_1 = "%s/%s/%s_1_cdens.h5" % (fn_data, dirs[i], fn_head)
-			cdens_fn_2 = "%s/%s/%s_2_cdens.h5" % (fn_data, dirs[i], fn_head)
+			cdens_fn_1 = "testing/%s/%s%s_1_cdens.h5" % (fn_data, dirs[i], fn_head)
+			cdens_fn_2 = "testing/%s/%s%s_2_cdens.h5" % (fn_data, dirs[i], fn_head)
 			cdens_file_1 = h5.File(cdens_fn_1, 'a')
 			cdens_file_2 = h5.File(cdens_fn_2, 'a')
 
