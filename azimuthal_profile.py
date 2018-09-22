@@ -231,11 +231,10 @@ if __name__ == '__main__':
   fn_head = '%s' % fn_head
 
   # Get the list of ion_fields from the first file available
+  '''
+  ion_fields = ['density', 'metal_density', 'temperature', 'H_number_density', 'C_p1_number_density', 'C_p2_number_density', 'Ne_p7_number_density', 'O_p5_number_density', 'Si_p3_number_density']
 
-  ion_fields = ['density', 'metal_density', 'temperature', 'H_number_density']
-  ion_fields = ['O_p5_number_density']
-
-  fig = GridFigure(2, 2, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
+  fig = GridFigure(3, 3, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
     right_buffer=0.02, vertical_buffer=0.08, horizontal_buffer=0.08, figsize=(12,8))
 
   # Step through each ion and make plots of azimuthal angle vs N
@@ -274,7 +273,7 @@ if __name__ == '__main__':
 
   plt.savefig('%s/fig1a.png' % fn_head)
 
-  fig = GridFigure(2, 2, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
+  fig = GridFigure(3, 3, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
     right_buffer=0.02, vertical_buffer=0.08, horizontal_buffer=0.08, figsize=(12,8))
 
   for i, field in enumerate(ion_fields):
@@ -312,7 +311,7 @@ if __name__ == '__main__':
 
   plt.savefig('%s/fig1b.png' % fn_head)
   
-  fig = GridFigure(2, 2, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
+  fig = GridFigure(3, 3, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
     right_buffer=0.02, vertical_buffer=0.08, horizontal_buffer=0.08, figsize=(12,8))
 
   for i, field in enumerate(ion_fields):
@@ -350,125 +349,125 @@ if __name__ == '__main__':
       fplot_radius(ion, '2', fn_head, field, ax)
 
   plt.savefig('%s/fig1c.png' % fn_head)
+  '''
 
-  ion_fields = ['C_p1_number_density', 'C_p2_number_density', 'Ne_p7_number_density', 'O_p5_number_density', 'Si_p3_number_density']
+  # fig = GridFigure(1, 5, top_buffer=0.04, bottom_buffer=0.08, left_buffer=0.12, 
+  #   right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,5))
 
-  fig = GridFigure(1, 5, top_buffer=0.04, bottom_buffer=0.08, left_buffer=0.12, 
-    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,5))
+  # # Step through each ion and make plots of azimuthal angle vs N
+  # for i, field in enumerate(ion_fields):
+  #   for c, (k,v) in enumerate(profiles_dict.items()):
+  #     n_files = len(v)
+  #     cdens_arr = np.array([])
+  #     a_arr = np.array([])
+  #     r_arr = np.array([])
+  #     for j in range(n_files):
+  #       f = h5.File(v[j], 'r')
+  #       a_arr = np.concatenate((a_arr, f['phi'].value))
+  #       cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
+  #       new_r = f['radius'].value / f.attrs.get('rvir')
+  #       r_arr = np.concatenate((r_arr, new_r))
+  #     if field == 'Mg_p1_number_density' or field == 'O_p5_number_density':
+  #       cdens_arr *= 6.02 * 10**23
 
-  # Step through each ion and make plots of azimuthal angle vs N
-  for i, field in enumerate(ion_fields):
-    for c, (k,v) in enumerate(profiles_dict.items()):
-      n_files = len(v)
-      cdens_arr = np.array([])
-      a_arr = np.array([])
-      r_arr = np.array([])
-      for j in range(n_files):
-        f = h5.File(v[j], 'r')
-        a_arr = np.concatenate((a_arr, f['phi'].value))
-        cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
-        new_r = f['radius'].value / f.attrs.get('rvir')
-        r_arr = np.concatenate((r_arr, new_r))
-      if field == 'Mg_p1_number_density' or field == 'O_p5_number_density':
-        cdens_arr *= 6.02 * 10**23
+  #     # create bins for data
+  #     a_n_bins = 9
+  #     a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
+  #     a_bins = np.flip(a_bins, 0)
 
-      # create bins for data
-      a_n_bins = 9
-      a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
-      a_bins = np.flip(a_bins, 0)
+  #     r_n_bins = 4
+  #     r_bins = np.linspace(1, 0, r_n_bins, endpoint=False)
+  #     r_bins = np.flip(r_bins, 0)
 
-      r_n_bins = 4
-      r_bins = np.linspace(1, 0, r_n_bins, endpoint=False)
-      r_bins = np.flip(r_bins, 0)
+  #     ax = fig[i]
+  #     profile_data = make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins)
+  #     for i in range(r_n_bins):
+  #       plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], '%s < b/rvir < %s' % \
+  #                   (.25*i, .25*i + .25), colors[i], ax, linestyles[i])
+  #     ion = finish_plot(field, ax)
+  #     fplot_angle(ion, '', fn_head, field, ax)
 
-      ax = fig[i]
-      profile_data = make_profiles2(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins)
-      for i in range(r_n_bins):
-        plot_profile(np.linspace(0, 90, a_n_bins), profile_data[i], '%s < b/rvir < %s' % \
-                    (.25*i, .25*i + .25), colors[i], ax, linestyles[i])
-      ion = finish_plot(field, ax)
-      fplot_angle(ion, '', fn_head, field, ax)
+  # plt.savefig('%s/fig2a.png' % fn_head)
 
-  plt.savefig('%s/fig2a.png' % fn_head)
+  # fig = GridFigure(1, 5, top_buffer=0.04, bottom_buffer=0.12, left_buffer=0.12, 
+  #   right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,5))
 
-  fig = GridFigure(1, 5, top_buffer=0.04, bottom_buffer=0.12, left_buffer=0.12, 
-    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,5))
+  # for i, field in enumerate(ion_fields):
+  #   for c, (k,v) in enumerate(profiles_dict.items()):
+  #     n_files = len(v)
+  #     cdens_arr = np.array([])
+  #     a_arr = np.array([])
+  #     r_arr = np.array([])
+  #     for j in range(n_files):
+  #       f = h5.File(v[j], 'r')
+  #       a_arr = np.concatenate((a_arr, f['phi'].value))
+  #       cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
+  #       new_r = f['radius'].value / f.attrs.get('rvir')
+  #       r_arr = np.concatenate((r_arr, new_r))
+  #     if field == 'Mg_p1_number_density' or field == 'O_p5_number_density':
+  #       cdens_arr *= 6.02 * 10**23
 
-  for i, field in enumerate(ion_fields):
-    for c, (k,v) in enumerate(profiles_dict.items()):
-      n_files = len(v)
-      cdens_arr = np.array([])
-      a_arr = np.array([])
-      r_arr = np.array([])
-      for j in range(n_files):
-        f = h5.File(v[j], 'r')
-        a_arr = np.concatenate((a_arr, f['phi'].value))
-        cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
-        new_r = f['radius'].value / f.attrs.get('rvir')
-        r_arr = np.concatenate((r_arr, new_r))
-      if field == 'Mg_p1_number_density' or field == 'O_p5_number_density':
-        cdens_arr *= 6.02 * 10**23
+  #     # redefine bins
+  #     a_n_bins = 2
+  #     a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
+  #     a_bins = np.flip(a_bins, 0)
 
-      # redefine bins
-      a_n_bins = 2
-      a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
-      a_bins = np.flip(a_bins, 0)
+  #     r_n_bins = 25
+  #     r_bins = np.linspace(1.25, 0, r_n_bins, endpoint=False)
+  #     r_bins = np.flip(r_bins, 0)
+  #     r_bins_plot = np.linspace(0, 1.25, r_n_bins)
 
-      r_n_bins = 25
-      r_bins = np.linspace(1.25, 0, r_n_bins, endpoint=False)
-      r_bins = np.flip(r_bins, 0)
-      r_bins_plot = np.linspace(0, 1.25, r_n_bins)
+  #     # Step through each ion and make plots of radius vs N for 3 radial bins
+  #     ax = fig[i]
+  #     radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
+  #     ion = finish_plot(field, ax)
+  #     plot_profile(r_bins_plot, radial_data[0], 'Φ < 45 degrees', colors[0], ax, linestyles[0])
+  #     plot_profile(r_bins_plot, radial_data[1], 'Φ > 45 degrees', colors[1], ax, linestyles[1])
+  #     fplot_radius(ion, 'long', fn_head, field, ax)
 
-      # Step through each ion and make plots of radius vs N for 3 radial bins
-      ax = fig[i]
-      radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
-      ion = finish_plot(field, ax)
-      plot_profile(r_bins_plot, radial_data[0], 'Φ < 45 degrees', colors[0], ax, linestyles[0])
-      plot_profile(r_bins_plot, radial_data[1], 'Φ > 45 degrees', colors[1], ax, linestyles[1])
-      fplot_radius(ion, 'long', fn_head, field, ax)
-
-  plt.savefig('%s/fig2b.png' % fn_head)
+  # plt.savefig('%s/fig2b.png' % fn_head)
   
-  fig = GridFigure(1, 5, top_buffer=0.04, bottom_buffer=0.12, left_buffer=0.12, 
-    right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,5))
+  # fig = GridFigure(1, 5, top_buffer=0.04, bottom_buffer=0.12, left_buffer=0.12, 
+  #   right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,5))
 
-  for i, field in enumerate(ion_fields):
-    for c, (k,v) in enumerate(profiles_dict.items()):
-      n_files = len(v)
-      cdens_arr = np.array([])
-      a_arr = np.array([])
-      r_arr = np.array([])
-      for j in range(n_files):
-        f = h5.File(v[j], 'r')
-        a_arr = np.concatenate((a_arr, f['phi'].value))
-        cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
-        new_r = f['radius'].value / f.attrs.get('rvir')
-        r_arr = np.concatenate((r_arr, new_r))
-      if field == 'Mg_p1_number_density' or field == 'O_p5_number_density':
-        cdens_arr *= 6.02 * 10**23
+  # for i, field in enumerate(ion_fields):
+  #   for c, (k,v) in enumerate(profiles_dict.items()):
+  #     n_files = len(v)
+  #     cdens_arr = np.array([])
+  #     a_arr = np.array([])
+  #     r_arr = np.array([])
+  #     for j in range(n_files):
+  #       f = h5.File(v[j], 'r')
+  #       a_arr = np.concatenate((a_arr, f['phi'].value))
+  #       cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
+  #       new_r = f['radius'].value / f.attrs.get('rvir')
+  #       r_arr = np.concatenate((r_arr, new_r))
+  #     if field == 'Mg_p1_number_density' or field == 'O_p5_number_density':
+  #       cdens_arr *= 6.02 * 10**23
 
-      # makes other plot
-      a_n_bins = 3
-      a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
-      a_bins = np.flip(a_bins, 0)
+  #     # makes other plot
+  #     a_n_bins = 3
+  #     a_bins = np.linspace(90, 0, a_n_bins, endpoint=False)
+  #     a_bins = np.flip(a_bins, 0)
 
-      r_n_bins = 25
-      r_bins = np.linspace(1.25, 0, r_n_bins, endpoint=False)
-      r_bins = np.flip(r_bins, 0)
-      r_bins_plot = np.linspace(0, 1.25, r_n_bins)
+  #     r_n_bins = 25
+  #     r_bins = np.linspace(1.25, 0, r_n_bins, endpoint=False)
+  #     r_bins = np.flip(r_bins, 0)
+  #     r_bins_plot = np.linspace(0, 1.25, r_n_bins)
 
-      # Step through each ion and make plots of radius vs N for 3 radial bins
-      ax = fig[i]
-      radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
-      ion = finish_plot(field, ax)
-      plot_profile(r_bins_plot, radial_data[0], '0 < Φ < 30 degrees', colors[0], ax, linestyles[0])
-      plot_profile(r_bins_plot, radial_data[1], '30 < Φ < 60 degrees', colors[1], ax, linestyles[1])
-      plot_profile(r_bins_plot, radial_data[2], '60 < Φ < 90 degrees', colors[2], ax, linestyles[2])
-      fplot_radius(ion, 'long2', fn_head, field, ax)
+  #     # Step through each ion and make plots of radius vs N for 3 radial bins
+  #     ax = fig[i]
+  #     radial_data = make_profiles2(r_arr, r_bins, r_n_bins, cdens_arr, a_arr, a_bins, a_n_bins)
+  #     ion = finish_plot(field, ax)
+  #     plot_profile(r_bins_plot, radial_data[0], '0 < Φ < 30 degrees', colors[0], ax, linestyles[0])
+  #     plot_profile(r_bins_plot, radial_data[1], '30 < Φ < 60 degrees', colors[1], ax, linestyles[1])
+  #     plot_profile(r_bins_plot, radial_data[2], '60 < Φ < 90 degrees', colors[2], ax, linestyles[2])
+  #     fplot_radius(ion, 'long2', fn_head, field, ax)
 
-  plt.savefig('%s/fig2c.png' % fn_head)
+  # plt.savefig('%s/fig2c.png' % fn_head)
 
   ion_fields = ['Mg_p1_number_density']
+  ion_fields = ['O_p5_number_density']
 
   fig = GridFigure(1, 1, top_buffer=0.01, bottom_buffer=0.12, left_buffer=0.12, 
     right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(6,6))
