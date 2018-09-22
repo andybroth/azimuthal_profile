@@ -233,6 +233,7 @@ if __name__ == '__main__':
   # Get the list of ion_fields from the first file available
 
   ion_fields = ['density', 'metal_density', 'temperature', 'H_number_density']
+  ion_fields = ['O_p5_number_density']
 
   fig = GridFigure(2, 2, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
     right_buffer=0.02, vertical_buffer=0.08, horizontal_buffer=0.08, figsize=(12,8))
@@ -247,7 +248,6 @@ if __name__ == '__main__':
       for j in range(n_files):
         f = h5.File(v[j], 'r')
         a_arr = np.concatenate((a_arr, f['phi'].value))
-        print(field)
         cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
         new_r = f['radius'].value / f.attrs.get('rvir')
         r_arr = np.concatenate((r_arr, new_r))
