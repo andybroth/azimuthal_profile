@@ -485,8 +485,6 @@ if __name__ == '__main__':
         cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
         new_r = f['radius'].value / f.attrs.get('rvir')
         r_arr = np.concatenate((r_arr, new_r))
-      if field == 'Mg_p1_number_density' or field == 'O_p5_number_density':
-        cdens_arr *= 6.02 * 10**23
 
       # create bins for data
       a_n_bins = 9
@@ -522,8 +520,6 @@ if __name__ == '__main__':
         cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
         new_r = f['radius'].value / f.attrs.get('rvir')
         r_arr = np.concatenate((r_arr, new_r))
-      if field == 'Mg_p1_number_density' or field == 'O_p5_number_density':
-        cdens_arr *= 6.02 * 10**23
 
       # redefine bins
       a_n_bins = 2
@@ -560,8 +556,6 @@ if __name__ == '__main__':
         cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
         new_r = f['radius'].value / f.attrs.get('rvir')
         r_arr = np.concatenate((r_arr, new_r))
-      if field == 'Mg_p1_number_density' or field == 'O_p5_number_density':
-        cdens_arr *= 6.02 * 10**23
 
       # makes other plot
       a_n_bins = 3
