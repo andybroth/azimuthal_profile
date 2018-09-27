@@ -247,7 +247,6 @@ if __name__ == '__main__':
       for j in range(n_files):
         f = h5.File(v[j], 'r')
         a_arr = np.concatenate((a_arr, f['phi'].value))
-        print("%s/%s" % (field, 'edge'))
         cdens_arr = np.concatenate((cdens_arr, f["%s/%s" % (field, 'edge')].value))
         new_r = f['radius'].value / f.attrs.get('rvir')
         r_arr = np.concatenate((r_arr, new_r))
