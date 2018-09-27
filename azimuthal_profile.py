@@ -71,7 +71,7 @@ def big_profile(a_arr, a_bins, a_n_bins, cdens_arr, r_arr, r_bins, r_n_bins):
 
 def fplot_angle(ion, description, fn, field, ax):
   # ax.title('%s' % ion)
-  ax.set_xlabel('Azimuthal Angle [degrees]')
+  ax.set_xlabel('Azimuthal Angle [degrees]', fontsize='small')
   ax.set_xlim((0,90))
   # ax.legend(title='b/rvir')
   
@@ -85,7 +85,7 @@ def fplot_angle(ion, description, fn, field, ax):
 
 def fplot_radius(ion, description, fn, field, ax):
   # ax.title('%s' % ion)
-  ax.set_xlabel('b/rvir')
+  ax.set_xlabel('b/rvir', fontsize='small')
   if description == 'long' or description == 'long2':
     ax.set_xlim((0,1.25))
   else:
@@ -206,7 +206,7 @@ def finish_plot(field, ax):
     sys.exit('Unidentified Field.')
   if not ylabel:
     ylabel = "%s Column Density [cm$^{-2}$]" % ion
-  ax.set_ylabel(ylabel)
+  ax.set_ylabel(ylabel, fontsize='small')
 
 ''''
 Things to fix to make correct images:
@@ -231,7 +231,7 @@ if __name__ == '__main__':
   fn_head = '%s' % fn_head
 
   # Get the list of ion_fields from the first file available
-  '''
+  
   ion_fields = ['density', 'metal_density', 'temperature', 'H_number_density', 'C_p1_number_density', 'C_p2_number_density', 'Ne_p7_number_density', 'O_p5_number_density', 'Si_p3_number_density']
 
   fig = GridFigure(3, 3, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
@@ -271,7 +271,7 @@ if __name__ == '__main__':
       ion = finish_plot(field, ax)
       fplot_angle(ion, '', fn_head, field, ax)
 
-  plt.savefig('%s/fig1a.png' % fn_head)
+  plt.savefig('%s/rbins_total.png' % fn_head)
 
   fig = GridFigure(3, 3, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
     right_buffer=0.02, vertical_buffer=0.08, horizontal_buffer=0.08, figsize=(12,8))
@@ -309,7 +309,7 @@ if __name__ == '__main__':
       plot_profile(r_bins_plot, radial_data[1], 'Φ > 45 degrees', colors[1], ax, linestyles[1])
       fplot_radius(ion, 'short', fn_head, field, ax)
 
-  plt.savefig('%s/fig1b.png' % fn_head)
+  plt.savefig('%s/2_abin_total.png' % fn_head)
   
   fig = GridFigure(3, 3, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
     right_buffer=0.02, vertical_buffer=0.08, horizontal_buffer=0.08, figsize=(12,8))
@@ -348,8 +348,8 @@ if __name__ == '__main__':
       plot_profile(r_bins_plot, radial_data[2], '60 < Φ < 90 degrees', colors[2], ax, linestyles[2])
       fplot_radius(ion, '2', fn_head, field, ax)
 
-  plt.savefig('%s/fig1c.png' % fn_head)
-  '''
+  plt.savefig('%s/3_abin_total.png' % fn_head)
+  
 
   # fig = GridFigure(1, 5, top_buffer=0.04, bottom_buffer=0.08, left_buffer=0.12, 
   #   right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(20,5))
@@ -467,7 +467,6 @@ if __name__ == '__main__':
   # plt.savefig('%s/fig2c.png' % fn_head)
 
   ion_fields = ['Mg_p1_number_density']
-  ion_fields = ['O_p5_number_density']
 
   fig = GridFigure(1, 1, top_buffer=0.01, bottom_buffer=0.12, left_buffer=0.12, 
     right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(6,6))
@@ -503,7 +502,7 @@ if __name__ == '__main__':
       ion = finish_plot(field, ax)
       fplot_angle(ion, '', fn_head, field, ax)
 
-  plt.savefig('%s/fig3a.png' % fn_head)
+  plt.savefig('%s/rbins_Mg.png' % fn_head)
 
   fig = GridFigure(1, 1, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
     right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(6,6))
@@ -539,7 +538,7 @@ if __name__ == '__main__':
       plot_profile(r_bins_plot, radial_data[1], 'Φ > 45 degrees', colors[1], ax, linestyles[1])
       fplot_radius(ion, 'short', fn_head, field, ax)
 
-  plt.savefig('%s/fig3b.png' % fn_head)
+  plt.savefig('%s/2_abin_Mg.png' % fn_head)
   
   fig = GridFigure(1, 1, top_buffer=0.01, bottom_buffer=0.08, left_buffer=0.12, 
     right_buffer=0.02, vertical_buffer=0.04, horizontal_buffer=0.04, figsize=(6,6))
@@ -576,7 +575,7 @@ if __name__ == '__main__':
       plot_profile(r_bins_plot, radial_data[2], '60 < Φ < 90 degrees', colors[2], ax, linestyles[2])
       fplot_radius(ion, 'long2', fn_head, field, ax)
 
-  plt.savefig('%s/fig3c.png' % fn_head)
+  plt.savefig('%s/3_abin_Mg.png' % fn_head)
 
 
   '''
