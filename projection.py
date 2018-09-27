@@ -90,7 +90,7 @@ if __name__ == '__main__':
 		ax.add_patch(cir)
 	
 	row0_cax = fig.add_cax(fig[0], 'left', buffer=0.01, length=1, width=0.05)
-	row0_cbar = plt.colorbar(plot2, cax=row1_cax, orientation='vertical')
+	row0_cbar = plt.colorbar(plot2, cax=row0_cax, orientation='vertical')
 	row0_cbar.set_label('H I Column Density [cm$^{-2}$]', weight='bold')
 	row0_cbar.ax.yaxis.label.set_font_properties(matplotlib.font_manager.FontProperties(size=16))
 	row0_cbar.ax.tick_params(labelsize=14)
@@ -102,7 +102,7 @@ if __name__ == '__main__':
 	row1_cbar.ax.tick_params(labelsize=14)
 
 	row3_cax = fig.add_cax(fig[2], 'left', buffer=0.01, length=1, width=0.05)
-	row3_cbar = plt.colorbar(plot2, cax=row1_cax, orientation='vertical')
+	row3_cbar = plt.colorbar(plot2, cax=row3_cax, orientation='vertical')
 	row3_cbar.set_label('O VI Column Density [cm$^{-2}$]', weight='bold')
 	row3_cbar.ax.yaxis.label.set_font_properties(matplotlib.font_manager.FontProperties(size=16))
 	row3_cbar.ax.tick_params(labelsize=14)
