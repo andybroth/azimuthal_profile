@@ -20,7 +20,7 @@ if __name__ == '__main__':
 	Makes projections from m12i_res7100_md for density, H I, Mg II, and O VI
 	in a grid figure plot for the paper. 
 	'''
-	ions = ['Mg II', 'O VI', 'Si IV']
+	ions = ['H I', 'Mg II', 'O VI', 'Si IV']
 
 	fn = 'm11g_res12000'
 
@@ -49,7 +49,7 @@ if __name__ == '__main__':
 	box = ds.box(c-one, c+one)
 
 	log('Generating Plot 1')
-	p1 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'density'), center=c, 
+	p1 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'H_number_density'), center=c, 
 		width=width, data_source=box, north_vector=L, weight_field=None)
 	log('Generating Plot 2')
 	p2 = yt.OffAxisProjectionPlot(ds, E1, ('gas', 'Mg_p1_number_density'), center=c, 
@@ -65,7 +65,7 @@ if __name__ == '__main__':
 	fig = GridFigure(2, 2, top_buffer=0.01, bottom_buffer=0.01, left_buffer=0.01, right_buffer=0.13, vertical_buffer=0.01, horizontal_buffer=0.01, figsize=(9,8))
 
 	# Actually plot in the different axes
-	plot1 = fig[0].imshow(p1.frb['density'], norm=LogNorm())
+	plot1 = fig[0].imshow(p1.frb['H_number_density'], norm=LogNorm())
 	# clim1 = plot1.get_clim()
 	plot1.set_cmap('thermal')
 	plot2 = fig[1].imshow(p2.frb['Mg_p1_number_density'], norm=LogNorm())
@@ -111,6 +111,6 @@ if __name__ == '__main__':
 	row2_cbar = plt.colorbar(plot4, cax=row2_cax, orientation='vertical')
 	row2_cbar.set_label('Si II Column Density [cm$^{-2}$]', weight='bold')
 	row2_cbar.ax.yaxis.label.set_font_properties(matplotlib.font_manager.FontProperties(size=16))
-	row2_cbar.ax.tick_params(labelsize=14) 
+	row2_cbar.ax.tick_params(labelsize=14)
 	
 	plt.savefig('projections.png')
