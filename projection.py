@@ -66,16 +66,16 @@ if __name__ == '__main__':
 	fig = GridFigure(2, 2, top_buffer=0.01, bottom_buffer=0.01, left_buffer=0.01, right_buffer=0.13, vertical_buffer=0.01, horizontal_buffer=0.01, figsize=(9,8))
 
 	# Actually plot in the different axes
-	plot1 = fig[0].imshow(p1.frb['H_number_density']*ds.quan(1, cm^2), norm=LogNorm())
+	plot1 = fig[0].imshow(p1.frb['H_number_density'], norm=LogNorm())
 	# clim1 = plot1.get_clim()
 	plot1.set_cmap('thermal')
-	plot2 = fig[1].imshow(p2.frb['Mg_p1_number_density']*ds.quan(1, cm^2), norm=LogNorm())
+	plot2 = fig[1].imshow(p2.frb['Mg_p1_number_density'], norm=LogNorm())
 	# plot2.set_clim(clim)
 	plot2.set_cmap('thermal')
-	plot3 = fig[2].imshow(p3.frb['O_p5_number_density']*ds.quan(1, cm^2), norm=LogNorm())
+	plot3 = fig[2].imshow(p3.frb['O_p5_number_density'], norm=LogNorm())
 	# clim = plot3.get_clim()
 	plot3.set_cmap('thermal')
-	plot4 = fig[3].imshow(p4.frb['Si_p3_number_density']*ds.quan(1, cm^2), norm=LogNorm())
+	plot4 = fig[3].imshow(p4.frb['Si_p3_number_density'], norm=LogNorm())
 	# plot4.set_clim(clim)
 	plot4.set_cmap('thermal')
 
@@ -90,7 +90,7 @@ if __name__ == '__main__':
 		cir = Circle((0.5, 0.5), rvir/width, fill=False, color='white', linestyle='dashed', linewidth=5, transform=ax.transAxes, alpha=0.5)
 		ax.add_patch(cir)
 	
-	row0_cax = fig.add_cax(fig[0], 'left', buffer=0.01, length=1, width=0.05)
+	row0_cax = fig.add_cax(fig[0], 'right', buffer=0.01, length=1, width=0.05)
 	row0_cbar = plt.colorbar(plot2, cax=row0_cax, orientation='vertical')
 	row0_cbar.set_label('H I Column Density [cm$^{-2}$]', weight='bold')
 	row0_cbar.ax.yaxis.label.set_font_properties(matplotlib.font_manager.FontProperties(size=16))
@@ -102,7 +102,7 @@ if __name__ == '__main__':
 	row1_cbar.ax.yaxis.label.set_font_properties(matplotlib.font_manager.FontProperties(size=16))
 	row1_cbar.ax.tick_params(labelsize=14)
 
-	row3_cax = fig.add_cax(fig[2], 'left', buffer=0.01, length=1, width=0.05)
+	row3_cax = fig.add_cax(fig[2], 'right', buffer=0.01, length=1, width=0.05)
 	row3_cbar = plt.colorbar(plot2, cax=row3_cax, orientation='vertical')
 	row3_cbar.set_label('O VI Column Density [cm$^{-2}$]', weight='bold')
 	row3_cbar.ax.yaxis.label.set_font_properties(matplotlib.font_manager.FontProperties(size=16))
