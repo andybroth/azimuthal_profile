@@ -65,16 +65,16 @@ if __name__ == '__main__':
 	fig = GridFigure(2, 2, top_buffer=0.01, bottom_buffer=0.01, left_buffer=0.01, right_buffer=0.13, vertical_buffer=0.01, horizontal_buffer=0.01, figsize=(9,8))
 
 	# Actually plot in the different axes
-	plot1 = fig[0].imshow(p1.frb['H_number_density']*ds.quan(1, 'cm^-2'), norm=LogNorm())
+	plot1 = fig[0].imshow(p1.frb['H_number_density']*ds.quan(1, 'cm^2'), norm=LogNorm())
 	# clim1 = plot1.get_clim()
 	plot1.set_cmap('thermal')
-	plot2 = fig[1].imshow(p2.frb['Mg_p1_number_density']*ds.quan(1, 'cm^-2'), norm=LogNorm())
+	plot2 = fig[1].imshow(p2.frb['Mg_p1_number_density']*ds.quan(1, 'cm^2'), norm=LogNorm())
 	# plot2.set_clim(clim)
 	plot2.set_cmap('thermal')
-	plot3 = fig[2].imshow(p3.frb['O_p5_number_density']*ds.quan(1, 'cm^-2'), norm=LogNorm())
+	plot3 = fig[2].imshow(p3.frb['O_p5_number_density']*ds.quan(1, 'cm^2'), norm=LogNorm())
 	# clim = plot3.get_clim()
 	plot3.set_cmap('thermal')
-	plot4 = fig[3].imshow(p4.frb['Si_p3_number_density']*ds.quan(1, 'cm^-2'), norm=LogNorm())
+	plot4 = fig[3].imshow(p4.frb['Si_p3_number_density']*ds.quan(1, 'cm^2'), norm=LogNorm())
 	# plot4.set_clim(clim)
 	plot4.set_cmap('thermal')
 
