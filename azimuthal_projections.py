@@ -143,9 +143,9 @@ if __name__ == '__main__':
 		# ions.append('H I')
 		# ion_fields.append('H_number_density')
 		# full_ion_fields.append(('gas', 'H_number_density'))
-		# ions.append('Mg II')
-		# ion_fields.append('Mg_p1_number_density')
-		# full_ion_fields.append(('gas', 'Mg_p1_number_density'))
+		ions.append('Mg II')
+		ion_fields.append('Mg_p1_number_density')
+		full_ion_fields.append(('gas', 'Mg_p1_number_density'))
 		# ions.append('Si II')
 		# ion_fields.append('Si_p1_number_density')
 		# full_ion_fields.append(('gas', 'Si_p1_number_density'))
@@ -173,9 +173,9 @@ if __name__ == '__main__':
 		# ions.append('Ne VIII')
 		# ion_fields.append('Ne_p7_number_density')
 		# full_ion_fields.append(('gas', 'Ne_p7_number_density'))
-		ions.append('O VI')
-		ion_fields.append('O_p5_number_density')
-		full_ion_fields.append(('gas', 'O_p5_number_density'))
+		# ions.append('O VI')
+		# ion_fields.append('O_p5_number_density')
+		# full_ion_fields.append(('gas', 'O_p5_number_density'))
 
 		others = []
 		other_fields = []
@@ -188,7 +188,7 @@ if __name__ == '__main__':
 		ds = GizmoDataset(fn)
 		trident.add_ion_fields(ds, ions=ions, ftype='gas')
 
-		radial_extent = ds.quan(375, 'kpc')
+		radial_extent = ds.quan(400, 'kpc')
 		width = 2*radial_extent
 
 		# ions.append('O_nuclei_density')
